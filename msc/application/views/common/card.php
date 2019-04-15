@@ -13,14 +13,9 @@
     <div class="col-lg-12">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">
+                <h6 class="m-0 font-weight-bold text-primary card-title">
                     <?php
-                        $ttlUri = count($this->uri->segment_array());
-                        for ($i=2; $i <= $ttlUri ; $i++) {
-                            $titleSlash = (($i+1) <= $ttlUri) ? " > " : "";
-                            $titleColor = ($i!=2) ? " class='text-gray-600' " : "";
-                            echo "<span $titleColor>".ucwords(str_replace("-"," ",$this->uri->segment($i))).$titleSlash."</span>";
-                        }
+                        echo $title;
                     ?>
                 </h6>
             </div>

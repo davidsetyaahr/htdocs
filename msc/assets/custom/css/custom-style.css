@@ -34,3 +34,6 @@ body{
 .mt-btn{
     margin-top : 55px;
 }
+.card-title span{
+  color: #858796 !important;
+}
