@@ -57,24 +57,58 @@
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
+        <a class="nav-link" href="<?php echo base_url() ?>">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Pendaftaran Siswa</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo base_url() ?>">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Penjadwalan</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo base_url() ?>">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Data Siswa</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo base_url() ?>">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Data Tentor</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo base_url() ?>">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>KBM</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo base_url() ?>">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Nilai Siswa</span></a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse2" aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-credit-card"></i>
-            <span>Menu 1</span>
+            <span>Keuangan</span>
         </a>
         <div id="collapse2" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="utilities-color.html">Sub Menu 1</a>
-            <h6 class="collapse-header">------------------------</h6>
-                <a class="collapse-item" href="utilities-color.html">Sub Menu 2</a>
-            <h6 class="collapse-header">------------------------</h6>
-                <a class="collapse-item" href="utilities-color.html">Sub Menu 3</a>
-            <h6 class="collapse-header">------------------------</h6>
-                
-                <a href="" aria-expanded="true" class="nav-link collapse-item collapsed colcol" data-toggle="collapse" data-target="#collapse21">Collapse</a>
-
-                <div id="collapse21" class="collapse">
-                    <a class="collapse-item" href="utilities-animation.html">Collapse</a>
-                </div>
+                <a class="collapse-item" href="<?php echo base_url()."data-master/jenjang"; ?>">Cicilan</a>
+                <a class="collapse-item" href="<?php echo base_url()."data-master/mapel"; ?>">SPP</a>
+                <a class="collapse-item" href="<?php echo base_url()."data-master/group"; ?>">Laporan</a>
+            </div>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-credit-card"></i>
+            <span>Data Master</span>
+        </a>
+        <div id="collapse1" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="<?php echo base_url()."data-master/jenjang"; ?>">Jenjang</a>
+                <a class="collapse-item" href="<?php echo base_url()."data-master/mapel"; ?>">Mapel</a>
+                <a class="collapse-item" href="<?php echo base_url()."data-master/group"; ?>">Group Siswa</a>
             </div>
         </div>
       </li>
@@ -281,7 +315,7 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800"><?php echo ucwords($this->uri->segment(1)) ?></h1>
+            <h1 class="h3 mb-0 text-gray-800"><?php echo str_replace("-"," ", ucwords($this->uri->segment(1))) ?></h1>
             <?php
             if (isset($btnHref)) {
                 ?>
