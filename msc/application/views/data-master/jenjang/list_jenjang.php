@@ -5,7 +5,6 @@
 				<thead>
 					<tr>
 						<th>#</th>
-						<th>Nama Mapel</th>
 						<th>Jenjang</th>
 						<th>Opsi</th>
 					</tr>
@@ -13,7 +12,6 @@
 				<tbody>
 					<tr>
 						<th>1</th>
-						<th>MATEMATIKA</th>
 						<th>SD</th>
 						<th>Opsi</th>
 					</tr>
