@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-lg-6">
 			<label>Kode Siswa</label>
-			<input type="text" class="form-control" name="kode_siswa" value="" readonly>
+			<input type="text" class="form-control" name="kode_siswa" value="123" readonly>
 		</div>
 		<div class="col-lg-6">
 			<label>Nama Siswa</label>
@@ -26,17 +26,17 @@
 		</div>
 		<div class="col-lg-6">
 			<label>No. Hp</label>
-			<input type="number" class="form-control" name="no_hp" value="">
-		</div>
-		<div class="col-lg-6">
-			<label>Foto</label>
-			<input type="file" class="form-control" name="foto" value="">
+			<input type="number" class="form-control" name="no_hpsiswa" value="">
 		</div>
 		<div class="col-lg-6">
 			<label>Group</label>
 			<select name="kode_group" class="form-control">
 			<option value="">---Pilih Group---</option>
-
+			<?php 
+				foreach ($group as $g) {
+					echo "<option value='".$g['kode_group']."'>$g[nama_group]</option>";
+				}
+			?>
 			</select>
 		</div>
 		<div class="col-lg-6">

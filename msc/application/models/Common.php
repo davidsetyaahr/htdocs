@@ -39,7 +39,12 @@ class Common extends CI_Model {
         }
 
         if(is_array($tb)){
-            $sql = $this->db->get($tb[0],$tb[1],$tb[2]);
+            if(count($tb)==2){
+                $sql = $this->db->get($tb[0],$tb[1]);
+            }
+            else{
+                $sql = $this->db->get($tb[0],$tb[1],$tb[2]);
+            }
         }
         else{
             $sql = $this->db->get($tb);

@@ -8,6 +8,12 @@ class Data_siswa extends CI_Controller
 		parent::__construct();
 		$this->title = $this->common_lib->getTitle();
 	}
+
+	public function index() 
+	{
+		
+	}
+
 }
 
 
