@@ -72,7 +72,7 @@
           <span>Data Siswa</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url() ?>">
+        <a class="nav-link" href="<?php echo base_url()."tentor"; ?>">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Data Tentor</span></a>
       </li>
