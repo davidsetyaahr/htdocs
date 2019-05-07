@@ -49,7 +49,7 @@ class Tentor extends CI_Controller {
 		$this->session->set_flashdata("success", "Berhasil Menambahkan Data!!!");
 		redirect(base_url()."tentor");
 	}
-	
+
 	public function edit_tentor($kode)
 	{
 		$where = array("kode_tentor" => $kode);
