@@ -8,7 +8,6 @@
 							<th>#</th>
 							<th>Nama Mapel</th>
 							<th>Jenjang</th>
-							<th>Opsi</th>
 						</tr>
 					</thead>
 					<?php
@@ -22,7 +21,7 @@
 							<th><?php
 									$dropdown["id"] = "menu".$t["id_mapel"];
 								$dropdown["href"] = array(
-								"Edit" => base_url()."mapel/input-mapel/".$t["id_mapel"],
+								"Edit" => base_url()."data-master/mapel/input-mapel/".$t["id_mapel"],
 								);
 								$this->load->view("common/dropdown", $dropdown);
 							?></th>

@@ -17,15 +17,13 @@
 			<input type="number" class="form-control" name="no_hp" value="<?php echo $data[0]["no_hp"]?>">
 		</div>
 		<div class="col-lg-6">
-<<<<<<< HEAD
-=======
 			<label>Jenis Kelamin</label>
 			<select name="jk" class="form-control">
 			<?php
 				$l = ($data[0]["jk"] == "Laki Laki") ? "selected" : "";
 				$p = ($data[0]["jk"] == "Perempuan") ? "selected" : "";
 			?>
-			<option value="">---Pilih Jenis Kelamin---</option>
+			<option value=""> ---Pilih Jenis Kelamin---</option>
 				<option <?php echo $l ?> >Laki Laki</option>
 				<option <?php echo $p ?> >Perempuan</option>
 			</select>
@@ -39,7 +37,6 @@
 			<input type="number" class="form-control" name="gaji" value="<?php echo $data[0]["gaji"]?>">
 		</div>
 		<div class="col-lg-6">
->>>>>>> 8f18ad547679988bf3f17656e5c8d4fa27cb6117
 			<br>
 			<?php $this->load->view("common/btn") ?>
 		</div>

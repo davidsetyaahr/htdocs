@@ -63,7 +63,7 @@ class Mapel extends CI_Controller {
 		$card['title'] = "Mapel <span>> Edit Mapel</span>";
         $this->load->view('common/menu', $menu);
         $this->load->view('common/card', $card);
-				$this->load->view('mapel/list-mapel', $data);
+				$this->load->view('data-master/mapel/list-mapel', $data);
 				$this->load->view('common/slash-card');
 				$this->load->view('common/footer');
 	}
