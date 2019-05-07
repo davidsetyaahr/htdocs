@@ -10,14 +10,24 @@
 						<th>Opsi</th>
 					</tr>
 				</thead>
+				<?php foreach($data as $d){?>
 				<tbody>
 					<tr>
-						<th>1</th>
-						<th>Wadidaw</th>
-						<th>Azizah</th>
-						<th>Opsi</th>
+						<th><?php echo $data["kode_group"]?></th>
+						<th><?php echo $data["nama_group"]?></th>
+						<th><?php echo $data["kode_tentor"]?></th>
+						<th>
+						<?php
+							$dropdown["id"] = "menu".$d["kode_group"];
+							$dropdown["href"] = array(
+								"Edit" => base_url()."data-master/group/edit_group/".$d["kode_group"],
+							);
+							$this->load->view("common/dropdown", $dropdown);
+						?>
+						</th>
 					</tr>
 				</tbody>
+						<?php }?>
 			</table>
 		</div>
 	</div>

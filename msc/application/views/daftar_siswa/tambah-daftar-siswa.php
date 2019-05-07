@@ -25,11 +25,11 @@
 			<textarea type="number" class="form-control" name="alamat" ></textarea>
 		</div>
 		<div class="col-lg-6">
-			<label>No. Hp</label>
+			<label>No Telepon Siswa</label>
 			<input type="number" class="form-control" name="no_hpsiswa" value="">
 		</div>
 		<div class="col-lg-6">
-			<label>Group</label>
+			<label>Grup</label>
 			<select name="kode_group" class="form-control">
 			<option value="">---Pilih Group---</option>
 			<?php 
@@ -44,7 +44,7 @@
 			<input type="text" class="form-control" name="nama_ortu" value="">
 		</div>
 		<div class="col-lg-6">
-			<label>No. Hp</label>
+			<label>No Telepon Wali</label>
 			<input type="number" class="form-control" name="no_hp" value="">
 		</div>
 		<div class="col-lg-6">
