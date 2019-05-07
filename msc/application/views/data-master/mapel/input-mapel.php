@@ -5,7 +5,7 @@
 			<input type="text" class="form-control" name="nama_mapel" value="">
 		</div>
 		<div class="col-lg-6">
-			<label>Jenjang</label>
+			<label>Jenjang Sekolah</label>
 			<select name="id_jenjang" class="form-control">
 				<option value="">---Pilih Jenjang---</option>
 			</select>
