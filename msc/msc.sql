@@ -2,10 +2,10 @@
 -- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 15, 2019 at 11:17 AM
+-- Host: localhost
+-- Generation Time: May 07, 2019 at 04:33 AM
 -- Server version: 10.1.38-MariaDB
--- PHP Version: 7.3.3
+-- PHP Version: 7.2.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -31,7 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `group_siswa` (
   `kode_group` varchar(6) NOT NULL,
   `nama_group` varchar(20) NOT NULL,
-  `id_tentor` int(3) NOT NULL
+  `kode_tentor` varchar(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -60,6 +60,23 @@ CREATE TABLE `jenjang` (
   `id_jenjang` int(2) NOT NULL,
   `nama_jenjang` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `jenjang`
+--
+
+INSERT INTO `jenjang` (`id_jenjang`, `nama_jenjang`) VALUES
+(1, 'SD'),
+(2, 'SMA'),
+(3, 'SMP'),
+(4, 'S1'),
+(5, 'D4'),
+(6, 'D3'),
+(7, 'S2'),
+(8, 'D2'),
+(9, 'S3'),
+(10, 'D1'),
+(11, 'test3');
 
 -- --------------------------------------------------------
 
@@ -177,6 +194,19 @@ CREATE TABLE `tentor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Dumping data for table `tentor`
+--
+
+INSERT INTO `tentor` (`kode_tentor`, `nama_tentor`, `jk`, `alamat`, `no_hp`, `pendidikan_terakhir`, `gaji`, `foto`) VALUES
+('T0001', 'Soimah', 'Perempuan', 'Jember', '081216938489', 'S1, Teknik Sipil', 1000000, 'soimah.jpg'),
+('T00010', 'SAIDAH', 'Perempuan', 'Bondowoso', '2676567576576', 'S3', 100000, ''),
+('T0002', 'Tafhan', '', 'maesan', '0876543', 'S3', 1000000, ''),
+('T0003', 'Fathan', '', 'Maesan', '0812121387821', 'S2', 10000000, ''),
+('T0006', 'tina', 'Perempuan', 'jember', '0892163821', 'S2', 1000000, ''),
+('T0010', 'dio', '', 'maesan', '0812189218321', 'S2', 1000000, ''),
+('T0011', 'tono', 'Laki Laki', 'jember', '021893721936', 'S3', 100, '');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -254,7 +284,7 @@ ALTER TABLE `jadwal`
 -- AUTO_INCREMENT for table `jenjang`
 --
 ALTER TABLE `jenjang`
-  MODIFY `id_jenjang` int(2) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_jenjang` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `kbm`

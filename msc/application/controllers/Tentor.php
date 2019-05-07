@@ -74,6 +74,5 @@ class Tentor extends CI_Controller {
 		$this->common->update("tentor", $this->input->post(), $filter);
 		$this->session->set_flashdata("success", "Berhasil Mengedit Data!!!");
 		redirect(base_url()."tentor");
-
 	}
 }

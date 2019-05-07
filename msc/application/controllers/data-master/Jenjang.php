@@ -18,9 +18,10 @@ class Jenjang extends CI_Controller {
 			"btnText" => "Tambah Jenjang"
 		);
 		$card['title'] = "Jenjang <span>> List Jenjang</span>";
+		$data["data"] = $this->common->getData("*", "jenjang", "", "", "");
 		$this->load->view('common/menu', $menu);
 		$this->load->view('common/card', $card);
-		$this->load->view('data-master/jenjang/list_jenjang');
+		$this->load->view('data-master/jenjang/list_jenjang', $dataP);
 		$this->load->view('common/slash-card');
 		$this->load->view('common/footer');
 	}
@@ -40,5 +41,37 @@ class Jenjang extends CI_Controller {
 		$this->load->view('data-master/jenjang/input_jenjang');
 		$this->load->view('common/slash-card');
 		$this->load->view('common/footer');
+	}
+
+	public function insert_jenjang(){
+		$this->common->insert("jenjang",$this->input->post());
+		$this->session->set_flashdata("success", "Berhasil Menambahkan Data!!!");
+		redirect(base_url()."data-master/jenjang");
+	}
+
+	public function edit_jenjang($kode)
+	{
+		$where = array("id_jenjang" => $kode);
+		$data["data"] = $this->common->getData("*", "jenjang", "", $where, "");
+		// $this
+		$menu = array(
+			"title" => $this->title,
+			"btnHref" => base_url()."data-master/Jenjang",
+			"btnBg" => "primary","btnFa" => "keyboard",
+			"btnText" => "Lihat Data"
+		);
+		$card['title'] = "Tentor <span>> Edit Jenjang</span>";
+        $this->load->view('common/menu', $menu);
+        $this->load->view('common/card', $card);
+		$this->load->view('data-master/jenjang/edit_jenjang', $data);
+		$this->load->view('common/slash-card');
+        $this->load->view('common/footer');
+	}
+
+	public function update_jenjang(){
+		$filter = array("id_jenjang" => $this->input->post("id_jenjang"));
+		$this->session->set_flashdata("success", "Berhasil Mengedit Data!!!");
+		$this->common->update("jenjang", $this->input->post(), $filter);
+		redirect(base_url()."data-master/jenjang");
 	}
 }

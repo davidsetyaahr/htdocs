@@ -18,9 +18,10 @@ class Group extends CI_Controller {
 			"btnText" => "Tambah Data"
 		);
 		$card['title'] = "Group <span>> List Group</span>";
+		$data["data"] = $this->common->getData("t.kode_tentor, g.*" ,"group_siswa g", ["tentor t", "t.kode_tentor=g.kode_group"], "", "");
 		$this->load->view('common/menu', $menu);
 		$this->load->view('common/card', $card);
-		$this->load->view('data-master/group/list_group');
+		$this->load->view('data-master/group/list_group', $data);
 		$this->load->view('common/slash-card');
 		$this->load->view('common/footer');
 	}
@@ -34,11 +35,19 @@ class Group extends CI_Controller {
 			"btnText" => "Lihat Data"
 		);
 		$card['title'] = "Group <span>> Input Group</span>";
+		$data["data"] = $this->common->getData("kode_tentor, nama_tentor", "tentor", "", "", "");
 		$this->load->view('common/menu', $menu);
 		$this->load->view('common/card', $card);
-		$this->load->view('data-master/group/input_group');
+		$this->load->view('data-master/group/input_group', $data);
 		$this->load->view('common/slash-card');
 		$this->load->view('common/footer');
+	}
+
+	public function insert_group()
+	{
+		$this->common->insert("group_siswa", $this->input->post());
+		$this->session->set_flashdata("success", "Berhasil Menambahkan Data!!!");
+		redirect(base_url()."data-master/group");
 	}
 
 }
