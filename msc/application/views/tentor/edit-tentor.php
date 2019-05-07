@@ -17,22 +17,6 @@
 			<input type="number" class="form-control" name="no_hp" value="">
 		</div>
 		<div class="col-lg-6">
-			<label>Jenis Kelamin</label>
-			<select name="jk" class="form-control">
-			<option value="">---Pilih Jenis Kelamin---</option>
-				<option>Laki Laki</option>
-				<option>Perempuan</option>
-			</select>
-		</div>
-		<div class="col-lg-6">
-			<label>Alamat</label>
-			<textarea type="number" class="form-control" name="alamat" ></textarea>
-		</div>
-		<div class="col-lg-6">
-			<label>Gaji</label>
-			<input type="number" class="form-control" name="gaji" value="">
-		</div>
-		<div class="col-lg-6">
 			<br>
 			<?php $this->load->view("common/btn") ?>
 		</div>
