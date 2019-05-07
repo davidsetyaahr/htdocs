@@ -10,7 +10,7 @@
 		</div>
 		<div class="col-lg-6">
 			<label>Jenjang</label>
-			<input type="text" class="form-control" name="jenjang" value="<?php echo $data[0]["jenjang"]?>">
+			<input type="text" class="form-control" name="id_jenjang" value="<?php echo $data[0]["nama_jenjang"]?>">
 		</div>
 		<div class="col-lg-6">
 			<br>

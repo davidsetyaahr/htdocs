@@ -52,7 +52,8 @@ class Mapel extends CI_Controller {
 	public function edit_mapel($id)
 	{
 		$where = array("id_mapel" => $id);
-		$data["data"] = $this->common->getData("*", "mapel", "", $where, "");
+		$data["data"] = $this->common->getData("m.id_mapel,m.mata_pelajaran,m.mata_pelajaran, j.nama_jenjang", "mapel m", ["jenjang j"," m.id_jenjang = j.id_jenjang"], "","");
+	
 		// $this
 		$menu = array(
 			"title" => $this->title,
@@ -73,5 +74,4 @@ class Mapel extends CI_Controller {
 		$this->session->set_flashdata("success", "Berhasil Mengedit Data!!!");
 		redirect(base_url().",mapel");
 	}
-
 }
