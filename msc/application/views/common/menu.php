@@ -67,7 +67,7 @@
           <span>Penjadwalan</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url()."data_siswa"; ?>">
+        <a class="nav-link" href="<?php echo base_url()."data-siswa"; ?>">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Data Siswa</span></a>
       </li>
