@@ -55,3 +55,4 @@ $route['translate_uri_dashes'] = FALSE;
 $route['data-master/mapel/input-mapel'] = "data-master/mapel/input_mapel";
 $route['data-master/jenjang/input-jenjang'] = "data-master/jenjang/input_jenjang";
 $route['data-master/group/input-group'] = "data-master/group/input_group";
+
