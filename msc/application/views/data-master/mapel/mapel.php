@@ -25,7 +25,7 @@
 							);
 							$this->load->view("common/dropdown", $dropdown);
 						?></th>
-					</tr>
+					</tr>	
 				</tbody>
                 <?php   } ?>
 			</table>
