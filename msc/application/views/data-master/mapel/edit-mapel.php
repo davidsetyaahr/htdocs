@@ -10,7 +10,17 @@
 		</div>
 		<div class="col-lg-6">
 			<label>Jenjang</label>
-			<input type="text" class="form-control" name="id_jenjang" value="<?php echo $data[0]["nama_jenjang"]?>">
+			<select name="jenjang" class="form-control">
+			<?php
+				$sd = ($data[0]["jenjang"] == "SD") ? "selected" : "";
+				$smp = ($data[0]["jenjang"] == "SMP") ? "selected" : "";
+				$sma = ($data[0]["jenjang"] == "SMA") ? "selected" : "";
+			?>
+			<option value=""> ---Pilih Jenjang---</option>
+				<option <?php echo $sd ?> >SD</option>
+				<option <?php echo $smp ?> >SMP</option>
+				<option <?php echo $sma ?> >SMA</option>
+			</select>
 		</div>
 		<div class="col-lg-6">
 			<br>

@@ -68,10 +68,11 @@ class Mapel extends CI_Controller {
 				$this->load->view('common/slash-card');
 				$this->load->view('common/footer');
 	}
-	public function update(){
-		$filter = array("id_mapel" => $this->input->post("id_mapel"));
-		$this->common->update("data-master/mapel", $this->input->post(), $filter);
-		$this->session->set_flashdata("success", "Berhasil Mengedit Data!!!");
-		redirect(base_url().",mapel");
-	}
+
+		public function update(){
+			$filter = array("id_mapel" => $this->input->post("id_mapel"));
+			$this->common->update("data-master/mapel", $this->input->post(), $filter);
+			$this->session->set_flashdata("success", "Berhasil Mengedit Data!!!");
+			redirect(base_url()."data-master/mapel");
+		}
 }
