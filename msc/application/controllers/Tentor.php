@@ -45,7 +45,23 @@ class Tentor extends CI_Controller {
     }
     public function insert_tentor()
     {
-		$this->common->insert("tentor",$this->input->post());
+		$tentor = array(
+			"kode_tentor" => $this->input->post("kode_tentor"),
+			"nama_tentor" => $this->input->post("nama_tentor"),
+			"pendidikan_terakhir" => $this->input->post("pendidikan_terakhir"),
+			"no_hp" => $this->input->post("no_hp"),
+			"jk" => $this->input->post("jk"),
+			"alamat" => $this->input->post("alamat"),
+			"gaji" => $this->input->post("gaji")
+		);
+		$this->common->insert("tentor", $tentor);
+		for($i=0; $i<count($_POST['id_mapel']); $i++){
+			$mapelTentor = array(
+				"id_mapel" => $_POST['id_mapel'][$i],
+				"kode_tentor" => $this->input->post("kode_tentor")
+			);
+			$this->common->insert("mapel_tentor", $mapelTentor);
+		}
 		$this->session->set_flashdata("success", "Berhasil Menambahkan Data!!!");
 		redirect(base_url()."tentor");
 	}
