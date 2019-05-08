@@ -27,7 +27,7 @@ class Data_siswa extends CI_Controller
 		$this->load->view('common/slash-card');
 		$this->load->view('common/footer');
 
-		$data['siswa'] = $this->m_data_siswa->tampil_data()->result();
+		$data['siswa'] = $this->common->getData()->result();
 		$this->load->view('data-siswa/list-siswa', $data);
 	}
 

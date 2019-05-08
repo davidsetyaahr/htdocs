@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-lg-6">
 			<label>Kode Tentor</label>
-			<input type="text" class="form-control" name="kode_tentor" value="T0002" readonly>
+			<input type="text" class="form-control" name="kode_tentor">
 		</div>
 		<div class="col-lg-6">
 			<label>Nama Tentor</label>

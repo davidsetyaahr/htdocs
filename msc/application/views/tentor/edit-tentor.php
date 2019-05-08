@@ -23,7 +23,7 @@
 				$l = ($data[0]["jk"] == "Laki Laki") ? "selected" : "";
 				$p = ($data[0]["jk"] == "Perempuan") ? "selected" : "";
 			?>
-			<option value="">---Pilih Jenis Kelamin---</option>
+			<option value=""> ---Pilih Jenis Kelamin---</option>
 				<option <?php echo $l ?> >Laki Laki</option>
 				<option <?php echo $p ?> >Perempuan</option>
 			</select>
