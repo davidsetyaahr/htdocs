@@ -57,7 +57,7 @@
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url()."daftar_siswa"; ?>">
+        <a class="nav-link" href="<?php echo base_url()."daftar-siswa"; ?>">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Pendaftaran Siswa</span></a>
       </li>

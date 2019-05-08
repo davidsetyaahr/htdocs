@@ -6,22 +6,36 @@
 					<tr>
 						<th>Kode Siswa</th>
 						<th>Nama Siswa</th>
-						<th>Tanggal Lahir</th>
-						<th>Jenis Kelamin</th>
-						<th>Alamat</th>
-						<th>No Telepon Siswa</th>
 						<th>Grup</th>
-						<th>Nama Orang Tua</th>
-						<th>No Telepon Wali</th>
-						<th>Tanggal Pendaftaran</th>
+						<th>No Telepon</th>
+						<th>Alamat</th>
 						<th>Opsi</th>
 					</tr>
 				</thead>
-				
 				<tbody>
+					<?php
+						foreach ($siswa as $key => $value) {
+					?>
 					<tr>
-						
+						<td><?php echo $value['kode_siswa'] ?></td>
+						<td><?php echo $value['nama_siswa'] ?></td>
+						<td><?php echo $value['kode_group'] ?></td>
+						<td><?php echo $value['no_hp'] ?></td>
+						<td><?php echo $value['alamat'] ?></td>
+						<td>
+						<?php
+							$dropdown["id"] = "menu".$value["kode_siswa"];
+							$dropdown["href"] = array(
+								"Edit" => base_url()."data-siswa/edit-siswa/".$value["kode_siswa"],
+								"Detail" => base_url()."data-siswa/detail/".$value["kode_siswa"],
+							);
+							$this->load->view("common/dropdown", $dropdown);
+						?>
+						</td>
 					</tr>
+					<?php
+						}
+					?>
 				</tbody>
 			</table>
 		</div>

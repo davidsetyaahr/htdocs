@@ -2,17 +2,19 @@
 	<div class="row">
 		<div class="col-lg-6">
 			<label>Kode Siswa</label>
-			<input type="text" class="form-control" name="kode_siswa" value="123" readonly>
+			<input type="text" class="form-control" name="kode_siswa">
 		</div>
 		<div class="col-lg-6">
 			<label>Nama Siswa</label>
 			<input type="text" class="form-control" name="nama_siswa" value="">
 		</div>
 		<div class="col-lg-6">
+			<br>
 			<label>Tanggal Lahir</label>
 			<input type="date" class="form-control" name="tgl_lahir" value="">
 		</div>
 		<div class="col-lg-6">
+			<br>
 			<label>Jenis Kelamin</label>
 			<select name="jk" class="form-control">
 			<option value="">---Pilih Jenis Kelamin---</option>
@@ -21,14 +23,17 @@
 			</select>
 		</div>
 		<div class="col-lg-6">
+			<br>
 			<label>Alamat</label>
 			<textarea type="number" class="form-control" name="alamat" ></textarea>
 		</div>
 		<div class="col-lg-6">
+			<br>
 			<label>No Telepon Siswa</label>
 			<input type="number" class="form-control" name="no_hpsiswa" value="">
 		</div>
 		<div class="col-lg-6">
+			<br>
 			<label>Grup</label>
 			<select name="kode_group" class="form-control">
 			<option value="">---Pilih Group---</option>
@@ -40,14 +45,17 @@
 			</select>
 		</div>
 		<div class="col-lg-6">
+			<br>
 			<label>Nama Orang Tua</label>
 			<input type="text" class="form-control" name="nama_ortu" value="">
 		</div>
 		<div class="col-lg-6">
+			<br>
 			<label>No Telepon Wali</label>
 			<input type="number" class="form-control" name="no_hp" value="">
 		</div>
 		<div class="col-lg-6">
+			<br>
 			<label>Tanggal Pendafatran</label>
 			<input type="date" class="form-control" name="tgl_daftar" value="">
 		</div>
