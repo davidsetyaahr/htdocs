@@ -10,17 +10,17 @@
 						<th>Opsi</th>
 					</tr>
 				</thead>
-				<?php foreach($data as $d){?>
+				<?php foreach($data as $data){?>
 				<tbody>
 					<tr>
 						<th><?php echo $data["kode_group"]?></th>
 						<th><?php echo $data["nama_group"]?></th>
-						<th><?php echo $data["kode_tentor"]?></th>
+						<th><?php echo $data["nama_tentor"]?></th>
 						<th>
 						<?php
-							$dropdown["id"] = "menu".$d["kode_group"];
+							$dropdown["id"] = "menu".$data["kode_group"];
 							$dropdown["href"] = array(
-								"Edit" => base_url()."data-master/group/edit_group/".$d["kode_group"],
+								"Edit" => base_url()."data-master/group/edit_group/".$data["kode_group"],
 							);
 							$this->load->view("common/dropdown", $dropdown);
 						?>

@@ -77,12 +77,12 @@
           <span>Data Tentor</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url() ?>">
+        <a class="nav-link" href="<?php echo base_url()."kbm" ?>">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>KBM</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url() ?>">
+        <a class="nav-link" href="<?php echo base_url()."nilai-siswa" ?>">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Nilai Siswa</span></a>
       </li>
@@ -93,9 +93,9 @@
         </a>
         <div id="collapse2" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="<?php echo base_url()."data-master/jenjang"; ?>">Cicilan</a>
-                <a class="collapse-item" href="<?php echo base_url()."data-master/mapel"; ?>">SPP</a>
-                <a class="collapse-item" href="<?php echo base_url()."data-master/group"; ?>">Laporan</a>
+                <a class="collapse-item" href="<?php echo base_url()."keuangan/cicilan"; ?>">Cicilan</a>
+                <a class="collapse-item" href="<?php echo base_url()."keuangan/spp"; ?>">SPP</a>
+                <a class="collapse-item" href="<?php echo base_url()."keuangan/laporan"; ?>">Laporan Keuangan</a>
             </div>
         </div>
       </li>

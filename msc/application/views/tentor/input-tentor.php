@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-lg-6">
 			<label>Kode Tentor</label>
-			<input type="text" class="form-control" name="kode_tentor" value="T0002" readonly>
+			<input type="text" class="form-control" name="kode_tentor">
 		</div>
 		<div class="col-lg-6">
 			<label>Nama Tentor</label>
@@ -31,6 +31,12 @@
 		<div class="col-lg-6">
 			<label>Gaji</label>
 			<input type="number" class="form-control" name="gaji" value="">
+		</div>
+		<div class="col-lg-6">
+			<label>Mata Pelajaran</label><br>
+			<?php foreach($data as $d){?>
+			<input type="checkbox" class="" name="id_mapel[]" value="<?php echo $d["id_mapel"]?>">&nbsp<?php echo $d["mata_pelajaran"]?>&nbsp &nbsp
+			<?php }?>
 		</div>
 		<div class="col-lg-6">
 			<br>
