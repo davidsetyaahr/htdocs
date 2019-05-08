@@ -10,16 +10,14 @@
 		</div>
 		<div class="col-lg-6">
 			<label>Jenjang</label>
-			<select name="jenjang" class="form-control">
-			<?php
-				$sd = ($data[0]["jenjang"] == "SD") ? "selected" : "";
-				$smp = ($data[0]["jenjang"] == "SMP") ? "selected" : "";
-				$sma = ($data[0]["jenjang"] == "SMA") ? "selected" : "";
-			?>
+			<select name="id_jenjang" class="form-control">
 			<option value=""> ---Pilih Jenjang---</option>
-				<option <?php echo $sd ?> >SD</option>
-				<option <?php echo $smp ?> >SMP</option>
-				<option <?php echo $sma ?> >SMA</option>
+			<?php 
+				foreach($jenjang as $d){
+				$j = ($d["id_jenjang"] == $data[0]["id_jenjang"]) ? "selected" : "";
+			?>
+			<option value="<?php echo $d["id_jenjang"]?>" <?php echo $j ?>><?php echo $d["nama_jenjang"]?></option>
+			<?php }?>
 			</select>
 		</div>
 		<div class="col-lg-6">
