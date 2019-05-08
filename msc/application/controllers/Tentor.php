@@ -36,10 +36,10 @@ class Tentor extends CI_Controller {
 			"btnText" => "Lihat Data"
 		);
 		$card['title'] = "Tentor <span>> Input Tentor</span>";
-        // $msg = $this->session->flashdata("success");
+		$data["data"] = $this->common->getData("*", "mapel", "", "", "");
 		$this->load->view('common/menu', $menu);
         $this->load->view('common/card', $card);
-		$this->load->view('tentor/input-tentor');
+		$this->load->view('tentor/input-tentor', $data);
 		$this->load->view('common/slash-card');
         $this->load->view('common/footer');
     }
