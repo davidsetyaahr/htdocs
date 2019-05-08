@@ -6,7 +6,12 @@
 		</div>
 		<div class="col-lg-6">
 			<label>Jenjang</label>
-			<input type="text" class="form-control" name="jenjang" value="">
+			<select name="id_jenjang" class="form-control">
+				<option value="">---Pilih Jenjang---</option>
+				<?php foreach($data as $d){?>
+				<option value="<?php echo $d["id_jenjang"]?>"><?php echo $d["nama_jenjang"]?></option>
+				<?php }?>
+			</select>
 			<br>
 		</div>
 		<div class="col-lg-6">
