@@ -35,7 +35,7 @@ class Cicilan extends CI_Controller {
 			"btnBg" => "primary","btnFa" => "keyboard",
 			"btnText" => "List Cicilan"
 		);
-		$card['title'] = "Cicilan <span>> Tambah Cicilan </span>";
+		$card['title'] = "Cicilan <span>> Input Cicilan </span>";
 		//$data["data"] = $this->common->getData("*", "mapel", "", "", "");
 		$this->load->view('common/menu', $menu);
         $this->load->view('common/card', $card);
