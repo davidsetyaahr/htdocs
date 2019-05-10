@@ -28,9 +28,7 @@ class Cicilan extends CI_Controller {
 
 	public function input_cicilan()
 	{
-<<<<<<< HEAD
 		$this->load->view('list-cicilan');
-=======
 		$menu = array(
 			"title" => $this->title,
 			"btnHref" => base_url()."keuangan/cicilan",
@@ -44,6 +42,5 @@ class Cicilan extends CI_Controller {
 		$this->load->view('keuangan/cicilan/tambah-cicilan');
 		$this->load->view('common/slash-card');
         $this->load->view('common/footer');
->>>>>>> 020b1242958f006ef2d59cdd07c63b6b5d99c870
     }
 }
