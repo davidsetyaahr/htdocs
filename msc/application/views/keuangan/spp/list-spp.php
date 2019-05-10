@@ -7,8 +7,8 @@
 						<th>#</th>
 						<th>Nama Siswa</th>
 						<th>Jenjang</th>
-						<th>Bulan</th>
 						<th>Total Bayar</th>
+						<th>Bulan</th>
 						<th>Keterangan</th>
 					</tr>
 				</thead>
