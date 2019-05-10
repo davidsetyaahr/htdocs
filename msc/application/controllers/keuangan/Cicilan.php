@@ -12,7 +12,7 @@ class Cicilan extends CI_Controller {
 	{
        	$menu = array(
             "title" => $this->title,
-			"btnHref" => base_url()."keuangan/cicilan/input-cicilan",
+			"btnHref" => base_url()."keuangan/cicilan/input_cicilan",
 			"btnBg" => "success",
 			"btnFa" => "keyboard",
 			"btnText" => "Tambah Data"
