@@ -17,7 +17,7 @@ class Spp extends CI_Controller {
 			"btnFa" => "keyboard",
 			"btnText" => "Tambah Data"
 		);
-		
+
 		$card['title'] = "Spp <span>> List Spp</span>";
 		// $data["data"] = $this->common->getData("*", "", "", "", "");
 		$this->load->view('common/menu', $menu);
@@ -31,5 +31,19 @@ class Spp extends CI_Controller {
 	public function input_spp()
 	{
 		$this->load->view('list-spp');
+		$menu = array(
+			"title" => $this->title,
+			"btnHref" => base_url()."keuangan/cicilan",
+			"btnBg" => "primary","btnFa" => "keyboard",
+			"btnText" => "List Cicilan"
+		);
+		$card['title'] = "Cicilan <span>> Input Cicilan </span>";
+		//$data["data"] = $this->common->getData("*", "mapel", "", "", "");
+		$this->load->view('common/menu', $menu);
+        $this->load->view('common/card', $card);
+		$this->load->view('keuangan/cicilan/tambah-cicilan');
+		$this->load->view('common/slash-card');
+        $this->load->view('common/footer');
+    }
     }
 }
