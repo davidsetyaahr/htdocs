@@ -12,7 +12,7 @@ class Cicilan extends CI_Controller {
 	{
        	$menu = array(
             "title" => $this->title,
-			"btnHref" => base_url()."keuangan/cicilan/list-cicilan",
+			"btnHref" => base_url()."keuangan/cicilan/input_cicilan",
 			"btnBg" => "success",
 			"btnFa" => "keyboard",
 			"btnText" => "Tambah Data"
@@ -28,13 +28,13 @@ class Cicilan extends CI_Controller {
 
 	public function input_cicilan()
 	{
-		$this->load->view('list-cicilan');
 		$menu = array(
-			"title" => $this->title,
+            "title" => $this->title,
 			"btnHref" => base_url()."keuangan/cicilan",
-			"btnBg" => "primary","btnFa" => "keyboard",
-			"btnText" => "List Cicilan"
-		);
+			"btnBg" => "success",
+			"btnFa" => "keyboard",
+			"btnText" => "List Data"
+		   );
 		$card['title'] = "Cicilan <span>> Tambah Cicilan </span>";
 		//$data["data"] = $this->common->getData("*", "mapel", "", "", "");
 		$this->load->view('common/menu', $menu);
