@@ -28,6 +28,10 @@ class Cicilan extends CI_Controller {
 
 	public function input_cicilan()
 	{
+<<<<<<< HEAD
+=======
+		$this->load->view('list-cicilan');
+>>>>>>> 9f8d948d209ecc877459701ab21b7dfb1547bd61
 		$menu = array(
 			"title" => $this->title,
 			"btnHref" => base_url()."keuangan/cicilan",
