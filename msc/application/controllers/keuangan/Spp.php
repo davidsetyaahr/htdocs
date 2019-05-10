@@ -17,6 +17,7 @@ class Spp extends CI_Controller {
 			"btnFa" => "keyboard",
 			"btnText" => "Tambah Data"
 		);
+		
 		$card['title'] = "Spp <span>> List Spp</span>";
 		// $data["data"] = $this->common->getData("*", "", "", "", "");
 		$this->load->view('common/menu', $menu);
