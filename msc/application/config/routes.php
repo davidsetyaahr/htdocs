@@ -57,6 +57,7 @@ $route['data-master/jenjang/input-jenjang'] = "data-master/jenjang/input_jenjang
 $route['data-master/group/input-group'] = "data-master/group/input_group";
 $route['data-master/mapel/edit-mapel/(:num)'] = "data-master/mapel/edit_mapel/$1";
 $route['daftar-siswa'] = "daftar_siswa";
+$route['keuangan/spp'] = "keuangan/spp";
 
 /*david */
 $route['data-siswa'] = "data_siswa";
