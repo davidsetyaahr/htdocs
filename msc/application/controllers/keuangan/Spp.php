@@ -37,11 +37,11 @@ class Spp extends CI_Controller {
 			"btnBg" => "primary","btnFa" => "keyboard",
 			"btnText" => "List Cicilan"
 		);
-		$card['title'] = "Cicilan <span>> Input Cicilan </span>";
+		$card['title'] = "Spp <span>> Edit SPP </span>";
 		//$data["data"] = $this->common->getData("*", "mapel", "", "", "");
 		$this->load->view('common/menu', $menu);
         $this->load->view('common/card', $card);
-		$this->load->view('keuangan/cicilan/tambah-cicilan');
+		$this->load->view('keuangan/spp/tambah-spp');
 		$this->load->view('common/slash-card');
         $this->load->view('common/footer');
     }
