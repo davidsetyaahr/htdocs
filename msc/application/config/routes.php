@@ -61,3 +61,4 @@ $route['daftar-siswa'] = "daftar_siswa";
 /*david */
 $route['data-siswa'] = "data_siswa";
 /*david*/
+
