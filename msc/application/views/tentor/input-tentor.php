@@ -34,9 +34,11 @@
 		</div>
 		<div class="col-lg-6">
 			<label>Mata Pelajaran</label><br>
+			<div class="form-control" style="overflow: auto;">
 			<?php foreach($data as $d){?>
-			<input type="checkbox" class="" name="id_mapel[]" value="<?php echo $d["id_mapel"]?>">&nbsp<?php echo $d["mata_pelajaran"]?>&nbsp &nbsp
+				<input id="<?= $d["id_mapel"]?>" type="checkbox" class="" name="id_mapel[]" value="<?php echo $d["id_mapel"]?>"><label for="<?= $d["id_mapel"]?>">&nbsp<?php echo $d["mata_pelajaran"]?>&nbsp &nbsp</label>
 			<?php }?>
+			</div>
 		</div>
 		<div class="col-lg-6">
 			<br>

@@ -53,11 +53,10 @@ class Jenjang extends CI_Controller {
 	{
 		$where = array("id_jenjang" => $kode);
 		$data["data"] = $this->common->getData("*", "jenjang", "", $where, "");
-		// $this
 		$menu = array(
-			"title" => $this->title,
-			"btnHref" => base_url()."data-master/Jenjang",
-			"btnBg" => "primary","btnFa" => "keyboard",
+		"title" => $this->title,
+		"btnHref" => base_url()."data-master/Jenjang",
+		"btnBg" => "primary","btnFa" => "keyboard",
 			"btnText" => "Lihat Data"
 		);
 		$card['title'] = "Tentor <span>> Edit Jenjang</span>";

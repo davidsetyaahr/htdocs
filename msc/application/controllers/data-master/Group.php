@@ -75,6 +75,4 @@ class Group extends CI_Controller {
 		$this->common->update("group_siswa", $this->input->post(), $filter);
 		redirect(base_url()."data-master/group");
 	}
-
-
 }

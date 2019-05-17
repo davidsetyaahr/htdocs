@@ -62,7 +62,7 @@
           <span>Pendaftaran Siswa</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url() ?>">
+        <a class="nav-link" href="<?php echo base_url()."jadwal" ?>">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Penjadwalan</span></a>
       </li>
@@ -77,9 +77,9 @@
           <span>Data Tentor</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url()."kbm" ?>">
+        <a class="nav-link" href="<?php echo base_url()."lkbm" ?>">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>KBM</span></a>
+          <span>Lampiran KBM</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="<?php echo base_url()."nilai-siswa" ?>">

@@ -8,6 +8,7 @@
 						<th>Nama Tentor</th>
 						<th>Jenis Kelamin</th>
 						<th>Pendidikan Terakhir</th>
+						<th>Mapel</th>
 						<th>No. HP</th>
 						<th>Alamat</th>
 						<th>Gaji</th>
@@ -15,7 +16,7 @@
 					</tr>
 				</thead>
                 <?php 
-                    foreach($data as $t){
+					foreach($data as $t){
                 ?>
 				<tbody>
 					<tr>
@@ -23,6 +24,16 @@
 						<th><?php echo $t["nama_tentor"]?></th>
 						<th><?php echo $t["jk"]?></th>
 						<th><?php echo $t["pendidikan_terakhir"]?></th>
+						<th><?php 
+							foreach($mapel as $m){
+								$pend = explode(",", $m["mata_pelajaran"]);
+								for ($i=0; $i < count($pend); $i++) { 
+									echo "-> ";
+									echo $pend[$i];
+									echo "<br>";
+								}
+							}
+						?></th>
 						<th><?php echo $t["no_hp"]?></th>
 						<th><?php echo $t["alamat"]?></th>
 						<th>Rp. <?php echo $t["gaji"]?></th>

@@ -4,6 +4,7 @@ class Common_lib
 {
     public function __construct()
     {
+        date_default_timezone_set("Asia/Jakarta");
         $this->ci =& get_instance();
         $this->ci->load->library("form_validation");
         $this->ci->form_validation->set_message(
@@ -17,6 +18,22 @@ class Common_lib
                 )
         );
     }
+
+    public function indoDay($d)
+    {
+        $arr = array(
+            "Sun" => "Minggu",
+            "Mon" => "Senin",
+            "Tue" => "Selasa",
+            "Wed" => "Rabu",
+            "Thu" => "Kamis",
+            "Fri" => "Jumat",
+            "Sat" => "Sabtu",
+        );
+
+        return $arr[$d];
+    }
+
     public function getTitle()
     {
         $countUri = count($this->ci->uri->segment_array());

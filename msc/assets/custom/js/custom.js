@@ -3,6 +3,32 @@ $(document).ready(function () {
 		format : "yyyy-mm-dd",
 	}).datepicker("setDate", new Date());
 	
+	$(".getId").click(function(e){
+		e.preventDefault()
+		var thisModal = $(this).data("modal");
+		var target = $(this).data("target")
+		var thisVal = $(this).data("value")
+		$(target+" option").remove()
+		$(target).append("<option>"+thisVal+"</option>")
+		$(thisModal).modal("hide")
+	});
+
+	var x = 1;
+    $(".addField").click(function(e){
+		e.preventDefault();
+        if(x < 5){
+			$(".place").append("<div class='row' id='place"+x+"'><div class='col-lg-6'><br><input type='file' name='lampiran"+x+"' class='form-control'></div><div class='col-lg-5'><br><input type='text' name='caption[]' class='form-control'></div><div class='col-lg-1'><br><a href='' class='btn btn-danger btn-sm remove' data-id='#place"+x+"'>Hapus</a></div></div>")
+			x++;
+			$(".remove").click(function(e){
+				e.preventDefault()
+				var id = $(this).data("id")
+				$(id).remove()
+				x--
+			})
+		}
+	});
+
+
 	$('#id_kepala').change(function () {
 		$('#basic-addon1').html($('#id_kepala').val());
 	});
