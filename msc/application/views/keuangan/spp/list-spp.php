@@ -15,11 +15,11 @@
 				<tbody>
 					<tr>
 						<th></th>
-						<th></th>
-						<th></th>
-						<th></th>
-						<th></th>
-						<th></th>
+						<th>Wahidah Addini</th>
+						<th>SMP</th>
+						<th>Rp100,000</th>
+						<th>Januari</th>
+						<th>Belum Bayar</th>
 					</tr>
 			</table>
 		</div>

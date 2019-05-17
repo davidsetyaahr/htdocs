@@ -17,12 +17,12 @@
 				<tbody>
 					<tr>
 						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td>Azizah Munaroh</td>
+						<td>Rp1,200,000</td>
+						<td>6 kali</td>
+						<td>Rp100,000/cicilan</td>
+						<td>2 kali</td>
+						<td>Rp200,000</td>
 						<td></td>
 					</tr>
 				</tbody>
