@@ -17,7 +17,7 @@
 				</thead>
                 <?php 
 					foreach($data as $t){
-                ?>
+						?>
 				<tbody>
 					<tr>
 						<th><?php echo $t["kode_tentor"]?></th>
@@ -25,13 +25,11 @@
 						<th><?php echo $t["jk"]?></th>
 						<th><?php echo $t["pendidikan_terakhir"]?></th>
 						<th><?php 
+							$mapel = $this->common->getData("m.mata_pelajaran", "mapel_tentor mt", ["mapel m", "m.id_mapel=mt.id_mapel"], ["mt.kode_tentor" => $t['kode_tentor']], "");
 							foreach($mapel as $m){
-								$pend = explode(",", $m["mata_pelajaran"]);
-								for ($i=0; $i < count($pend); $i++) { 
 									echo "-> ";
-									echo $pend[$i];
+									echo $m['mata_pelajaran'];
 									echo "<br>";
-								}
 							}
 						?></th>
 						<th><?php echo $t["no_hp"]?></th>
@@ -46,7 +44,8 @@
 						?></th>
 					</tr>
 				</tbody>
-                <?php   } ?>
+				<?php   } 
+				?>
 			</table>
 		</div>
 	</div>
