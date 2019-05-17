@@ -34,7 +34,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-calculator"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">PT ARR</div>
+        <div class="sidebar-brand-text mx-3">MSC</div>
       </a>
 
       <!-- Divider -->
