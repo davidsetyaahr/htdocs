@@ -19,7 +19,6 @@ class Tentor extends CI_Controller {
 		);
 		$card['title'] = "Tentor <span>> List Tentor</span>";
 		$data["data"] = $this->common->getdata("*", "tentor", "", "", "");
-//		$data["mapel"] = $this->common->getData("t.nama_tentor, t.jk, t.pendidikan_terakhir, t.no_hp, t.alamat, t.gaji, t.kode_tentor, m.id_mapel, m.mata_pelajaran", "mapel_tentor mt", ["mapel m", "m.id_mapel=mt.id_mapel", "tentor t", "t.kode_tentor=mt.kode_tentor"], "", "");
 		$this->load->view('common/menu', $menu);
 		$this->load->view('common/card', $card);
 		$this->load->view('tentor/tentor', $data);
@@ -30,14 +29,36 @@ class Tentor extends CI_Controller {
 
 	public function input_tentor()
 	{
+		$cek = $this->common->getData("kode_tentor", "tentor", "", "", "");
+		if(count($cek)==0){
+			$kode = "TR001";
+		}
+		else{
+			$getKode = $this->common->getData("kode_tentor", ["tentor",1], "", "", ["kode_tentor","desc"]);
+			$getInt = (int)substr($getKode[0]['kode_tentor'],2,3) + 1;
+			if(strlen($getInt)==1){
+				$nol = "00";
+			}
+			else if(strlen($getInt)==2){
+				$nol = "0";
+			}
+			else if(strlen($getInt)==3){
+				$nol = "";
+			}
+			$kode = "TR".$nol.$getInt;
+		}
+
 		$menu = array(
 			"title" => $this->title,
 			"btnHref" => base_url()."tentor",
 			"btnBg" => "primary","btnFa" => "keyboard",
 			"btnText" => "Lihat Data"
 		);
+		
 		$card['title'] = "Tentor <span>> Input Tentor</span>";
+		// $data = $this->insert_tentor($kode);
 		$data["data"] = $this->common->getData("*", "mapel", "", "", "");
+		$data["kode"] = $kode;
 		$this->load->view('common/menu', $menu);
         $this->load->view('common/card', $card);
 		$this->load->view('tentor/input-tentor', $data);
@@ -46,6 +67,7 @@ class Tentor extends CI_Controller {
     }
     public function insert_tentor()
     {
+
 		$tentor = array(
 			"kode_tentor" => $this->input->post("kode_tentor"),
 			"nama_tentor" => $this->input->post("nama_tentor"),
@@ -59,7 +81,7 @@ class Tentor extends CI_Controller {
 		for($i=0; $i<count($_POST['id_mapel']); $i++){
 			$mapelTentor = array(
 				"id_mapel" => $_POST['id_mapel'][$i],
-				"kode_tentor" => $this->input->post("kode_tentor")
+				"kode_tentor" => $_POST["kode_tentor"]
 			);
 			$this->common->insert("mapel_tentor", $mapelTentor);
 		}
