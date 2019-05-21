@@ -7,6 +7,7 @@ class Lkbm extends CI_Controller {
 	{
 		parent::__construct();
 		$this->title = $this->common_lib->getTitle();
+        date_default_timezone_set("Asia/Jakarta");
     }
     
     // public function index()

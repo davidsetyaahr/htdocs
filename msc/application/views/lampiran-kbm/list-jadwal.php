@@ -31,13 +31,13 @@
 							$day = date("D");
                             $now = date("H:i:s");
                             $mulaitamp = strtotime($data['jam_mulai']) - 60*60;
-                            $mulai = date("H:i:s", $mulaitamp);
-                            if($this->common_lib->indoDay($day)==$data['hari'] && ($now >= $mulai) && ($now <= $data["jam_slesai"])){
+							$mulai = date("H:i:s", $mulaitamp);
+							if($this->common_lib->indoDay($day)==$data['hari'] && ($now >= $mulai) && ($now <= $data["jam_slesai"])){
                                 echo "<a href='".base_url()."lkbm/kbm/$data[id_jadwal]' class='btn btn-primary btn-sm'>Masuk</a>";
                             }
                             else{
                                 echo "Tidak Bisa Melakukan Aksi";
-                            }
+							}
                         ?>
                         </th>
 					</tr>

@@ -33,9 +33,29 @@
 	</div>
 </div>
 <hr>
+<?php 
+    $kbm = empty($this->uri->segment(4)) ? "active" : "";
+    $abs = !empty($this->uri->segment(4)) && $this->uri->segment(4)=="absensi" ? "active" : "";
+?>
 <div class="row">
     <div class="col-lg-12">
-        <div class="card border-left-danger shadow h-100 py-2">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link <?php echo $kbm ?>" href="<?php echo base_url()."lkbm/kbm/".$this->uri->segment(3) ?>">KBM</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <?php echo $abs ?>" href="<?php echo base_url()."lkbm/kbm/".$this->uri->segment(3)."/absensi" ?>">Absensi</a>
+            </li>
+        </ul>        
+    </div>
+</div>
+<br>
+<?php 
+    if($kbm=="active"){
+?>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card border-left-danger">
             <div class="card-body">
                 <form action="" method="post">
                 <h4><b>Pengumuman</b></h4>
@@ -52,7 +72,7 @@
 <br>
 <div class="row">
     <div class="col-lg-12">
-        <div class="card border-left-danger shadow h-100 py-2">
+        <div class="card border-left-primary">
             <div class="card-body">
             <form action="" method="post" enctype="multipart/form-data">
                 <h4><b>Lampiran</b></h4>
@@ -72,7 +92,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <br>
-                        <a href="" type="button" class="btn btn-sm btn-info addField">Tambah Lampiran</a>
+                        <a href="" class="btn btn-sm btn-info addField">Tambah Lampiran</a>
                     </div>
                     <div class="col-auto ml-auto">
                         <br>
@@ -101,3 +121,52 @@
         </div>
     </div>
 </div>
+<?php } else{ 
+$siswa = $this->common->getData("kode_siswa,nama_siswa","siswa","",["kode_group" => $jadwal[0]['kode_group']],["kode_siswa","desc"]);
+?>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped">
+                <thead class="bg-primary text-white">
+                    <tr>
+                        <th>Hadir</th>
+                        <th>Kode Siswa</th>
+                        <th>Nama Siswa</th>
+                        <th>Hadir</th>
+                        <th>Tidak Hadir</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php 
+                        foreach($siswa as $key => $s){
+                    ?>
+                        <tr>
+                            <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-success btn-sm"><i class="fas fa-check-circle"></i> Hadir</button>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fas fa-minus-circle"></i>
+                                Tidak Hadir
+                                </button>
+                                    <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">Tanpa Keterangan</a>
+                                    <a class="dropdown-item" href="#">Ijin</a>
+                                    <a class="dropdown-item" href="#">Sakit</a>
+                                    </div>
+                                </div>
+                                </div>
+                            </td>
+                            <td><?php echo $s['kode_siswa'] ?></td>
+                            <td><?php echo $s['nama_siswa'] ?></td>
+                            <td> <i class="fas fa-check-circle text-success"></i></td>
+                            <td>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<?php } ?>
