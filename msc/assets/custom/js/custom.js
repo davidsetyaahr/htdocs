@@ -33,11 +33,59 @@ $(document).ready(function () {
 		}
 	});
 
+	if($("#chadir").length==1){
+		var hadir = parseInt($("#chadir").html());
+		var tidakHadir = 0;
+	}
 
+	$(".tidak-hadir a").click(function(e){
+		e.preventDefault()
+		var key = $(this).data("key")
+		var capt = $(this).data("capt")
+		var bg = $(this).data("class")
+		var btnBg = $("#tidak-hadir"+key).attr("data-bg")
+		if($("#badge"+key+" h5 b").length==0){
+			$("#badge"+key).html("<h5><b></b></h5>")
+		}
+		$("#badge"+key+" h5 b").attr("class","")
+		$("#badge"+key+" h5 b").addClass("badge bg-"+bg+" text-white")
+		$("#badge"+key+" h5 b").html(capt)
+		$("#hadir"+key).removeClass("btn-success")
+		$("#hadir"+key).addClass("btn-default")
+		$("#check"+key).empty()
+		$("#tidak-hadir"+key).removeClass(btnBg)
+		$("#tidak-hadir"+key).addClass("btn-"+bg)
+		$("#tidak-hadir"+key).attr("data-bg","btn-"+bg)
+		$("#absen"+key).val(capt)
+		hadir--
+		tidakHadir++
+		$("#chadir").html(hadir)
+		$("#ctidak-hadir").html(tidakHadir)
+	})
+	
+	$(".hadir").click(function(e){
+		e.preventDefault()
+		var key = $(this).data("key")
+		var removeBg = $("#tidak-hadir"+key).attr("data-bg")
+		$(this).removeClass("btn-default")
+		$(this).addClass("btn-success")
+		$("#tidak-hadir"+key).removeClass(removeBg)
+		$("#tidak-hadir"+key).addClass("btn-default")
+		$("#tidak-hadir"+key).attr("data-bg","btn-default")
+		$("#badge"+key).empty()
+		$("#check"+key).empty()
+		$("#check"+key).html("<i class='fas fa-check-circle text-success'></i>")
+		$("#absen"+key).val("Hadir")
+		hadir++
+		tidakHadir--
+		$("#chadir").html(hadir)
+		$("#ctidak-hadir").html(tidakHadir)
+	})
+	
 	$('#id_kepala').change(function () {
 		$('#basic-addon1').html($('#id_kepala').val());
 	});
-
+	
 	$('#kode_induk').change(function () {
 		$('#basic-addon2').html($('#kode_induk').val());
 	});

@@ -37,3 +37,6 @@ body{
 .card-title span{
   color: #858796 !important;
 }
+.btn-default{
+    border : 1px solid #dddfeb;
+}
