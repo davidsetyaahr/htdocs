@@ -122,10 +122,10 @@
     </div>
 </div>
 <?php } else{ 
-$siswa = $this->common->getData("kode_siswa,nama_siswa","siswa","",["kode_group" => $jadwal[0]['kode_group']],["kode_siswa","desc"]);
 ?>
 <div class="row">
     <div class="col-lg-12">
+        <form action="" method="post">
         <div class="table-responsive">
             <table class="table table-bordered table-hover table-striped">
                 <thead class="bg-primary text-white">
@@ -138,35 +138,64 @@ $siswa = $this->common->getData("kode_siswa,nama_siswa","siswa","",["kode_group"
                     </tr>
                 </thead>
                 <tbody>
-                    <?php 
+                    <?php
+                        $arrBg = array(
+                            "Tanpa Keterangan" => "danger",
+                            "Ijin" => "info",
+                            "Sakit" => "warning",
+                        );
                         foreach($siswa as $key => $s){
+                            if($cek>0){
+                                $absen = $this->common->getData("kode_siswa,keterangan","absensi","",["id_jadwal" => $this->uri->segment(3),"kode_siswa" => $s['kode_siswa']],"");
+                                $check = $absen[0]['keterangan'];
+                                $bgHadir = ($absen[0]['keterangan']=="Hadir") ? "success" : "default";
+                                $bgTidakHadir = ($absen[0]['keterangan']!="Hadir") ? $arrBg[$check] : "default";
+                                $hadir = $bgHadir=="success" ? "<i class='fas fa-check-circle text-success'></i>" : "";
+                                $tidakHadir = $bgTidakHadir!="default" ? "<h5><b class='badge bg-".$bgTidakHadir." text-white'>".$absen[0]['keterangan']."</b></h5>" : "";
+                            }
+                            else{
+                                $bgHadir = "success";
+                                $bgTidakHadir = "default";
+                                $check = "Hadir";
+                                $hadir = "<i class='fas fa-check-circle text-success'></i>";
+                                $tidakHadir = "";
+                            }
                     ?>
                         <tr>
                             <td>
+                            <input style="display:none" type="checkbox" name="absen[<?php echo $s['kode_siswa'] ?>]" id="absen<?php echo $key ?>" value="<?php echo $check ?>" checked>
                             <div class="btn-group">
-                                <button type="button" class="btn btn-success btn-sm"><i class="fas fa-check-circle"></i> Hadir</button>
+                                <button type="button" id="hadir<?php echo $key ?>" data-key="<?php echo $key ?>" class="btn btn-<?php echo $bgHadir ?> btn-sm hadir"><i class="fas fa-check-circle"></i> Hadir</button>
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fas fa-minus-circle"></i>
+                                    <button type="button" data-bg="btn-default" id="tidak-hadir<?php echo $key ?>" class="btn btn-<?php echo $bgTidakHadir ?> btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fas fa-minus-circle"></i>
                                 Tidak Hadir
                                 </button>
-                                    <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Tanpa Keterangan</a>
-                                    <a class="dropdown-item" href="#">Ijin</a>
-                                    <a class="dropdown-item" href="#">Sakit</a>
+                                    <div class="dropdown-menu tidak-hadir">
+                                        <a class="dropdown-item" data-class="danger" data-key="<?php echo $key ?>" data-capt="Tanpa Keterangan" href="#">Tanpa Keterangan</a>
+                                        <a class="dropdown-item" data-class="info" data-key="<?php echo $key ?>" data-capt="Ijin" href="#">Ijin</a>
+                                        <a class="dropdown-item" data-class="warning" data-key="<?php echo $key ?>" data-capt="Sakit" href="#">Sakit</a>
                                     </div>
                                 </div>
                                 </div>
                             </td>
                             <td><?php echo $s['kode_siswa'] ?></td>
                             <td><?php echo $s['nama_siswa'] ?></td>
-                            <td> <i class="fas fa-check-circle text-success"></i></td>
-                            <td>
+                            <td id="check<?php echo $key ?>"> <?php echo $hadir ?></td>
+                            <td id="badge<?php echo $key ?>">
+                                <?php echo $tidakHadir ?>
                             </td>
                         </tr>
                     <?php } ?>
+                    <tr class="bg-warning text-white">
+                        <th colspan="3">Total : </th>
+                        <th><span id="chadir"><?php echo count($siswa) ?></span> Siswa</th>
+                        <th><span id="ctidak-hadir">0</span> Siswa</th>
+                    </tr>
                 </tbody>
             </table>
         </div>
+        <button type="submit" class="btn btn-primary btn-sm"><span class="fas fa-save"></span> Simpan</button>
+        </form>
     </div>
 </div>
 <?php } ?>

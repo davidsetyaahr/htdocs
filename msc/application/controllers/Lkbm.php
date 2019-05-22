@@ -82,6 +82,19 @@ class Lkbm extends CI_Controller {
 				$data['error'] = $err;
 			}
 		}
+		
+		if(isset($_POST['absen'])){
+			foreach($_POST['absen'] as $key => $val){
+				$arr = array(
+					"id_jadwal" => $id,
+					"kode_siswa" => $key,
+					"keterangan" => $val,
+				);
+				$this->common->insert("absensi", $arr);
+			}
+
+			redirect(base_url()."lkbm/kbm/$id/absensi");
+		}
 		$where = array("id_jadwal" => $id);
 		$menu = array(
 			"title" => $this->title,
@@ -93,6 +106,10 @@ class Lkbm extends CI_Controller {
 		$data['lampiran'] = $this->common->getData("*","lampiran_kbm","",["id_jadwal" => $id],["id_lampiran","desc"]);
 		$card['title'] = "Lampiran KBM <span>> List L-KBM</span>";
 		$data["jadwal"] = $this->common->getData("j.*, g.kode_group, g.nama_group, t.kode_tentor, t.nama_tentor, m.mata_pelajaran, ", "jadwal j", ["group_siswa g", "j.kode_group=g.kode_group", "mapel_tentor mt", "mt.id_mapel_tentor=j.id_mapel_tentor", "mapel m", "mt.id_mapel=m.id_mapel", "tentor t", "mt.kode_tentor=t.kode_tentor"], $where, "");
+		if(!empty($this->uri->segment(4))){
+			$data['siswa'] = $this->common->getData("kode_siswa,nama_siswa","siswa","",["kode_group" => $data['jadwal'][0]['kode_group']],["kode_siswa","asc"]);
+			$data['cek'] = count($this->common->getData("kode_siswa","absensi","",["id_jadwal" => $id],""));
+		}
 		$this->load->view('common/menu', $menu);
 		$this->load->view('common/card', $card);
 		$this->load->view('lampiran-kbm/kbm', $data);
