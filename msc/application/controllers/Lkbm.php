@@ -9,23 +9,6 @@ class Lkbm extends CI_Controller {
 		$this->title = $this->common_lib->getTitle();
     }
     
-    // public function index()
-    // {
-    //     $menu = array(
-	// 		"title" => $this->title,
-	// 		"btnHref" => base_url()."lkbm/input_lkbm",
-	// 		"btnBg" => "success",
-	// 		"btnFa" => "keyboard",
-	// 		"btnText" => "Tambah KBM"
-	// 	);
-	// 	$card['title'] = "Lampiran KBM <span>> List L-KBM</span>";
-	// 	$data["data"] = $this->common->getData("l.id_lampiran, l.lampiran, l.caption, g.nama_group, t.nama_tentor, m.mata_pelajaran, j.jam_mulai, j.jam_slesai, j.minggu_ke", "lampiran_kbm l", ["jadwal j", "j.id_jadwal=l.id_jadwal", "group_siswa g", "g.kode_group=j.kode_group", "mapel_tentor mt", "mt.id_mapel_tentor=j.id_mapel_tentor", "tentor t", "mt.kode_tentor=t.kode_tentor", "mapel m", "m.id_mapel=mt.id_mapel"], "", "");
-	// 	$this->load->view('common/menu', $menu);
-	// 	$this->load->view('common/card', $card);
-	// 	$this->load->view('lampiran-kbm/lampiran-kbm', $data);
-	// 	$this->load->view('common/slash-card');
-	// 	$this->load->view('common/footer');
-    // }
     public function index()
     {
 		$menu = array(
@@ -89,8 +72,8 @@ class Lkbm extends CI_Controller {
 			"btnFa" => "keyboard",
 			"btnText" => "Tambah KBM"
 		);
-		$data['lampiran'] = $this->common->getData("*","lampiran_kbm","",["id_jadwal" => $id],["id_lampiran","desc"]);
 		$card['title'] = "Lampiran KBM <span>> List L-KBM</span>";
+		$data['lampiran'] = $this->common->getData("*","lampiran_kbm","",["id_jadwal" => $id],["id_lampiran","desc"]);
 		$data["jadwal"] = $this->common->getData("j.*, g.kode_group, g.nama_group, t.kode_tentor, t.nama_tentor, m.mata_pelajaran, ", "jadwal j", ["group_siswa g", "j.kode_group=g.kode_group", "mapel_tentor mt", "mt.id_mapel_tentor=j.id_mapel_tentor", "mapel m", "mt.id_mapel=m.id_mapel", "tentor t", "mt.kode_tentor=t.kode_tentor"], $where, "");
 		$this->load->view('common/menu', $menu);
 		$this->load->view('common/card', $card);
@@ -150,5 +133,4 @@ class Lkbm extends CI_Controller {
 		$this->common->update("jadwal", $this->input->post(), $filter);
 		redirect(base_url()."jadwal");
 	}
-
 }

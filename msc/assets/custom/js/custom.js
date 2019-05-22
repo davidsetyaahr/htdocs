@@ -1,4 +1,9 @@
 $(document).ready(function () {
+	
+	//datatable
+	window.$('#lkbm').DataTable();
+	  
+	
 	$(".datepicker").datepicker({
 		format : "yyyy-mm-dd",
 	}).datepicker("setDate", new Date());

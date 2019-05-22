@@ -1,10 +1,10 @@
 <div class="row">
 	<div class="col-lg-12">
 		<div class="table-responsive">
-			<table class="table table-striped table-bordered table-hover">
+			<table class="table table-striped table-bordered table-hover" id="lkbm">
                 <thead>
 					<tr>
-						<th>#</th>
+						<!-- <th>#</th> -->
 						<th>Nama Tentor</th>
 						<th>Jenis Kelamin</th>
 						<th>Pendidikan Terakhir</th>
@@ -20,7 +20,7 @@
 						?>
 				<tbody>
 					<tr>
-						<th><?php echo $t["kode_tentor"]?></th>
+						<!-- <th><?php echo $t["kode_tentor"]?></th> -->
 						<th><?php echo $t["nama_tentor"]?></th>
 						<th><?php echo $t["jk"]?></th>
 						<th><?php echo $t["pendidikan_terakhir"]?></th>

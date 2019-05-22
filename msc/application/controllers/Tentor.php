@@ -56,7 +56,6 @@ class Tentor extends CI_Controller {
 		);
 		
 		$card['title'] = "Tentor <span>> Input Tentor</span>";
-		// $data = $this->insert_tentor($kode);
 		$data["data"] = $this->common->getData("*", "mapel", "", "", "");
 		$data["kode"] = $kode;
 		$this->load->view('common/menu', $menu);
