@@ -83,7 +83,7 @@
           <span>Lampiran KBM</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url()."nilai-siswa" ?>">
+        <a class="nav-link" href="<?php echo base_url()."nilai_siswa" ?>">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Nilai Siswa</span></a>
       </li>
