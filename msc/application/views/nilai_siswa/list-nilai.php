@@ -15,15 +15,26 @@
 					</tr>
 				</thead>
 				<tbody>
+				<?php foreach($data as $d){?>
 					<tr>
-						<td>1</td>
-						<td>1</td>
-						<td>80</td>
-						<td>Juni</td>
-						<td>2017</td>
-						<td>T001</td>
-						<td>18-01-2017</td>
+						<td><?php echo $d["id_nilai"]?></td>
+						<td><?php echo $d["kode_siswa"]?></td>
+						<td><?php echo $d["sikap"]?></td>
+						<td><?php echo $d["bulan"]?></td>
+						<td><?php echo $d["tahun"]?></td>
+						<td><?php echo $d["kode_tentor"]?></td>
+						<td><?php echo $d["tanggal_penilaian"]?></td>
+						<td>
+						<?php
+							$dropdown["id"] = "menu".$d["id_nilai"];
+							$dropdown["href"] = array(
+								"Edit" => base_url()."nilai_siswa/edit_nilai".$d["id_nilai"],
+							);
+							$this->load->view("common/dropdown", $dropdown);
+						?>
+						</td>
 					</tr>
+						<?php }?>
 				</tbody>
 			</table>
 		</div>

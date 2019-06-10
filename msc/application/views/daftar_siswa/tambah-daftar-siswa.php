@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-lg-6">
 			<label>Kode Siswa</label>
-			<input type="text" class="form-control" name="kode_siswa">
+			<input type="text" class="form-control" name="kode_siswa" readonly value="<?= $siswa?>">
 		</div>
 		<div class="col-lg-6">
 			<label>Nama Siswa</label>

@@ -4,6 +4,7 @@
 			<table class="table table-striped table-bordered table-hover" id="lkbm">
 				<thead>
 					<tr>
+						<th>No</th>
 						<th>ID Lampiran</th>
 						<th>Lampiran</th>
 						<th>Caption</th>
@@ -16,9 +17,12 @@
 						<th>Opsi</th>
 					</tr>
 				</thead>
-				<?php foreach($data as $data){?>
+				<?php 
+				$no = 1;
+				foreach($data as $data){?>
 				<tbody>
 					<tr>
+						<th><?= $no?></th>
 						<th><?php echo $data["id_lampiran"]?></th>
 						<th><?php echo $data["lampiran"]?></th>
 						<th><?php echo $data["caption"]?></th>
@@ -39,7 +43,7 @@
 						</th>
 					</tr>
 				</tbody>
-						<?php }?>
+						<?php $no++; }?>
 			</table>
 		</div>
 	</div>

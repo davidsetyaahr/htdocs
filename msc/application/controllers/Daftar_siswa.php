@@ -10,12 +10,27 @@ class Daftar_siswa extends CI_Controller {
 	
 	public function index()
 	{
+		$cek = $this->common->getData("kode_siswa", "siswa", "", "", "");
+		if(count($cek)==0){
+			$kode = "MSC001";
+		}
+		else{
+			$getKode = $this->common->getData("kode_siswa", ["siswa",1], "", "", ["kode_siswa","desc"]);
+			$getInt = (int)substr($getKode[0]['kode_siswa'],2,3) + 1;
+			if(strlen($getInt)==1){
+				$nol = "00";
+			}
+			else if(strlen($getInt)==2){
+				$nol = "0";
+			}
+			else if(strlen($getInt)==3){
+				$nol = "";
+			}
+			$kode = "MSC".$nol.$getInt;
+		}
+		$data["siswa"] = $kode;		
         $menu = array(
             "title" => $this->title,
-			// "btnHref" => base_url()."daftar_siswa/tambah_daftar_siswa",
-			// "btnBg" => "success",
-			// "btnFa" => "keyboard",
-			// "btnText" => "Tambah Siswa"
 		);
 		$card['title'] = "Pendafatran <span>> Daftar</span>";
         $data["data"] = $this->common->getData("*", "tentor", "", "", "");
@@ -29,14 +44,13 @@ class Daftar_siswa extends CI_Controller {
 	}
 
 	public function tambah_daftar_siswa()
-	{
+	{	
 		$menu = array(
 			"title" => $this->title,
 			"btnHref" => base_url()."",
 			"btnBg" => "primary","btnFa" => "keyboard",
 		);
 		$card['title'] = "Pendaftaran Siswa<span>> Input Pendaftaran Siswa</span>";
-        // $msg = $this->session->flashdata("success");
 		$this->load->view('common/menu', $menu);
         $this->load->view('common/card', $card);
 		$this->load->view('daftar_siswa/tambah-daftar-siswa');

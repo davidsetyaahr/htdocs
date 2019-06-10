@@ -33,6 +33,39 @@ $(document).ready(function () {
 		}
 	});
 
+	    var m = 1;
+        $(".addMapel").click(function(e){
+			e.preventDefault();
+			var key = $(this).data("key")
+			$.ajax({
+				url : "http://localhost/projek-kelompok/msc/nilai_siswa/show_mapel"
+			})
+/*             if(m < 12){
+				for(var i=0; i<mapel.length; ++i){
+                $(".mapelAdd").append(`
+					<div class="row">      
+						<div class="col-lg-4">
+							<label for="">Mapel</label>
+							<select name="id_mapel[]" id="" class="form-control">
+								<option value="">---Pilih Mapel---</option>
+								<option value="`+i.id_mapel+`">`+i.mata_pelajaran+`</option>
+							</select>
+						</div>
+						<div class="col-lg-4">
+							<label for="">Nilai</label>
+							<input type="text" name="" id="" class="form-control" value="">
+						</div>
+						<div class="col-lg-4">
+							<label for="">Catatan</label>
+							<textarea name="" id="" class="form-control"></textarea>
+						</div>    
+					</div>  	
+				`)
+				}
+            m++;
+            }
+ */        });	
+
 	if($("#chadir").length==1){
 		var hadir = parseInt($("#chadir").html());
 		var tidakHadir = 0;
@@ -106,4 +139,26 @@ $(document).ready(function () {
 		$('#basic-addon3').html('SP-' + $('#id_kategorisp option:selected').html() + '-');
 	}
 
+	$('.coba').click(function(e) {
+		e.preventDefault();
+		$.ajax({
+			url:'load_functions',
+			dataType:"JSON",
+			success:function(params) {
+				console.log(params);
+				// let id = $('.hai');
+				// if (id != null) {
+					// $.each(params.mapel,function(key,val) {
+					// 	console.log(val.id_mapel);
+					// 	$('.hai').append(val.id_mapel+,``)
+					// })
+					for (let index = 0; index < params.mapel.length; index++) {
+						// const element = array[index];
+						$('.hai').append(params.mapel[index]['mata_pelajaran']+`<br>`)
+						
+					}
+				// }
+			}
+		})
+	})
 });

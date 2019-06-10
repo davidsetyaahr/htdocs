@@ -5,7 +5,6 @@
 			<input type="text" class="form-control" name="">
 		</div>
 		<div class="col-lg-6">
-			<br>
 			<label>Biaya/cicilan</label>
 			<input type="number" class="form-control" name="" value="">
 		</div>
@@ -14,7 +13,6 @@
 			<input type="text" class="form-control" name="kode_siswa">
 		</div>
 		<div class="col-lg-6">
-			<br>
 			<label>Jumlah Cicilan</label>
 			<input type="number" class="form-control" name="" value="">
 		</div>
@@ -23,7 +21,6 @@
 			<input type="text" class="form-control" name="nama_siswa" value="">
 		</div>
 		<div class="col-lg-6">
-			<br>
 			<label>Total Biaya</label>
 			<input type="number" class="form-control" name="" value="">
 		</div>

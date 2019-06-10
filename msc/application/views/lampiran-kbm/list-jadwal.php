@@ -4,6 +4,7 @@
 			<table class="table table-striped table-bordered table-hover" id="lkbm">
 				<thead>
 					<tr>
+						<th>No</th>
 						<th>Kode Jadwal</th>
 						<th>Minggu Ke-</th>
 						<th>Nama Group</th>
@@ -15,9 +16,12 @@
 						<th>Opsi</th>
 					</tr>
 				</thead>
-				<?php foreach($jadwal as $data){?>
+				<?php 
+				$no = 1;
+				foreach($jadwal as $data){?>
 				<tbody>
 					<tr>
+						<th><?= $no?></th>
 						<th><?php echo $data["id_jadwal"]?></th>
 						<th><?php echo $data["minggu_ke"]?></th>
 						<th><?php echo $data["nama_group"]?></th>
@@ -42,7 +46,7 @@
                         </th>
 					</tr>
 				</tbody>
-						<?php }?>
+						<?php $no++; }?>
 			</table>
 		</div>
 	</div>
