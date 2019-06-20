@@ -33,6 +33,12 @@ class Common_lib
 
         return $arr[$d];
     }
+    public function indoMonth($m)
+    {
+        $arr = array("","Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember");
+
+        return $arr[(int)$m];
+    }
 
     public function getTitle()
     {

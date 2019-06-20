@@ -1,28 +1,33 @@
 <form action="<?php echo base_url()."keuangan/cicilan/input_cicilan" ?>" method="post">
 	<div class="row">
 		<div class="col-lg-6">
-			<label>Kode Cicilan</label>
-			<input type="text" class="form-control" name="">
-		</div>
-		<div class="col-lg-6">
-			<label>Biaya/cicilan</label>
-			<input type="number" class="form-control" name="" value="">
-		</div>
-		<div class="col-lg-6">
 			<label>Kode Siswa</label>
-			<input type="text" class="form-control" name="kode_siswa">
+			<select name="" id="" class="form-control" name="kode_siswa">
+				<option value="">---Option---</option>
+			</select>
 		</div>
 		<div class="col-lg-6">
-			<label>Jumlah Cicilan</label>
-			<input type="number" class="form-control" name="" value="">
+			<label>Tahun</label>
+			<select name="tahun" id="" class="form-control">
+			<?php 
+				$start = date("Y")+1;
+				$end = date("Y")-2;
+				for($i=$start;$i>=$end;$i--){
+					$s = $i==date("Y") ? "selected" : "";
+					echo "<option $s>$i</option>";
+				}
+			?>
+			</select>
 		</div>
 		<div class="col-lg-6">
-			<label>Nama Siswa</label>
-			<input type="text" class="form-control" name="nama_siswa" value="">
+		<br>
+			<label for="">Cicilan Ke-</label>
+			<input type="text" class="form-control" name="cicilan_ke" readonly>
 		</div>
 		<div class="col-lg-6">
-			<label>Total Biaya</label>
-			<input type="number" class="form-control" name="" value="">
+		<br>
+			<label>Nominal</label>
+			<input type="number" class="form-control" name="nominal" value="" readonly>
 		</div>
 
 		<div class="col-lg-6">

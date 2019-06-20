@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jun 10, 2019 at 03:28 PM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.2.15
+-- Host: 127.0.0.1
+-- Generation Time: Jun 20, 2019 at 03:31 PM
+-- Server version: 10.3.15-MariaDB
+-- PHP Version: 7.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -33,7 +33,7 @@ CREATE TABLE `absensi` (
   `id_jadwal` int(5) NOT NULL,
   `kode_siswa` varchar(6) NOT NULL,
   `keterangan` enum('Hadir','Tanpa Keterangan','Ijin','Sakit') NOT NULL,
-  `waktu_absen` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `waktu_absen` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -241,7 +241,7 @@ CREATE TABLE `nilai_mapel` (
   `id_nilai` int(6) DEFAULT NULL,
   `id_mapel` int(3) DEFAULT NULL,
   `nilai` int(3) DEFAULT NULL,
-  `catatan` text
+  `catatan` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
