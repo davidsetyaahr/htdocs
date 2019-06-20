@@ -54,4 +54,19 @@ class Cicilan extends CI_Controller {
 			echo $cek[0]["cicilan_ke"]+1;
 		}
 	}
+
+	public function insert_cicilan()
+	{
+		$tgl = date("Y-m-d");
+		$value = array(
+			"kode_siswa" => $this->input->post("kode_siswa"),
+			"tahun" => $this->input->post("tahun"),
+			"cicilan_ke" => $this->input->post("cicilan_ke"),
+			"nominal" => $this->input->post("nominal"),
+			"tanggal_bayar" => $tgl
+		);
+		$this->common->insert("pembayaran_cicilan", $value);
+		$this->session->set_flashdata("success", "Berhasil Menambahkan Data!!!");
+		redirect(base_url()."keuangan/cicilan");
+	}
 }
