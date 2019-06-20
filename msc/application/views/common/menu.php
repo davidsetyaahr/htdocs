@@ -104,7 +104,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="<?php echo base_url()."keuangan/cicilan"; ?>">Cicilan</a>
                 <a class="collapse-item" href="<?php echo base_url()."keuangan/spp"; ?>">SPP</a>
-                <a class="collapse-item" href="<?php echo base_url()."gaji"; ?>">Gaji Karyawan</a>
+                <a class="collapse-item" href="<?php echo base_url()."keuangan/gaji"; ?>">Gaji Karyawan</a>
                 <a class="collapse-item" href="<?php echo base_url()."keuangan/laporan"; ?>">Laporan Keuangan</a>
             </div>
         </div>
