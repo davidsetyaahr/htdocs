@@ -61,6 +61,7 @@ $route['nilai-siswa'] = "nilai_siswa";
 $route['keuangan/cicilan/list-cicilan'] = "keuangan/cicilan/list_cicilan";
 $route['keuangan/cicilan/tambah-cicilan'] = "keuangan/cicilan/tambah_cicilan";
 $route['keuangan/spp'] = "keuangan/spp";
+$route['keuangan/laporan/list-keuangan'] = "keuangan/laporan/list_laporan";
 
 /*david */
 $route['data-siswa'] = "data_siswa";
