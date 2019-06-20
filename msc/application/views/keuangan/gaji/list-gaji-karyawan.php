@@ -8,7 +8,7 @@
 						<th>Bulan</th>
 						<th>Tahun</th>
 						<th>Nominal</th>
-						<th>Keterangan</th>
+						<th>Tanggal</th>
 					</tr>
 				</thead>
 				<tbody>
