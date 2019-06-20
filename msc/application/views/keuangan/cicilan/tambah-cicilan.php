@@ -2,13 +2,18 @@
 	<div class="row">
 		<div class="col-lg-6">
 			<label>Kode Siswa</label>
-			<select name="" id="" class="form-control" name="kode_siswa">
+			<select id="kode_siswa" class="form-control" name="kode_siswa">
 				<option value="">---Option---</option>
+				<?php
+				foreach($siswa as $s => $val) {
+					echo '<option value="'.$val["kode_siswa"].'">'.$val["nama_siswa"].'</option>';
+				}
+				?>
 			</select>
 		</div>
 		<div class="col-lg-6">
 			<label>Tahun</label>
-			<select name="tahun" id="" class="form-control">
+			<select name="tahun" id="tahun" class="form-control tahun">
 			<?php 
 				$start = date("Y")+1;
 				$end = date("Y")-2;
@@ -22,12 +27,12 @@
 		<div class="col-lg-6">
 		<br>
 			<label for="">Cicilan Ke-</label>
-			<input type="text" class="form-control" name="cicilan_ke" readonly>
+			<input type="text" id="cicilan_ke" class="form-control" name="cicilan_ke" readonly>
 		</div>
 		<div class="col-lg-6">
 		<br>
 			<label>Nominal</label>
-			<input type="number" class="form-control" name="nominal" value="" readonly>
+			<input type="number" class="form-control" name="nominal" readonly value="<?= $cicilan[0]["cicilan"]?>">
 		</div>
 
 		<div class="col-lg-6">

@@ -1,7 +1,7 @@
 $(document).ready(function () {
-	
+	var base_url = "http://localhost/projek-kelompok/msc/"
 	//datatable
-	window.$('#lkbm').DataTable();
+//	window.$('#lkbm').DataTable();
 	  
 	
 	$(".datepicker").datepicker({
@@ -146,19 +146,36 @@ $(document).ready(function () {
 			dataType:"JSON",
 			success:function(params) {
 				console.log(params);
-				// let id = $('.hai');
-				// if (id != null) {
-					// $.each(params.mapel,function(key,val) {
-					// 	console.log(val.id_mapel);
-					// 	$('.hai').append(val.id_mapel+,``)
-					// })
-					for (let index = 0; index < params.mapel.length; index++) {
-						// const element = array[index];
+				for (let index = 0; index < params.mapel.length; index++) {
+					// const element = array[index];
 						$('.hai').append(params.mapel[index]['mata_pelajaran']+`<br>`)
 						
 					}
-				// }
+				}
+			})
+	})
+	
+	function cicilan_ke(){
+		var kode_siswa = $("#kode_siswa").val()
+		var tahun = $("#tahun").val()
+		$.ajax({
+			url		: base_url+'keuangan/cicilan/cek_cicilan_ke',
+			type	: "post",
+			data	: {
+				"kode_siswa" : kode_siswa,
+				"tahun" : tahun
+			},
+			success	: function(respone){
+				$("#cicilan_ke").val(respone)
 			}
 		})
+
+	}
+
+	$("#kode_siswa").change(function(){
+		cicilan_ke()
+	})
+	$("#tahun").change(function(){
+		cicilan_ke()
 	})
 });
