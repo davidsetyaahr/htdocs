@@ -14,7 +14,7 @@ class Laporan extends CI_Controller {
             "title" => $this->title,
 		);
 
-		$card['title'] = "Laporan <span>> List Cicilan</span>";
+		$card['title'] = "Laporan <span>> List Laporan</span>";
        	// $data["data"] = $this->common->getData("*", "", "", "", "");
 		$this->load->view('common/menu', $menu);
 		$this->load->view('common/card', $card);
