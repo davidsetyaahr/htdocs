@@ -63,10 +63,18 @@
           <span>Pendaftaran Siswa</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url()."jadwal" ?>">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Penjadwalan</span></a>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse0" aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-credit-card"></i>
+            <span>Penjadwalan</span>
+        </a>
+        <div id="collapse0" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="<?php echo base_url()."jadwal" ?>">Jadwal Les</a>
+                <a class="collapse-item" href="<?php echo base_url()."permintaan-perubahan-jadwal" ?>">Permintaan Perubahan<br> Jadwal</a>
+            </div>
+        </div>
       </li>
+
       <li class="nav-item">
         <a class="nav-link" href="<?php echo base_url()."data-siswa"; ?>">
           <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -107,6 +115,7 @@
         </a>
         <div id="collapse1" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="<?php echo base_url()."data-master/biaya"; ?>">Biaya</a>
                 <a class="collapse-item" href="<?php echo base_url()."data-master/jenjang"; ?>">Jenjang</a>
                 <a class="collapse-item" href="<?php echo base_url()."data-master/mapel"; ?>">Mapel</a>
                 <a class="collapse-item" href="<?php echo base_url()."data-master/group"; ?>">Group Siswa</a>
