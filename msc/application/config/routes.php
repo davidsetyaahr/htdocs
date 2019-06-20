@@ -64,5 +64,6 @@ $route['keuangan/spp'] = "keuangan/spp";
 
 /*david */
 $route['data-siswa'] = "data_siswa";
+$route['permintaan-perubahan-jadwal'] = "permintaan_perubahan_jadwal";
 /*david*/
 
