@@ -107,6 +107,7 @@
         </a>
         <div id="collapse1" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="<?php echo base_url()."data-master/biaya"; ?>">Biaya</a>
                 <a class="collapse-item" href="<?php echo base_url()."data-master/jenjang"; ?>">Jenjang</a>
                 <a class="collapse-item" href="<?php echo base_url()."data-master/mapel"; ?>">Mapel</a>
                 <a class="collapse-item" href="<?php echo base_url()."data-master/group"; ?>">Group Siswa</a>
