@@ -36,11 +36,37 @@ class Cicilan extends CI_Controller {
 			"btnText" => "List Data"
 		   );
 		$card['title'] = "Cicilan <span>> Tambah Cicilan </span>";
-		//$data["data"] = $this->common->getData("*", "mapel", "", "", "");
+		$data["siswa"] = $this->common->getData("kode_siswa, nama_siswa", "siswa", "", "", "");
+		$data["cicilan"] = $this->common->getData("cicilan", "biaya", "", "", "");
 		$this->load->view('common/menu', $menu);
         $this->load->view('common/card', $card);
-		$this->load->view('keuangan/cicilan/tambah-cicilan');
+		$this->load->view('keuangan/cicilan/tambah-cicilan', $data);
 		$this->load->view('common/slash-card');
         $this->load->view('common/footer');
     }
+	public function cek_cicilan_ke()
+	{
+		$cek = $this->common->getData("cicilan_ke",["pembayaran_cicilan", 1], "", ["kode_siswa" => $_POST["kode_siswa"], "tahun" => $_POST["tahun"]], ["cicilan_ke", "desc"]);
+		if(count($cek)==0){
+			echo "1";
+		}
+		else{
+			echo $cek[0]["cicilan_ke"]+1;
+		}
+	}
+
+	public function insert_cicilan()
+	{
+		$tgl = date("Y-m-d");
+		$value = array(
+			"kode_siswa" => $this->input->post("kode_siswa"),
+			"tahun" => $this->input->post("tahun"),
+			"cicilan_ke" => $this->input->post("cicilan_ke"),
+			"nominal" => $this->input->post("nominal"),
+			"tanggal_bayar" => $tgl
+		);
+		$this->common->insert("pembayaran_cicilan", $value);
+		$this->session->set_flashdata("success", "Berhasil Menambahkan Data!!!");
+		redirect(base_url()."keuangan/cicilan");
+	}
 }
