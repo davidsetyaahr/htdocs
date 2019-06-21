@@ -17,7 +17,7 @@ class Gaji extends CI_Controller {
 			"btnFa" => "keyboard",
 			"btnText" => "Tambah Data"
 		   );
-		$card['title'] = "Gaji <span>> List Cicilan</span>";
+		$card['title'] = "Gaji <span>> List Gaji</span>";
        	// $data["data"] = $this->common->getData("*", "", "", "", "");
 		$this->load->view('common/menu', $menu);
 		$this->load->view('common/card', $card);
