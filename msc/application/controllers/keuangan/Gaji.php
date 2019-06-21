@@ -43,4 +43,19 @@ class Gaji extends CI_Controller {
 		$this->load->view('common/slash-card');
         $this->load->view('common/footer');
     }
+
+    public function insert_gaji()
+	{
+		$tgl = date("Y-m-d");
+		$value = array(
+			"kode_tentor" => $this->input->post("kode_tentor"),
+			"bulan" => $this->input->post("bulan"),
+			"tahun" => $this->input->post("tahun"),
+			"nominal" => $this->input->post("nominal"),
+			"tanggal_bayar" => $tgl
+		);
+		$this->common->insert("pembayaran_gaji", $value);
+		$this->session->set_flashdata("success", "Berhasil Menambahkan Data!!!");
+		redirect(base_url()."keuangan/gaji");
+	}
 }

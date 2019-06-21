@@ -1,4 +1,4 @@
-<form action="<?php echo base_url()."keuangan/gaji/input_gaji" ?>" method="post">
+<form action="<?php echo base_url()."keuangan/gaji/insert_gaji" ?>" method="post">
 	<div class="row">
 		<div class="col-lg-6">
 			<label>Nama Tentor</label>
@@ -11,7 +11,7 @@
 		</div>
         <div class="col-lg-6">
 			<label>Bulan</label>
-			<select name="" id="" class="form-control" name="bulan">
+			<select id="" class="form-control" name="bulan">
 				<option value="">---Option---</option>
                 <option value="01">Januari</option>
                 <option value="02">Februari</option>
