@@ -36,10 +36,10 @@ class Gaji extends CI_Controller {
 			"btnText" => "List Data"
 		   );
 		$card['title'] = "Gaji <span>> Tambah Gaji </span>";
-		//$data["data"] = $this->common->getData("*", "mapel", "", "", "");
+		$data["data"] = $this->common->getData("nama_tentor, kode_tentor", "tentor", "", "", "");
 		$this->load->view('common/menu', $menu);
         $this->load->view('common/card', $card);
-		$this->load->view('keuangan/gaji/tambah-gaji');
+		$this->load->view('keuangan/gaji/tambah-gaji', $data);
 		$this->load->view('common/slash-card');
         $this->load->view('common/footer');
     }
