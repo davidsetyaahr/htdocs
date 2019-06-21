@@ -47,7 +47,7 @@
 		<div class="col-lg-6">
 			<br>
 			<label>Nama Orang Tua</label>
-			<input type="text" class="form-control" name="nama_ortu" value="<?php echo $siswa[0]["nama_orangtua"]?>">
+			<input type="text" class="form-control" name="nama_ortu" value="">
 		</div>
 		<div class="col-lg-6">
 			<br>
