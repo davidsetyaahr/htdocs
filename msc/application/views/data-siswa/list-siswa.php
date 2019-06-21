@@ -26,8 +26,8 @@
 						<?php
 							$dropdown["id"] = "menu".$value["kode_siswa"];
 							$dropdown["href"] = array(
-								"Edit" => base_url()."data-siswa/edit-siswa/".$value["kode_siswa"],
-								"Detail" => base_url()."data-siswa/detail/".$value["kode_siswa"],
+								"Edit" => base_url()."data_siswa/edit_siswa/".$value["kode_siswa"],
+								"Detail" => base_url()."data_siswa/detail/".$value["kode_siswa"],
 							);
 							$this->load->view("common/dropdown", $dropdown);
 						?>
