@@ -1,4 +1,4 @@
-<form action="<?php echo base_url()."keuangan/cicilan/input_cicilan" ?>" method="post">
+<form action="<?php echo base_url()."keuangan/gaji/input_gaji" ?>" method="post">
 	<div class="row">
 		<div class="col-lg-6">
 			<label>Nama Tentor</label>

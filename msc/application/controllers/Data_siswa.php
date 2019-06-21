@@ -25,6 +25,20 @@ class Data_siswa extends CI_Controller
 
 	}
 
+	public function edit_siswa($kode_siswa)
+	{	
+		$menu = array(
+			"title" => $this->title,
+		);
+		$card['title'] = "Data Siswa <span>> Edit Data Siswa</span>";
+		$data['siswa'] = $this->common->getData("*","siswa","",["kode_siswa" => $kode_siswa],"");
+		$this->load->view('common/menu', $menu);
+        $this->load->view('common/card', $card);
+		$this->load->view('data-siswa/edit-siswa', $data);
+		$this->load->view('common/slash-card');
+        $this->load->view('common/footer');
+    }
+
 }
 
 ?>
