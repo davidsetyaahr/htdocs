@@ -105,7 +105,7 @@ class Tentor extends CI_Controller {
 		$this->load->view('tentor/edit-tentor', $data);
 		$this->load->view('common/slash-card');
         $this->load->view('common/footer');
-	}
+	} 
 	
 	public function update(){
 		$filter = array("kode_tentor" => $this->input->post("kode_tentor"));

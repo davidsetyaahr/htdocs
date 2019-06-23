@@ -77,6 +77,8 @@ class Daftar_siswa extends CI_Controller {
     		"alamat" => $_POST['alamat'],
     		"foto" => "default_siswa.png",
     		"no_hp" => $_POST['no_hpsiswa'],
+    		"cicilan" => $_POST ['cicilan'],
+    		"kelas" => $_POST ['kelas'],
     		"kode_group" => $_POST['kode_group'],
     		"id_ortu" => $getId[0]['id_ortu'],
     		"tgl_daftar" => $_POST['tgl_daftar'],

@@ -1,17 +1,17 @@
-<form action="<?php echo base_url()."daftar_siswa/insert_daftar" ?>" method="post">
+<form action="<?php echo base_url()."data_siswa/edit_siswa" ?>" method="post">
 	<div class="row">
 		<div class="col-lg-6">
 			<label>Kode Siswa</label>
-			<input type="text" class="form-control" name="kode_siswa" readonly value="<?= $siswa?>">
+			<input type="text" class="form-control" name="kode_siswa" value="<?php echo $siswa[0]["kode_siswa"]?>" readonly>
 		</div>
 		<div class="col-lg-6">
 			<label>Nama Siswa</label>
-			<input type="text" class="form-control" name="nama_siswa" value="">
+			<input type="text" class="form-control" name="nama_siswa" value="<?php echo $siswa[0]["nama_siswa"]?>">
 		</div>
 		<div class="col-lg-6">
 			<br>
 			<label>Tanggal Lahir</label>
-			<input type="date" class="form-control" name="tgl_lahir" value="">
+			<input type="date" class="form-control" name="tgl_lahir" value="<?php echo $siswa[0]["tgl_lahir"]?>">
 		</div>
 		<div class="col-lg-6">
 			<br>
@@ -25,12 +25,12 @@
 		<div class="col-lg-6">
 			<br>
 			<label>Alamat</label>
-			<textarea type="number" class="form-control" name="alamat" ></textarea>
+			<textarea type="number" class="form-control" name="alamat" value="<?php echo $siswa[0]["alamat"]?>" ></textarea>
 		</div>
 		<div class="col-lg-6">
 			<br>
 			<label>No Telepon Siswa</label>
-			<input type="number" class="form-control" name="no_hpsiswa" value="">
+			<input type="number" class="form-control" name="no_hpsiswa" value="<?php echo $siswa[0]["no_hp"]?>">
 		</div>
 		<div class="col-lg-6">
 			<br>
@@ -38,7 +38,7 @@
 			<select name="kelas" class="form-control">
 			<option value="">---Pilih Kelas---</option>
 			<option>1</option>
-			<optio>2</option>
+			<option>2</option>
 			<option>3</option>
 			<option>4</option>
 			<option>5</option>
@@ -76,12 +76,12 @@
 		<div class="col-lg-6">
 			<br>
 			<label>No Telepon Wali</label>
-			<input type="number" class="form-control" name="no_hp" value="">
+			<input type="number" class="form-control" name="no_hpwali" value="<?php echo $siswa[0]["no_hp"]?>">
 		</div>
 		<div class="col-lg-6">
 			<br>
 			<label>Tanggal Pendafatran</label>
-			<input type="date" class="form-control" name="tgl_daftar" value="">
+			<input type="date" class="form-control" name="tgl_daftar" value="<?php echo $siswa[0]["tgl_daftar"]?>">
 		</div>
 
 		<div class="col-lg-6">
@@ -90,3 +90,4 @@
 		</div>
 	</div>
 </form>
+
