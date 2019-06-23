@@ -68,13 +68,13 @@ class Tentor extends CI_Controller {
     {
 
 		$tentor = array(
+			"pendidikan_terakhir" => $this->input->post("pendidikan_terakhir"),
 			"kode_tentor" => $this->input->post("kode_tentor"),
 			"nama_tentor" => $this->input->post("nama_tentor"),
-			"pendidikan_terakhir" => $this->input->post("pendidikan_terakhir"),
-			"no_hp" => $this->input->post("no_hp"),
-			"jk" => $this->input->post("jk"),
 			"alamat" => $this->input->post("alamat"),
-			"gaji" => $this->input->post("gaji")
+			"no_hp" => $this->input->post("no_hp"),
+			"gaji" => $this->input->post("gaji"),
+			"jk" => $this->input->post("jk")
 		);
 		$this->common->insert("tentor", $tentor);
 		for($i=0; $i<count($_POST['id_mapel']); $i++){

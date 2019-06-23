@@ -4,27 +4,39 @@
 			<table class="table table-striped table-bordered table-hover">
 				<thead>
 					<tr>
-						<th>Kode Cicilan</th>
+						<th>Kode Siswa</th>
 						<th>Nama Siswa</th>
-						<th>Total Biaya</th>
-						<th>Jumlah Cicilan</th>
-						<th>Biaya/cicilan</th>
+						<th>Total Cicilan</th>
 						<th>Sisa Cicilan</th>
-						<th>Sisa Biaya</th>
-						<th>Opsi</th>
+						<th>Terbayar</th>
+						<th>Kekurangan</th>
 					</tr>
 				</thead>
 				<tbody>
+				<?php foreach ($siswa as $s) { 
+					//sisa cicilan
+					$terakhir_cicilan_ke = $this->common->getData("cicilan_ke", ["pembayaran_cicilan", 1], "", ["kode_siswa" => $s["kode_siswa"]], ["cicilan_ke", "desc"]);
+					if(count($terakhir_cicilan_ke) == 0){
+						$cicilan_terakhhir = 0;
+					}
+					else{
+						$cicilan_terakhhir = $terakhir_cicilan_ke[0]["cicilan_ke"];
+					}
+					$sisa_cicilan = 6 - $cicilan_terakhhir;
+					//terbayar
+					$terbayar = $this->common->getData("sum(nominal) total", "pembayaran_cicilan", "", ["kode_siswa" => $s["kode_siswa"]], "");
+					//kekurangan
+					$kekurangan = $s["cicilan"] - $terbayar[0]["total"];
+					?>
 					<tr>
-						<td></td>
-						<td>Azizah Munaroh</td>
-						<td>Rp1,200,000</td>
-						<td>6 kali</td>
-						<td>Rp100,000/cicilan</td>
-						<td>2 kali</td>
-						<td>Rp200,000</td>
-						<td></td>
+						<td><?= $s["kode_siswa"]?></td>
+						<td><?= $s["nama_siswa"]?></td>
+						<td>Rp. <?= $s["cicilan"]?></td>
+						<td><?= $sisa_cicilan?></td>
+						<td>Rp. <?= $terbayar[0]["total"]?></td>
+						<td>Rp. <?= $kekurangan?></td>
 					</tr>
+				<?php }?>
 				</tbody>
 			</table>
 		</div>

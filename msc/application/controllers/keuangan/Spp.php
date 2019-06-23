@@ -37,10 +37,10 @@ class Spp extends CI_Controller {
 			"btnText" => "List Spp"
 		);
 		$card['title'] = "Spp <span>> Input SPP </span>";
-		//$data["data"] = $this->common->getData("*", "mapel", "", "", "");
+		$data["siswa"] = $this->common->getData("kode_siswa, nama_siswa", "siswa", "", "", "");
 		$this->load->view('common/menu', $menu);
         $this->load->view('common/card', $card);
-		$this->load->view('keuangan/spp/input-spp');
+		$this->load->view('keuangan/spp/input-spp', $data);
 		$this->load->view('common/slash-card');
         $this->load->view('common/footer');
 	}
@@ -75,4 +75,12 @@ class Spp extends CI_Controller {
 		$this->common->update("spp", $this->input->post(), $filter);
 		redirect(base_url()."keuangan/spp");
 	}*/
+
+	public function hitung_bayar_spp()
+	{
+		$spp = $this->common->getData("spp", "biaya", "", "", "");
+		$jumlah_bulan = $_POST["jumlah_bulan"];
+		$hasil = $spp[0]["spp"] * $jumlah_bulan;
+		echo $hasil;
+	}
 }
