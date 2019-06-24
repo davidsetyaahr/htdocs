@@ -53,4 +53,13 @@ class Common extends CI_Model {
 
         return $sql->result_array();
     }
+
+    public function gaji(){
+        $sql = $this->db->select("tentor.nama_tentor,pembayaran_gaji.*");
+        $sql = $this->db->from("pembayaran_gaji");
+        $sql = $this->db->join("tentor","pembayaran_gaji.kode_tentor = tentor.kode_tentor");
+        return $this->db->get()->result_array();
+    }
+
+    
 }
