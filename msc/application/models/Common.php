@@ -60,4 +60,6 @@ class Common extends CI_Model {
         $sql = $this->db->join("tentor","pembayaran_gaji.kode_tentor = tentor.kode_tentor");
         return $this->db->get()->result_array();
     }
+
+    
 }
