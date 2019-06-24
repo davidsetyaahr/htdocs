@@ -7,37 +7,17 @@
 			</select>
 		</div>
 		<div class="col-lg-3">
-			<label>Tahun</label>
+			<label>Jumlah Bulan</label>
 			<select name="tahun" id="" class="form-control">
 			<?php 
-				$start = date("Y")+1;
-				$end = date("Y")-2;
-				for($i=$start;$i>=$end;$i--){
-					$s = $i==date("Y") ? "selected" : "";
-					echo "<option $s>$i</option>";
+				for($i=1;$i<=12;$i++){
+					echo "<option>$i</option>";
 				}
 			?>
 			</select>
 		</div>
 		<div class="col-lg-3">
-			<label>Bulan</label>
-			<select name="tahun" id="" class="form-control">
-			<?php 
-				for($i=1;$i<=12;$i++){
-					$s = $i==(int)date("m") ? "selected" : "";
-					echo "<option value='$i' $s>".$this->common_lib->indoMonth($i)."</option>";
-				}
-			?>
-			</select>
-		</div>
-		<div class="col-lg-6">
-		<br>
-			<label for="">Cicilan Ke-</label>
-			<input type="text" class="form-control" name="cicilan_ke" readonly>
-		</div>
-		<div class="col-lg-6">
-		<br>
-			<label>Nominal</label>
+			<label>Total</label>
 			<input type="number" class="form-control" name="nominal" value="" readonly>
 		</div>
 

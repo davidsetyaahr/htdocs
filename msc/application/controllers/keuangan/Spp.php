@@ -37,7 +37,7 @@ class Spp extends CI_Controller {
 			"btnText" => "List Spp"
 		);
 		$card['title'] = "Spp <span>> Input SPP </span>";
-		//$data["data"] = $this->common->getData("*", "mapel", "", "", "");
+		$data["siswa"] = $this->common->getData("kode_siswa,nama_siswa", "siswa", "", "", "");
 		$this->load->view('common/menu', $menu);
         $this->load->view('common/card', $card);
 		$this->load->view('keuangan/spp/input-spp');
