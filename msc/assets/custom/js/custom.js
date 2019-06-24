@@ -196,11 +196,10 @@ $(document).ready(function () {
 	// 	})
 	// })
 
-	function spp_bayar(params) {
-		var kode_siswa = $("#kode_siswa").val()
+	function spp_bayar() {
 		var jumlah_bulan = $("#jumlah_bulan").val()
 		$.ajax({
-			url		: base_url+"keuangan/spp/hitung_bayar_spp",
+			url		: base_url+"keuangan/spp/spp_bayar",
 			type	: "post",
 			data	: { "jumlah_bulan" : jumlah_bulan },
 			success	: function(respone) {
@@ -208,10 +207,8 @@ $(document).ready(function () {
 			}
 		})
 	}
+
 	$("#jumlah_bulan").change(function(){
-		spp_bayar()
-	})
-	$("#kode_siswa").change(function(){
 		spp_bayar()
 	})
 });
