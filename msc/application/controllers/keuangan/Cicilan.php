@@ -18,10 +18,10 @@ class Cicilan extends CI_Controller {
 			"btnText" => "Tambah Data"
 		   );
 		$card['title'] = "Cicilan <span>> List Cicilan</span>";
-       	// $data["data"] = $this->common->getData("*", "", "", "", "");
+		$data["siswa"] = $this->common->getData("kode_siswa, nama_siswa, cicilan", "siswa", "", "", "");
 		$this->load->view('common/menu', $menu);
 		$this->load->view('common/card', $card);
-		$this->load->view('keuangan/cicilan/list-cicilan');
+		$this->load->view('keuangan/cicilan/list-cicilan', $data);
 		$this->load->view('common/slash-card');
         $this->load->view('common/footer');
 	}
@@ -46,13 +46,22 @@ class Cicilan extends CI_Controller {
     }
 	public function cek_cicilan_ke()
 	{
-		$cek = $this->common->getData("cicilan_ke",["pembayaran_cicilan", 1], "", ["kode_siswa" => $_POST["kode_siswa"], "tahun" => $_POST["tahun"]], ["cicilan_ke", "desc"]);
-		if(count($cek)==0){
-			echo "1";
+		$cek_cicilan_ke = $this->common->getData("cicilan_ke",["pembayaran_cicilan", 1], "", ["kode_siswa" => $_POST["kode_siswa"], "tahun" => $_POST["tahun"]], ["cicilan_ke", "desc"]);
+		if(count($cek_cicilan_ke)==0){
+			$json['cicilan_ke'] = 1;
 		}
 		else{
-			echo $cek[0]["cicilan_ke"]+1;
+			$json['cicilan_ke'] = $cek_cicilan_ke[0]["cicilan_ke"]+1;
 		}
+		//select cicilan dari tb siswa
+		$cicilan_siswa = $this->common->getData("cicilan", "siswa", "", ["kode_siswa" => $_POST["kode_siswa"]], "");
+		//sum
+		$cek_total_cicilan = $this->common->getData("sum(nominal) total", "pembayaran_cicilan", "", ["kode_siswa" => $_POST["kode_siswa"], "tahun" => $_POST["tahun"]], "");
+			$json["kekurangan"] = $cicilan_siswa[0]["cicilan"] - $cek_total_cicilan[0]["total"];
+		//$json['kekurangan'] = pengurangan cicilan - sum
+		header("content-type:json/application");
+		echo json_encode($json);
+
 	}
 
 	public function insert_cicilan()

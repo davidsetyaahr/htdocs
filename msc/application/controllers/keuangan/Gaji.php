@@ -17,7 +17,7 @@ class Gaji extends CI_Controller {
 			"btnFa" => "keyboard",
 			"btnText" => "Tambah Data"
 		   );
-		$card['title'] = "Gaji <span>> List Cicilan</span>";
+		$card['title'] = "Gaji <span>> List Gaji</span>";
        	// $data["data"] = $this->common->getData("*", "", "", "", "");
 		$this->load->view('common/menu', $menu);
 		$this->load->view('common/card', $card);
@@ -36,11 +36,26 @@ class Gaji extends CI_Controller {
 			"btnText" => "List Data"
 		   );
 		$card['title'] = "Gaji <span>> Tambah Gaji </span>";
-		//$data["data"] = $this->common->getData("*", "mapel", "", "", "");
+		$data["data"] = $this->common->getData("nama_tentor, kode_tentor", "tentor", "", "", "");
 		$this->load->view('common/menu', $menu);
         $this->load->view('common/card', $card);
-		$this->load->view('keuangan/gaji/tambah-gaji');
+		$this->load->view('keuangan/gaji/tambah-gaji', $data);
 		$this->load->view('common/slash-card');
         $this->load->view('common/footer');
     }
+
+    public function insert_gaji()
+	{
+		$tgl = date("Y-m-d");
+		$value = array(
+			"kode_tentor" => $this->input->post("kode_tentor"),
+			"bulan" => $this->input->post("bulan"),
+			"tahun" => $this->input->post("tahun"),
+			"nominal" => $this->input->post("nominal"),
+			"tanggal_bayar" => $tgl
+		);
+		$this->common->insert("pembayaran_gaji", $value);
+		$this->session->set_flashdata("success", "Berhasil Menambahkan Data!!!");
+		redirect(base_url()."keuangan/gaji");
+	}
 }

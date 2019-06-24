@@ -54,14 +54,14 @@ class Group extends CI_Controller {
 	{
 		$where = array("kode_group" => $kode);
 		$data["data"] = $this->common->getData("*" ,"group_siswa","", $where, "");
-		$data["tentor"] = $this->common->getData("*" ,"tentor","", "", "");
+		$data["tentor"] = $this->common->getData("*" ,"tentor","", "", ""); 
 		$menu = array(
 			"title" => $this->title,
 			"btnHref" => base_url()."data-master/group",
 			"btnBg" => "primary","btnFa" => "keyboard",
 			"btnText" => "Lihat Data"
 		);
-		$card['title'] = "Tentor <span>> Edit Jenjang</span>";
+		$card['title'] = "Group <span>> Edit Group</span>";
         $this->load->view('common/menu', $menu);
         $this->load->view('common/card', $card);
 		$this->load->view('data-master/group/edit_group', $data);

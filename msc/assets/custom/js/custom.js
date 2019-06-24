@@ -166,7 +166,8 @@ $(document).ready(function () {
 				"tahun" : tahun
 			},
 			success	: function(respone){
-				$("#cicilan_ke").val(respone)
+				$("#cicilan_ke").val(respone.cicilan_ke)
+				$("#kekurangan").val(respone.kekurangan)
 			}
 		})
 
@@ -177,5 +178,40 @@ $(document).ready(function () {
 	})
 	$("#tahun").change(function(){
 		cicilan_ke()
+	})
+	
+	// $("#nominal").keyup(function(){
+	// 	var kode_siswa = $("#kode_siswa").val()
+	// 	var  = $("#tahun").val()
+	// 	var nominal = $("#nominal").val()
+	// 	$.ajax({
+	// 		url		: base_url+'keuangan/cicilan/nyicil',
+	// 		type	: "post",
+	// 		data	: {
+	// 					"nominal" : nominal
+	// 				  },
+	// 		success	: function(respone){
+
+	// 		}
+	// 	})
+	// })
+
+	function spp_bayar(params) {
+		var kode_siswa = $("#kode_siswa").val()
+		var jumlah_bulan = $("#jumlah_bulan").val()
+		$.ajax({
+			url		: base_url+"keuangan/spp/hitung_bayar_spp",
+			type	: "post",
+			data	: { "jumlah_bulan" : jumlah_bulan },
+			success	: function(respone) {
+				$("#total").val(respone)	
+			}
+		})
+	}
+	$("#jumlah_bulan").change(function(){
+		spp_bayar()
+	})
+	$("#kode_siswa").change(function(){
+		spp_bayar()
 	})
 });

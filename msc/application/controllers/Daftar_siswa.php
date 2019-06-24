@@ -16,7 +16,7 @@ class Daftar_siswa extends CI_Controller {
 		}
 		else{
 			$getKode = $this->common->getData("kode_siswa", ["siswa",1], "", "", ["kode_siswa","desc"]);
-			$getInt = (int)substr($getKode[0]['kode_siswa'],2,3) + 1;
+			$getInt = (int)substr($getKode[0]['kode_siswa'],3,3) + 1;
 			if(strlen($getInt)==1){
 				$nol = "00";
 			}
@@ -77,6 +77,8 @@ class Daftar_siswa extends CI_Controller {
     		"alamat" => $_POST['alamat'],
     		"foto" => "default_siswa.png",
     		"no_hp" => $_POST['no_hpsiswa'],
+    		"cicilan" => $_POST ['cicilan'],
+    		"kelas" => $_POST ['kelas'],
     		"kode_group" => $_POST['kode_group'],
     		"id_ortu" => $getId[0]['id_ortu'],
     		"tgl_daftar" => $_POST['tgl_daftar'],

@@ -31,10 +31,14 @@
 		</div>
 		<div class="col-lg-6">
 		<br>
-			<label>Nominal</label>
-			<input type="number" class="form-control" name="nominal" readonly value="<?= $cicilan[0]["cicilan"]?>">
+			<label>Kekurangan</label>
+			<input type="number" class="form-control" id="kekurangan" name="kekurangan" value="" readonly>
 		</div>
-
+		<div class="col-lg-6">
+		<br>
+			<label>Nominal</label>
+			<input type="number" class="form-control" id="nominal" name="nominal" value="">
+		</div>
 		<div class="col-lg-6">
 			<br>
 			<?php $this->load->view("common/btn") ?>
