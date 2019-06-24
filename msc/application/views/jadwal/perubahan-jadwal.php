@@ -4,23 +4,30 @@
 			<table class="table table-striped table-bordered table-hover">
 				<thead>
 					<tr>
-						<th>Kode Jadwal</th>
 						<th>Kode Siswa</th>
 						<th>Ke Hari</th>
 						<th>Ke Minggu</th>
 						<th>Ke Jam</th>
 						<th>Status</th>
+						<th>opsi</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
+					<?php 
+					foreach ($req_jadwal as $value) {
+					?>
+				<tr>
+					<td><?php echo $value['kode_siswa'] ?></td>
+					<td><?php echo $value['ke_hari'] ?></td>
+					<td><?php echo $value['ke_minggu'] ?></td>
+					<td><?php echo $value['ke_jam'] ?></td>
+					<td><?php echo $value['status'] ?></td>
+					<td></td>
+
+				</tr>
+					<?php
+					}
+					?>
 				</tbody>
 			</table>
 		</div>
