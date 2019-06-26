@@ -75,6 +75,14 @@ class Cicilan extends CI_Controller {
 			"tanggal_bayar" => $tgl
 		);
 		$this->common->insert("pembayaran_cicilan", $value);
+		$getIdCicilan = $this->common->getData("id_pembayaran_cicilan", ["pembayaran_cicilan", 1], "", "", ["id_pembayaran_cicilan", "desc"]);
+		$valLapKeuangan = array(
+			"id_parent" => $getIdCicilan[0]["id_pembayaran_cicilan"],
+			"tanggal" => date("Y-m-d"),
+			"nominal" => $_POST["nominal"],
+			"tipe" => "Cicilan"
+		);
+		$this->common->insert("laporan_keuangan", $valLapKeuangan);
 		$this->session->set_flashdata("success", "Berhasil Menambahkan Data!!!");
 		redirect(base_url()."keuangan/cicilan");
 	}

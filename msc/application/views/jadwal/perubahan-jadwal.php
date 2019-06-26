@@ -22,7 +22,16 @@
 					<td><?php echo $value['ke_minggu'] ?></td>
 					<td><?php echo $value['ke_jam'] ?></td>
 					<td><?php echo $value['status'] ?></td>
-					<td></td>
+					<td>
+						<?php
+							$dropdown["id"] = "menu".$value["kode_siswa"];
+							$dropdown["href"] = array(
+								"Terima" => base_url()."data_siswa/edit_siswa/".$value["kode_siswa"],
+								"Tolak" => base_url()."data_siswa/detail/".$value["kode_siswa"],
+							);
+							$this->load->view("common/dropdown", $dropdown);
+						?>
+						</td>
 
 				</tr>
 					<?php
