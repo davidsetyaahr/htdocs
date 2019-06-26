@@ -44,11 +44,11 @@ class Data_siswa extends CI_Controller
 		$menu = array(
 			"title" => $this->title,
 		);
-		$card['title'] = "detail <span>> Detail Daftar Siswa </span>";
-		//$data["data"] = $this->common->getData("*", "mapel", "", "", "");
+		$card['title'] = "Detail <span>> Detail Daftar Siswa </span>";
+		$data['detail'] = $this->common->getData("*","siswa","",["kode_siswa" => $kode_siswa],"");
 		$this->load->view('common/menu', $menu);
         $this->load->view('common/card', $card);
-		$this->load->view('daftar_siswa/detail-daftar-siswa');
+		$this->load->view('data-siswa/detail-data-siswa', $data);
 		$this->load->view('common/slash-card');
         $this->load->view('common/footer');
     }
