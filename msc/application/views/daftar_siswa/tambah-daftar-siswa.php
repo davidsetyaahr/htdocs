@@ -38,7 +38,7 @@
 			<select name="kelas" class="form-control">
 			<option value="">---Pilih Kelas---</option>
 			<option>1</option>
-			<optio>2</option>
+			<option>2</option>
 			<option>3</option>
 			<option>4</option>
 			<option>5</option>
@@ -54,7 +54,7 @@
 		<div class="col-lg-6">
 			<br>
 			<label>Cicilan</label>
-			<input type="number" class="form-control" name="cicilan" value="">
+			<input type="number" class="form-control" name="cicilan" value="0">
 		</div>
 		<div class="col-lg-6">
 			<br>
@@ -83,8 +83,13 @@
 			<label>Tanggal Pendafatran</label>
 			<input type="date" class="form-control" name="tgl_daftar" value="">
 		</div>
-
 		<div class="col-lg-6">
+			<br>
+			<label>Biaya Pendafatran</label>
+			<input type="number" class="form-control" name="nominal_pendaftaran" readonly value="<?= $biaya[0]["pendaftaran"]?>">
+		</div>
+		<div class="col-lg-6">
+			<br>
 			<br>
 			<?php $this->load->view("common/btn") ?>
 		</div>

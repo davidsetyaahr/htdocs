@@ -27,7 +27,7 @@
 						<?php 
 							foreach($bulan as $b => $v){
 								if($b>0){
-									$spp = $this->common->getData("count(bulan) ttl", "pembayaran_spp", "", ["kode_siswa" => $val["kode_siswa"], "tahun"=> date("Y"), "bulan" => $b], "");
+									$spp = $this->common->getData("count(d.bulan) ttl", "detail_pembayaran_spp d", ["pembayaran_spp p","d.id_pembayaran_spp = p.id_pembayaran_spp"], ["p.kode_siswa" => $val["kode_siswa"],"d.bulan" => $b,"d.tahun" => date("Y")], "");
 									echo "<th>";
 									$fa = $spp[0]['ttl']==0 ? "fas fa-minus-circle text-danger" : "fas fa-check-circle text-success";
 									echo "<span class='$fa'></span></th>";

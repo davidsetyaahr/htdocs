@@ -49,7 +49,7 @@ class Spp extends CI_Controller {
 		//tanggal sekarang
 		$tgl = date("Y-m-d");
 		//get tahun dan bulan dari spp
-		$getSpp = $this->common->getData("tahun, bulan", ["pembayaran_spp", 1], "", ["kode_siswa" => $_POST["kode_siswa"]], ["id_pembayaran_spp", "desc"]);
+		$getSpp = $this->common->getData("d.tahun, d.bulan", ["pembayaran_spp p", 1], ["detail_pembayaran_spp d","p.id_pembayaran_spp = d.id_pembayaran_spp"], ["p.kode_siswa" => $_POST["kode_siswa"]], ["d.id_detail", "desc"]);
 		if(count($getSpp)==0){
 			$bulan_terakhir = 0;
 			$tahun_terakhir = date("Y");
@@ -59,6 +59,16 @@ class Spp extends CI_Controller {
 			$tahun_terakhir = $getSpp[0]["tahun"];
 		}
 		//jumlah bulan yang ingin dibayar
+
+		$valPembayaranSpp = array(
+			"kode_siswa" => $_POST["kode_siswa"],
+			"nominal" => $_POST["nominal"],
+			"tanggal_bayar" => $tgl
+		);
+		$this->common->insert("pembayaran_spp", $valPembayaranSpp);
+
+		$idEnd = $this->common->getData("id_pembayaran_spp",["pembayaran_spp",1],"","",["id_pembayaran_spp","desc"]);
+
 		$banyak_bulan = $_POST["jumlah_bulan"];
 		for ($i=1; $i <= $banyak_bulan ; $i++) {
 			$jumlah_bulan = $bulan_terakhir+$i;
@@ -71,14 +81,19 @@ class Spp extends CI_Controller {
 				$bulan = $jumlah_bulan;
 			}
 			$val = array(
-				"kode_siswa" => $_POST["kode_siswa"],
-				"nominal" => $_POST["nominal"],
+				"id_pembayaran_spp" => $idEnd[0]['id_pembayaran_spp'],
 				"bulan" => $bulan,
 				"tahun" => $tahun,
-				"tanggal_bayar" => $tgl
 			); 
-			$this->common->insert("pembayaran_spp", $val);
+			$this->common->insert("detail_pembayaran_spp", $val);
 		}
+		$valLapKeuangan = array(
+			"id_parent" => $idEnd[0]["id_pembayaran_spp"],
+			"tanggal" => date("Y-m-d"),
+			"nominal" => $_POST["total"],
+			"tipe" => "Spp"
+		);
+		$this->common->insert("laporan_keuangan", $valLapKeuangan);
 		$this->session->set_flashdata("success", "Berhasil Menambahkan Data!!!");
 		redirect(base_url()."keuangan/spp");
 	}
