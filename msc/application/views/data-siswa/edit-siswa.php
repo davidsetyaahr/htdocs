@@ -1,9 +1,9 @@
-<form action="<?php echo base_url()."data_siswa/edit_siswa" ?>" method="post">
+<form action="<?php echo base_url()."data_siswa/update_siswa" ?>" method="post">
 	<div class="row">
 		<div class="col-lg-6">
 			<label>Kode Siswa</label>
 			<input type="text" class="form-control" name="kode_siswa" value="<?php echo $siswa[0]["kode_siswa"]?>" readonly>
-		</div>
+		</div> 
 		<div class="col-lg-6">
 			<label>Nama Siswa</label>
 			<input type="text" class="form-control" name="nama_siswa" value="<?php echo $siswa[0]["nama_siswa"]?>">
