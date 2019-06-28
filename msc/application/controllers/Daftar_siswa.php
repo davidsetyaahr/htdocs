@@ -35,6 +35,7 @@ class Daftar_siswa extends CI_Controller {
 		$card['title'] = "Pendafatran <span>> Daftar</span>";
         $data["data"] = $this->common->getData("*", "tentor", "", "", "");
 		$data['group'] = $this->common->getData("*","group_siswa","","","");
+		$data['biaya'] = $this->common->getData("pendaftaran, cicilan","biaya","","","");
 		$this->load->view('common/menu', $menu);
 		$this->load->view('common/card', $card);
 		$this->load->view('daftar_siswa/tambah-daftar-siswa', $data);
@@ -83,7 +84,15 @@ class Daftar_siswa extends CI_Controller {
     		"id_ortu" => $getId[0]['id_ortu'],
     		"tgl_daftar" => $_POST['tgl_daftar'],
     	);
-    	$this->common->insert("siswa",$siswa);
+		$this->common->insert("siswa",$siswa);
+		$getIdSiswa = $this->common->getData("id_siswa", ["siswa", 1], "", "", ["id_siswa", "desc"]);
+		$valLapKeuangan = array(
+			"id_parent" => $getIdSiswa[0]["id_siswa"],
+			"tanggal" => date("Y-m-d"),
+			"nominal" => $_POST["nominal_pendaftaran"],
+			"tipe" => "Pendaftaran"
+		);
+		$this->common->insert("laporan_keuangan", $valLapKeuangan);
 		$this->session->set_flashdata("success", "Berhasil Menambahkan Data!!!");
 		redirect(base_url()."data_siswa");
 	}
