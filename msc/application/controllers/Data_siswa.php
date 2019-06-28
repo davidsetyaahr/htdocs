@@ -43,9 +43,10 @@ class Data_siswa extends CI_Controller
 	{
 		$menu = array(
 			"title" => $this->title,
-		);
+		);	
 		$card['title'] = "Detail <span>> Detail Daftar Siswa </span>";
-		$data['detail'] = $this->common->getData("*","siswa","",["kode_siswa" => $kode_siswa],"");
+		$filter = array("kode_siswa" => $this->input->post("kode_siswa"));
+		$data['detail'] = $this->common->detail_data_siswa($filter);
 		$this->load->view('common/menu', $menu);
         $this->load->view('common/card', $card);
 		$this->load->view('data-siswa/detail-data-siswa', $data);
