@@ -18,8 +18,9 @@
   <link href="<?php echo base_url()."assets/" ?>css/sb-admin-2.min.css" rel="stylesheet">
   <link href="<?php echo base_url()."assets/" ?>vendor/bootstrap-datepicker-master/dist/css/bootstrap-datepicker3.standalone.min.css" rel="stylesheet">
   <link href="<?php echo base_url()."assets/" ?>custom/css/custom-style.css" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/>
- 
+  <!-- data tabe	 -->
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url()."assets/"?>vendor/DataTables/media/css/dataTables.bootstrap4.css">
+
 </head>
 
 <body id="page-top">

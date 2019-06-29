@@ -43,7 +43,7 @@
   <script src="<?php echo base_url()."assets/" ?>js/demo/chart-pie-demo.js"></script>
   <script src="<?php echo base_url()."assets/" ?>vendor/bootstrap-datepicker-master/dist/js/bootstrap-datepicker.min.js"></script>
   <script src="<?php echo base_url()."assets/" ?>custom/js/custom.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  
 </body>
 
 </html>
