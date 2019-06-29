@@ -53,4 +53,29 @@ class Common extends CI_Model {
 
         return $sql->result_array();
     }
+
+    public function gaji(){
+        $sql = $this->db->select("tentor.nama_tentor,pembayaran_gaji.*");
+        $sql = $this->db->from("pembayaran_gaji");
+        $sql = $this->db->join("tentor","pembayaran_gaji.kode_tentor = tentor.kode_tentor");
+        return $this->db->get()->result_array();
+    }
+    public function req_jadwal() {
+        $sql = $this->db->select("req_perubahan_jadwal.id_req, req_perubahan_jadwal.ke_hari, req_perubahan_jadwal.ke_minggu, req_perubahan_jadwal.ke_jam, req_perubahan_jadwal.status, siswa.kode_siswa, siswa.kode_group, jadwal.hari, jadwal.jam_mulai, jadwal.jam_slesai,jadwal.minggu_ke");
+        $sql = $this->db->from("req_perubahan_jadwal");
+        $sql = $this->db->join("siswa", "req_perubahan_jadwal.kode_siswa = siswa.kode_siswa");
+        $sql = $this->db->join("jadwal", "req_perubahan_jadwal.id_jadwal = jadwal.id_jadwal");
+
+        return $this->db->get()->result_array();
+    }
+    public function detail_data_siswa(){
+        $sql = $this->db->select("siswa.kode_siswa, siswa.nama_siswa, siswa.tgl_lahir, siswa.jk, siswa.alamat, siswa.no_hp, group_siswa.kode_group, ortu.nama_ortu, siswa.tgl_daftar, siswa.cicilan, siswa.kelas, ortu.no_hp");
+        $sql = $this->db->from("siswa");
+        $sql = $this->db->join("group_siswa", "siswa.kode_group = group_siswa.kode_group");
+        $sql = $this->db->join("ortu", "ortu.id_ortu = siswa.id_ortu");
+        //$this->db->where('kode_siswa');
+
+        return $this->db->get()->result_array();
+    }
+
 }

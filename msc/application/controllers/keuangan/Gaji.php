@@ -18,10 +18,10 @@ class Gaji extends CI_Controller {
 			"btnText" => "Tambah Data"
 		   );
 		$card['title'] = "Gaji <span>> List Gaji</span>";
-       	// $data["data"] = $this->common->getData("*", "", "", "", "");
+       	$data["gaji"] = $this->common->gaji();
 		$this->load->view('common/menu', $menu);
 		$this->load->view('common/card', $card);
-		$this->load->view('keuangan/gaji/list-gaji-karyawan');
+		$this->load->view('keuangan/gaji/list-gaji-karyawan', $data);
 		$this->load->view('common/slash-card');
         $this->load->view('common/footer');
 	}
@@ -55,6 +55,14 @@ class Gaji extends CI_Controller {
 			"tanggal_bayar" => $tgl
 		);
 		$this->common->insert("pembayaran_gaji", $value);
+		$getIdGaji = $this->common->getData("id_pembayaran", ["pembayaran_gaji", 1], "", "", ["id_pembayaran", "desc"]);
+		$valLapKeuangan = array(
+			"id_parent" => $getIdGaji[0]["id_pembayaran"],
+			"tanggal" => date("Y-m-d"),
+			"nominal" => $_POST["nominal"],
+			"tipe" => "Gaji"
+		);
+		$this->common->insert("laporan_keuangan", $valLapKeuangan);
 		$this->session->set_flashdata("success", "Berhasil Menambahkan Data!!!");
 		redirect(base_url()."keuangan/gaji");
 	}

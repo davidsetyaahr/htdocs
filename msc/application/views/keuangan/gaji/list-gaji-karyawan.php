@@ -12,13 +12,20 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
+				<?php 
+					foreach ($gaji as $value) {
+				?>
+				<tr>
+					<td><?php echo $value['nama_tentor'] ?></td>
+					<td><?php echo $value['bulan'] ?></td>
+					<td><?php echo $value['tahun'] ?></td>
+					<td><?php echo $value['nominal'] ?></td>
+					<td><?php echo $value['tanggal_bayar'] ?></td>
+
+				</tr>
+				<?php
+					}
+				?>
 				</tbody>
 			</table>
 		</div>

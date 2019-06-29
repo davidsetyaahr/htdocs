@@ -4,23 +4,73 @@
 			<table class="table table-striped table-bordered table-hover">
 				<thead>
 					<tr>
-						<th>Kode Jadwal</th>
 						<th>Kode Siswa</th>
-						<th>Ke Hari</th>
-						<th>Ke Minggu</th>
-						<th>Ke Jam</th>
+						<th>Jadwal Awal</th>
+						<th>Permintaan Jadwal</th>
 						<th>Status</th>
+						<th>opsi</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
+					<?php 
+					foreach ($req_jadwal as $value) {
+					?>
+				<tr>
+					<td class="text-center align-middle"><?php echo $value['kode_siswa'] ?></td>
+					<td>
+						<table width="100%">
+							<tr>
+								<td>Hari</td>
+								<td>:</td>
+								<td><?php echo $value['hari'] ?></td>
+							</tr>
+							<tr>
+								<td>Minggu Ke</td>
+								<td>:</td>
+								<td><?php echo $value['minggu_ke'] ?></td>
+							</tr>
+							<tr>
+								<td>Waktu</td>
+								<td>:</td>
+								<td><?php echo $value['jam_mulai'] ?></td>
+							</tr>
+						</table>
+					</td>
+					<td>
+					<table width="100%">
+							<tr>
+								<td>Hari</td>
+								<td>:</td>
+								<td><?php echo $value['ke_hari'] ?></td>
+							</tr>
+							<tr>
+								<td>Minggu Ke</td>
+								<td>:</td>
+								<td><?php echo $value['ke_minggu'] ?></td>
+							</tr>
+							<tr>
+								<td>Waktu</td>
+								<td>:</td>
+								<td><?php echo $value['ke_jam'] ?></td>
+							</tr>
+						</table>
+					</td>
+					<td class="text-center align-middle"><?php echo $value['status'] ?></td>
+					<td class="text-center align-middle">
+					<div class="dropdown no-arrow">
+						<button class="btn btn-info btn-sm btn-block dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    						Opsi <span class="fas fa-caret-down"></span>
+    					</button>
+    					<div class="dropdown-menu" aria-labelledby="<?= $value["id_req"]?>">
+							<a class="dropdown-item req_jadwal" id="<?= $value["id_req"]?>" href="">Terima</a>
+							<a class="dropdown-item req_jadwal" id="<?= $value["id_req"]?>" href="">Tolak</a>
+						</div>
+					</div>
+						</td>
+				</tr>
+					<?php
+					}
+					?>
 				</tbody>
 			</table>
 		</div>

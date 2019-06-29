@@ -13,10 +13,10 @@ class Permintaan_perubahan_jadwal extends CI_Controller {
         "title" => $this->title,
       );
       $card['title'] = "Perubahan_jadwal <span>> List Perubahan Jadwal</span>";
-      // $data["data"] = $this->common->getData("*", "", "", "", "");
+      $data["req_jadwal"] = $this->common->req_jadwal();
       $this->load->view('common/menu', $menu);
       $this->load->view('common/card', $card);
-      $this->load->view('jadwal/perubahan-jadwal');
+      $this->load->view('jadwal/perubahan-jadwal', $data);
       $this->load->view('common/slash-card');
       $this->load->view('common/footer');
     }

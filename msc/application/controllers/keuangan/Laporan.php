@@ -15,10 +15,10 @@ class Laporan extends CI_Controller {
 		);
 
 		$card['title'] = "Laporan <span>> List Laporan</span>";
-       	// $data["data"] = $this->common->getData("*", "", "", "", "");
+       	$data["laporan"] = $this->common->getData("*", "laporan_keuangan", "", "", "");
 		$this->load->view('common/menu', $menu);
 		$this->load->view('common/card', $card);
-		$this->load->view('keuangan/laporan_keuangan/list-laporan');
+		$this->load->view('keuangan/laporan_keuangan/list-laporan', $data);
 		$this->load->view('common/slash-card');
         $this->load->view('common/footer');
 	}
