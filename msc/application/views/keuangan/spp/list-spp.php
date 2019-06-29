@@ -1,4 +1,59 @@
 <div class="row">
+	<div class="col-lg-3">
+		<label>Kode Siswa</label>
+		<select class="form-control">
+			<option value="">---Option---</option>
+		</select>
+	</div>
+	<div class="col-lg-3">
+		<label>Group</label>
+		<select class="form-control">
+			<option value="">---Pilih Group---</option>
+			<?php 
+				foreach ($group as $g) {
+					echo "<option value='".$g['kode_group']."'>$g[nama_group]</option>";
+				}
+			?>
+		</select>
+	</div>
+	<div class="col-lg-3">
+		<label>Tahun</label>
+		<select name="tahun" id="tahun" class="form-control tahun">
+			<?php 
+				$start = date("Y")+1;
+				$end = date("Y")-2;
+				for($i=$start;$i>=$end;$i--){
+					$s = $i==date("Y") ? "selected" : "";
+					echo "<option $s>$i</option>";
+				}
+			?>
+			</select>
+	</div>
+	<div class="col-lg-3">
+		<label>Bulan</label>
+		<select class="form-control">
+			<option value="">---Option---</option>
+			<option>januari</option>
+			<option>februari</option>
+			<option>maret</option>
+			<option>april</option>
+			<option>mei</option>
+			<option>juni</option>
+			<option>juli</option>
+			<option>agustus</option>
+			<option>september</option>
+			<option>oktober</option>
+			<option>november</option>
+			<option>desember</option>
+		</select>
+	</div>
+</div>
+		<div class="col-lg-6">
+			<br>
+			<?php $this->load->view("common/btn") ?>
+		</div>
+<br>
+<div class="row">
 	<div class="col-lg-12">
 		<div class="table-responsive">
 			<table class="table table-striped table-bordered table-hover">
