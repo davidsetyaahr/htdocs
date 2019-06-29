@@ -40,31 +40,7 @@ $(document).ready(function () {
 			$.ajax({
 				url : "http://localhost/projek-kelompok/msc/nilai_siswa/show_mapel"
 			})
-/*             if(m < 12){
-				for(var i=0; i<mapel.length; ++i){
-                $(".mapelAdd").append(`
-					<div class="row">      
-						<div class="col-lg-4">
-							<label for="">Mapel</label>
-							<select name="id_mapel[]" id="" class="form-control">
-								<option value="">---Pilih Mapel---</option>
-								<option value="`+i.id_mapel+`">`+i.mata_pelajaran+`</option>
-							</select>
-						</div>
-						<div class="col-lg-4">
-							<label for="">Nilai</label>
-							<input type="text" name="" id="" class="form-control" value="">
-						</div>
-						<div class="col-lg-4">
-							<label for="">Catatan</label>
-							<textarea name="" id="" class="form-control"></textarea>
-						</div>    
-					</div>  	
-				`)
-				}
-            m++;
-            }
- */        });	
+       });	
 
 	if($("#chadir").length==1){
 		var hadir = parseInt($("#chadir").html());
@@ -211,4 +187,35 @@ $(document).ready(function () {
 	$("#jumlah_bulan").change(function(){
 		spp_bayar()
 	})
+
+	$(".req_jadwal").click(function(){
+		var id = $(this).attr("id")
+		Swal.fire('Hello world!')
+		// alert($(this).attr("id"))
+		// Swal.fire({
+		// 	title: 'Are you sure?',
+		// 	text: 'You will not be able to recover this imaginary file!',
+		// 	type: 'warning',
+		// 	showCancelButton: true,
+		// 	confirmButtonText: 'Yes, delete it!',
+  		// 	cancelButtonText: 'No, keep it'
+		// }).then((result) => {
+		// 	if (result.value) {
+		// 	  Swal.fire(
+		// 		'Deleted!',
+		// 		'Your imaginary file has been deleted.',
+		// 		'success'
+		// 	  )
+		// 	// For more information about handling dismissals please visit
+		// 	// https://sweetalert2.github.io/#handling-dismissals
+		// 	} else if (result.dismiss === Swal.DismissReason.cancel) {
+		// 	  Swal.fire(
+		// 		'Cancelled',
+		// 		'Your imaginary file is safe :)',
+		// 		'error'
+		// 	  )
+		// 	}
+		//   })
+	})
+
 });
