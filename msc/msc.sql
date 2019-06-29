@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 20, 2019 at 03:31 PM
+-- Generation Time: Jun 29, 2019 at 05:04 AM
 -- Server version: 10.3.15-MariaDB
 -- PHP Version: 7.3.6
 
@@ -60,6 +60,13 @@ CREATE TABLE `biaya` (
   `pendaftaran` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `biaya`
+--
+
+INSERT INTO `biaya` (`spp`, `cicilan`, `pendaftaran`) VALUES
+(100000, 50000, 1000000);
+
 -- --------------------------------------------------------
 
 --
@@ -73,6 +80,29 @@ CREATE TABLE `biaya_pendaftaran` (
   `nominal` int(11) NOT NULL,
   `tgl_bayar` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `detail_pembayaran_spp`
+--
+
+CREATE TABLE `detail_pembayaran_spp` (
+  `id_detail` int(11) NOT NULL,
+  `id_pembayaran_spp` int(11) NOT NULL,
+  `bulan` int(2) NOT NULL,
+  `tahun` int(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `detail_pembayaran_spp`
+--
+
+INSERT INTO `detail_pembayaran_spp` (`id_detail`, `id_pembayaran_spp`, `bulan`, `tahun`) VALUES
+(1, 2, 1, 2019),
+(2, 2, 2, 2019),
+(3, 2, 3, 2019),
+(4, 2, 4, 2019);
 
 -- --------------------------------------------------------
 
@@ -120,7 +150,7 @@ CREATE TABLE `jadwal` (
 
 INSERT INTO `jadwal` (`id_jadwal`, `minggu_ke`, `kode_group`, `id_mapel_tentor`, `hari`, `jam_mulai`, `jam_slesai`, `pengumuman`) VALUES
 (1, 3, '2', 8, 'Minggu', '13:00:00', '15:00:00', ''),
-(2, 1, '2', 15, 'Rabu', '13:00:00', '17:00:00', 'Pengumuman'),
+(2, 4, '2', 15, 'Sabtu', '08:00:00', '17:00:00', 'Pengumuman'),
 (3, 1, '2', 14, 'Minggu', '16:00:00', '17:00:00', ''),
 (4, 1, '123EA', 15, 'Rabu', '15:00:00', '16:00:00', 'Hari Ini Kita Belajar Web'),
 (5, 4, '2', 16, 'Rabu', '10:00:00', '11:00:00', 'belajar'),
@@ -181,8 +211,19 @@ CREATE TABLE `laporan_keuangan` (
   `id_laporan` int(11) NOT NULL,
   `id_parent` int(11) NOT NULL,
   `tipe` enum('Spp','Cicilan','Pendaftaran','Gaji') NOT NULL,
-  `tanggal` int(11) NOT NULL
+  `tanggal` date NOT NULL,
+  `nominal` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `laporan_keuangan`
+--
+
+INSERT INTO `laporan_keuangan` (`id_laporan`, `id_parent`, `tipe`, `tanggal`, `nominal`) VALUES
+(1, 2, 'Spp', '2019-06-25', 400000),
+(2, 4, 'Cicilan', '2019-06-25', 2000000),
+(3, 2, 'Gaji', '2019-06-25', 1000000),
+(4, 8, 'Pendaftaran', '2019-06-25', 1000000);
 
 -- --------------------------------------------------------
 
@@ -229,6 +270,18 @@ INSERT INTO `mapel_tentor` (`id_mapel_tentor`, `id_mapel`, `kode_tentor`) VALUES
 (17, 5, 'T00100'),
 (18, 6, 'T00100'),
 (19, 7, 'TR022');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `msg_req_perubahan_jadwal`
+--
+
+CREATE TABLE `msg_req_perubahan_jadwal` (
+  `id_msg` int(11) NOT NULL,
+  `id_req` int(11) NOT NULL,
+  `msg` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -320,7 +373,10 @@ INSERT INTO `ortu` (`id_ortu`, `nama_ortu`, `no_hp`, `foto`, `username`, `passwo
 (2, 'Susanto', '0875422345', 'default_ortu.png', '', ''),
 (3, 'Supardi', '0542345', 'default_ortu.png', '', ''),
 (4, 'Asih', '94836587365', 'default_ortu.png', '', ''),
-(5, 'manis', '0987675624', 'default_ortu.png', '', '');
+(5, 'manis', '0987675624', 'default_ortu.png', '', ''),
+(6, 'Indah Dwi Wahyuni', '081358050152', 'default_ortu.png', '', ''),
+(7, 'Indah Dwi Wahyuni', '081358050152', 'default_ortu.png', '', ''),
+(8, 'Indah Dwi Wahyuni', '081358050152', 'default_ortu.png', '', '');
 
 -- --------------------------------------------------------
 
@@ -337,6 +393,16 @@ CREATE TABLE `pembayaran_cicilan` (
   `tanggal_bayar` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `pembayaran_cicilan`
+--
+
+INSERT INTO `pembayaran_cicilan` (`id_pembayaran_cicilan`, `kode_siswa`, `tahun`, `cicilan_ke`, `nominal`, `tanggal_bayar`) VALUES
+(1, 'MSC002', 2019, 1, 100000, '2019-06-24'),
+(2, 'MSC002', 2019, 2, 200000, '2019-06-25'),
+(3, 'MSC002', 2019, 3, 1000000, '2019-06-25'),
+(4, 'MSC002', 2019, 4, 2000000, '2019-06-25');
+
 -- --------------------------------------------------------
 
 --
@@ -352,6 +418,14 @@ CREATE TABLE `pembayaran_gaji` (
   `tanggal_bayar` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `pembayaran_gaji`
+--
+
+INSERT INTO `pembayaran_gaji` (`id_pembayaran`, `kode_tentor`, `bulan`, `tahun`, `nominal`, `tanggal_bayar`) VALUES
+(1, 'T00100', 3, 2019, 1500000, '2019-06-25'),
+(2, 'TR022', 2, 2019, 1000000, '2019-06-25');
+
 -- --------------------------------------------------------
 
 --
@@ -361,11 +435,16 @@ CREATE TABLE `pembayaran_gaji` (
 CREATE TABLE `pembayaran_spp` (
   `id_pembayaran_spp` int(11) NOT NULL,
   `kode_siswa` varchar(6) NOT NULL,
-  `bulan` int(2) NOT NULL,
-  `tahun` int(4) NOT NULL,
   `nominal` int(11) NOT NULL,
   `tanggal_bayar` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pembayaran_spp`
+--
+
+INSERT INTO `pembayaran_spp` (`id_pembayaran_spp`, `kode_siswa`, `nominal`, `tanggal_bayar`) VALUES
+(2, 'MSC001', 100000, '2019-06-25');
 
 -- --------------------------------------------------------
 
@@ -383,6 +462,13 @@ CREATE TABLE `req_perubahan_jadwal` (
   `status` enum('Menunggu','Diterima','Ditolak','Berakhir') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `req_perubahan_jadwal`
+--
+
+INSERT INTO `req_perubahan_jadwal` (`id_req`, `id_jadwal`, `kode_siswa`, `ke_hari`, `ke_minggu`, `ke_jam`, `status`) VALUES
+(1, 1, 'MSC005', 'Minggu', 1, '15:00:00', 'Menunggu');
+
 -- --------------------------------------------------------
 
 --
@@ -390,8 +476,10 @@ CREATE TABLE `req_perubahan_jadwal` (
 --
 
 CREATE TABLE `siswa` (
+  `id_siswa` int(11) NOT NULL,
   `kode_siswa` varchar(6) NOT NULL,
   `nama_siswa` varchar(30) NOT NULL,
+  `kelas` int(2) NOT NULL,
   `tgl_lahir` date NOT NULL,
   `jk` enum('Laki Laki','Perempuan') NOT NULL,
   `alamat` text NOT NULL,
@@ -399,19 +487,24 @@ CREATE TABLE `siswa` (
   `no_hp` varchar(13) NOT NULL,
   `kode_group` varchar(6) NOT NULL,
   `id_ortu` int(3) NOT NULL,
-  `tgl_daftar` date NOT NULL
+  `tgl_daftar` date NOT NULL,
+  `cicilan` int(11) NOT NULL,
+  `awal_spp` varchar(7) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `siswa`
 --
 
-INSERT INTO `siswa` (`kode_siswa`, `nama_siswa`, `tgl_lahir`, `jk`, `alamat`, `foto`, `no_hp`, `kode_group`, `id_ortu`, `tgl_daftar`) VALUES
-('', 'Dini', '1997-12-31', 'Perempuan', 'Situbondo', 'default_siswa.png', '9329486342', '3', 4, '2017-01-01'),
-('MSC001', 'David Setya', '2019-04-05', 'Laki Laki', 'Bondowoso', 'default_siswa.png', '0823138643', '2', 1, '2019-05-21'),
-('MSC002', 'Fathan Ridlo', '2019-05-15', 'Laki Laki', 'Maesan', 'default_siswa.png', '08231374', '2', 2, '2019-05-21'),
-('MSC003', 'Indri Nur', '2019-05-22', 'Perempuan', 'Situbondo', 'default_siswa.png', '086432234', '2', 3, '2019-05-22'),
-('msc005', 'danu', '1998-02-03', 'Laki Laki', 'jember', 'default_siswa.png', '089786427', '003', 5, '2019-05-29');
+INSERT INTO `siswa` (`id_siswa`, `kode_siswa`, `nama_siswa`, `kelas`, `tgl_lahir`, `jk`, `alamat`, `foto`, `no_hp`, `kode_group`, `id_ortu`, `tgl_daftar`, `cicilan`, `awal_spp`) VALUES
+(1, '', 'Dini', 0, '1997-12-31', 'Perempuan', 'Situbondo', 'default_siswa.png', '9329486342', '3', 4, '2017-01-01', 0, '0'),
+(2, 'MSC001', 'David Setya', 11, '2019-04-05', 'Laki Laki', 'Bondowoso', 'default_siswa.png', '0823138643', '2', 1, '2019-05-21', 0, '05-2018'),
+(3, 'MSC002', 'Fathan Ridlo', 12, '2019-05-15', 'Laki Laki', 'Maesan', 'default_siswa.png', '08231374', '2', 2, '2019-05-21', 6000000, '0'),
+(4, 'MSC003', 'Indri Nur', 0, '2019-05-22', 'Perempuan', 'Situbondo', 'default_siswa.png', '086432234', '2', 3, '2019-05-22', 0, '0'),
+(5, 'msc005', 'danu', 0, '1998-02-03', 'Laki Laki', 'jember', 'default_siswa.png', '089786427', '003', 5, '2019-05-29', 0, '0'),
+(6, 'MSC006', 'Muhammad', 11, '1999-03-10', 'Laki Laki', 'Maesan, Bondowoso', 'default_siswa.png', '081216938489', '3', 6, '1987-02-12', 0, '0'),
+(7, 'MSC007', 'Muhammad Fathan', 11, '1999-03-10', 'Laki Laki', 'Maesan, Bondowoso', 'default_siswa.png', '081216938489', '3', 7, '1987-02-12', 0, '0'),
+(8, 'MSC008', 'Muhammad Fathan Ridlo', 11, '1999-03-10', 'Laki Laki', 'Maesan', 'default_siswa.png', '081216938489', '2', 8, '2019-01-12', 0, '0');
 
 -- --------------------------------------------------------
 
@@ -456,6 +549,12 @@ ALTER TABLE `biaya_pendaftaran`
   ADD PRIMARY KEY (`id_pendaftaran`);
 
 --
+-- Indexes for table `detail_pembayaran_spp`
+--
+ALTER TABLE `detail_pembayaran_spp`
+  ADD PRIMARY KEY (`id_detail`);
+
+--
 -- Indexes for table `group_siswa`
 --
 ALTER TABLE `group_siswa`
@@ -480,6 +579,12 @@ ALTER TABLE `lampiran_kbm`
   ADD PRIMARY KEY (`id_lampiran`);
 
 --
+-- Indexes for table `laporan_keuangan`
+--
+ALTER TABLE `laporan_keuangan`
+  ADD PRIMARY KEY (`id_laporan`);
+
+--
 -- Indexes for table `mapel`
 --
 ALTER TABLE `mapel`
@@ -490,6 +595,12 @@ ALTER TABLE `mapel`
 --
 ALTER TABLE `mapel_tentor`
   ADD PRIMARY KEY (`id_mapel_tentor`);
+
+--
+-- Indexes for table `msg_req_perubahan_jadwal`
+--
+ALTER TABLE `msg_req_perubahan_jadwal`
+  ADD PRIMARY KEY (`id_msg`);
 
 --
 -- Indexes for table `nilai_mapel`
@@ -539,7 +650,8 @@ ALTER TABLE `req_perubahan_jadwal`
 -- Indexes for table `siswa`
 --
 ALTER TABLE `siswa`
-  ADD PRIMARY KEY (`kode_siswa`);
+  ADD PRIMARY KEY (`id_siswa`),
+  ADD UNIQUE KEY `kode_siswa` (`kode_siswa`);
 
 --
 -- Indexes for table `tentor`
@@ -564,6 +676,12 @@ ALTER TABLE `biaya_pendaftaran`
   MODIFY `id_pendaftaran` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `detail_pembayaran_spp`
+--
+ALTER TABLE `detail_pembayaran_spp`
+  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `jadwal`
 --
 ALTER TABLE `jadwal`
@@ -582,6 +700,12 @@ ALTER TABLE `lampiran_kbm`
   MODIFY `id_lampiran` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `laporan_keuangan`
+--
+ALTER TABLE `laporan_keuangan`
+  MODIFY `id_laporan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `mapel`
 --
 ALTER TABLE `mapel`
@@ -592,6 +716,12 @@ ALTER TABLE `mapel`
 --
 ALTER TABLE `mapel_tentor`
   MODIFY `id_mapel_tentor` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `msg_req_perubahan_jadwal`
+--
+ALTER TABLE `msg_req_perubahan_jadwal`
+  MODIFY `id_msg` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `nilai_mapel`
@@ -609,31 +739,37 @@ ALTER TABLE `nilai_siswa`
 -- AUTO_INCREMENT for table `ortu`
 --
 ALTER TABLE `ortu`
-  MODIFY `id_ortu` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_ortu` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `pembayaran_cicilan`
 --
 ALTER TABLE `pembayaran_cicilan`
-  MODIFY `id_pembayaran_cicilan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pembayaran_cicilan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `pembayaran_gaji`
 --
 ALTER TABLE `pembayaran_gaji`
-  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `pembayaran_spp`
 --
 ALTER TABLE `pembayaran_spp`
-  MODIFY `id_pembayaran_spp` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pembayaran_spp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `req_perubahan_jadwal`
 --
 ALTER TABLE `req_perubahan_jadwal`
-  MODIFY `id_req` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_req` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `siswa`
+--
+ALTER TABLE `siswa`
+  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
