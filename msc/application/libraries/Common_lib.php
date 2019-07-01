@@ -33,6 +33,21 @@ class Common_lib
 
         return $arr[$d];
     }
+
+    public function hariKe($d)
+    {
+        $arr = array(
+            "Sun" => 7,
+            "Mon" => 1,
+            "Tue" => 2,
+            "Wed" => 3,
+            "Thu" => 4,
+            "Fri" => 5,
+            "Sat" => 6,
+        );
+
+        return $arr[$d];
+    }
     public function indoMonth($m)
     {
         $arr = array("","Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember");

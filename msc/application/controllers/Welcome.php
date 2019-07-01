@@ -6,23 +6,12 @@ class Welcome extends CI_Controller {
 	{
 		parent::__construct();
 		$this->title = $this->common_lib->getTitle();
+		if($this->session->userdata("status") != "login")
+		{
+			redirect(base_url()."login");
+		}
 	}
-	/*
-	public function index()
-	{
-		$menu = array(
-			"title" => $this->title,
-			"btnHref" => base_url(),
-			"btnBg" => "success",
-			"btnFa" => "keyboard",
-			"btnText" => "Tambah Data"
-		);
-		$this->load->view('common/menu', $menu);
-		$this->load->view('common/card');
-		$this->load->view('common/slash-card');
-		$this->load->view('common/footer');
-	}
-		*/
+
 	public function index()
 	{
         $page = array(
