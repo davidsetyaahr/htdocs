@@ -31,29 +31,22 @@ class Permintaan_perubahan_jadwal extends CI_Controller {
         $this->load->view('common/footer');
     }
 
-    public function status($id,$status,$id_jadwal)
+    public function status($id,$status)
     {
-      if($status != "Ditolak"){
         $where = array("id_req" => $id);
         $val = array("status" => $status);
         $this->common->update("req_perubahan_jadwal", $val, $where);
-        redirect("permintaan_perubahan_jadwal/edit_jadwal/$id_jadwal/$id");
-      }
-      else{
         redirect("permintaan_perubahan_jadwal");
-
       }
-    }
-
-    public function edit_jadwal($where, $id_req_jadwal)
+      
+    public function edit_jadwal($where)
     {
-      $data["req"] = $this->common->getData("ke_hari, ke_minggu, ke_jam, status", "req_perubahan_jadwal", "", ["id_req" => $id_req_jadwal], "");
-      $data["jadwal"] = $this->common->getData("id_jadwal, jam_mulai, jam_slesai", "jadwal", "", ["id_jadwal" => $where], "");
+      $data["req"] = $this->common->getData("r.id_req, r.ke_hari, r.ke_minggu, r.ke_jam, j.id_jadwal, r.status, j.jam_mulai, j.jam_slesai", "req_perubahan_jadwal r", ["jadwal j", "r.id_jadwal=j.id_jadwal"], ["id_req" => $where], "");
       $menu = array(
         "title" => $this->title,
-        "btnHref" => base_url()."jadwal",
-        "btnBg" => "primary","btnFa" => "keyboard",
-        "btnText" => "Lihat Data"
+        // "btnHref" => base_url()."jadwal",
+        // "btnBg" => "primary","btnFa" => "keyboard",
+        // "btnText" => "Lihat Data"
       );
       $card['title'] = "Tentor <span>> Edit Jadwal</span>";
       $this->load->view('common/menu', $menu);
@@ -62,9 +55,21 @@ class Permintaan_perubahan_jadwal extends CI_Controller {
       $this->load->view('common/slash-card');
       $this->load->view('common/footer');
     }
-
-    public function edit(Type $var = null)
+    
+    public function update_jadwal($id_req)
     {
-      # code...
+      $where = array("id_jadwal" => $_POST["id_jadwal"]);
+      $where_req = array("id_req" => $id_req);
+      $val_req_jadwal = array("status" => "Diterima");
+      $val = array(
+        "hari" => $_POST["hari"],
+        "minggu_ke" => $_POST["minggu_ke"],
+        "jam_mulai" => $_POST["jam_mulai"],
+        "jam_slesai" => $_POST["jam_slesai"]
+      );
+      $this->common->update("jadwal", $val, $where);
+      $this->common->update("req_perubahan_jadwal", $val_req_jadwal, $where_req);
+      redirect(base_url()."permintaan_perubahan_jadwal");
     }
-}
+  }
+  
