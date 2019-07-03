@@ -7,6 +7,13 @@ class Jadwal extends CI_Controller {
 	{
 		parent::__construct();
 		$this->title = $this->common_lib->getTitle();
+		if($this->session->userdata("status") != "login")
+		{
+			redirect(base_url()."login");
+		}
+		else if($this->session->userdata("hak_akses") != "Admin"){
+			show_404();
+		}
     }
     
     public function index()

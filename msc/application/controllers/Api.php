@@ -8,6 +8,10 @@ class Api extends CI_Controller {
         $this->kode_siswa = $this->uri->segment(3);
         $this->siswa = $this->common->getData("nama_siswa,kelas,cicilan,kode_group,awal_spp","siswa","",["kode_siswa" => $this->kode_siswa],"");
         $this->date = date("Y-m-d");
+        if($this->session->userdata("status") != "login")
+		{
+			redirect(base_url()."login");
+		}
     }
     public function dashboard()
     {

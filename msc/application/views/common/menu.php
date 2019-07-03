@@ -18,15 +18,7 @@
   <link href="<?php echo base_url()."assets/" ?>css/sb-admin-2.min.css" rel="stylesheet">
   <link href="<?php echo base_url()."assets/" ?>vendor/bootstrap-datepicker-master/dist/css/bootstrap-datepicker3.standalone.min.css" rel="stylesheet">
   <link href="<?php echo base_url()."assets/" ?>custom/css/custom-style.css" rel="stylesheet">
-<<<<<<< HEAD
-  <!-- data tabe	 -->
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url()."assets/"?>vendor/DataTables/media/css/dataTables.bootstrap4.css">
-
-=======
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/>
-  <link rel="stylesheet" href="<?= base_url()."assets/vendor/"?>sweetalert2-master/src/sweetalert2.scss">
- 
->>>>>>> master
+  
 </head>
 
 <body id="page-top">
@@ -38,9 +30,9 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url()."welcome"?>">
         <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-calculator"></i>
+          <i class="fas fa-graduation-cap"></i>
         </div>
         <div class="sidebar-brand-text mx-3">MSC</div>
       </a>
@@ -100,7 +92,7 @@
       </li>
       
       <?php }
-      else if($this->session->userdata("hak_akses") == "Admin" || $this->session->userdata("hak_akses") == "Owner" || $this->session->userdata("hak_akses") == "Tentor"){
+      if($this->session->userdata("hak_akses") == "Admin" || $this->session->userdata("hak_akses") == "Owner" || $this->session->userdata("hak_akses") == "Tentor"){
       ?>
       <li class="nav-item">
         <a class="nav-link" href="<?php echo base_url()."data-siswa"; ?>">
@@ -113,7 +105,7 @@
           <span>Data Tentor</span></a>
       </li>
       <?php }
-        else if($this->session->userdata("hak_akses") == "Tentor"){
+        if($this->session->userdata("hak_akses") == "Tentor"){
           ?>
       <li class="nav-item">
         <a class="nav-link" href="<?php echo base_url()."lkbm" ?>">
@@ -121,7 +113,7 @@
           <span>Lampiran KBM</span></a>
       </li>
       <?php }
-        else if($this->session->userdata("hak_akses") == "Tentor" || $this->session->userdata("hak_akses") == "Admin"){
+        if($this->session->userdata("hak_akses") == "Tentor" || $this->session->userdata("hak_akses") == "Admin"){
           ?>
       <li class="nav-item">
         <a class="nav-link" href="<?php echo base_url()."nilai-siswa" ?>">
@@ -129,7 +121,7 @@
           <span>Nilai Siswa</span></a>
       </li>
       <?php }
-        else if($this->session->userdata("hak_akses" == "Admin") || $this->session->userdata("hak_akses" == "Owner")){
+        if($this->session->userdata("hak_akses") == "Admin" || $this->session->userdata("hak_akses") == "Owner"){
           ?>
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse2" aria-expanded="true" aria-controls="collapseTwo">
@@ -311,11 +303,29 @@
             </li>
 
             <div class="topbar-divider d-none d-sm-block"></div>
+            <!-- Logout Modal-->
+            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="exampleModalLabel">MSC Bondowoso</h5>
+                    <button class="close text-white" type="button" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">Anda Yaking Ingin Keluar Sebagai "<?= $this->session->userdata("nama")?>"?</div>
+                  <div class="modal-footer">
+                    <button class="btn btn-danger" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-success" href="<?= base_url()."login/logout"?>">Logout</a>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $this->session->userdata("nama")?></span>
                 <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
               </a>
               <!-- Dropdown - User Information -->

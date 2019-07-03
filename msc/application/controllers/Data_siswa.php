@@ -8,6 +8,14 @@ class Data_siswa extends CI_Controller
 		parent::__construct();
 		$this->title = $this->common_lib->getTitle();
 		$this->load->helper('url');
+		if($this->session->userdata("status") != "login")
+		{
+			redirect(base_url()."login");
+		}
+		else if($this->session->userdata("hak_akses") == "Siswa" || $this->session->userdata("hak_akses") == "Orang Tua")
+		{
+			show_404();
+		}
 	}
  
 	public function index() 
@@ -45,7 +53,7 @@ class Data_siswa extends CI_Controller
 			"title" => $this->title,
 		);	
 		$card['title'] = "Detail <span>> Detail Daftar Siswa </span>";
-		$filter = array("kode_siswa" => $this->input->post("kode_siswa"));
+		$filter = array("kode_siswa" => $kode_siswa);
 		$data['detail'] = $this->common->detail_data_siswa($filter);
 		$this->load->view('common/menu', $menu);
         $this->load->view('common/card', $card);
