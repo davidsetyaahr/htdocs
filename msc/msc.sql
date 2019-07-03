@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 29, 2019 at 05:04 AM
+-- Generation Time: Jul 03, 2019 at 04:12 AM
 -- Server version: 10.3.15-MariaDB
 -- PHP Version: 7.3.6
 
@@ -41,12 +41,12 @@ CREATE TABLE `absensi` (
 --
 
 INSERT INTO `absensi` (`id_absen`, `id_jadwal`, `kode_siswa`, `keterangan`, `waktu_absen`) VALUES
-(8, 5, 'MSC001', 'Tanpa Keterangan', '2019-05-22 13:36:06'),
-(9, 5, 'MSC002', 'Hadir', '2019-05-22 13:36:07'),
-(10, 5, 'MSC003', 'Ijin', '2019-05-22 13:36:07'),
-(11, 5, 'MSC001', 'Tanpa Keterangan', '2019-05-29 09:52:08'),
-(12, 5, 'MSC002', 'Hadir', '2019-05-29 09:52:08'),
-(13, 5, 'MSC003', 'Ijin', '2019-05-29 09:52:08');
+(8, 5, 'MSC001', 'Tanpa Keterangan', '2019-06-22 13:36:06'),
+(9, 5, 'MSC002', 'Hadir', '2019-06-22 13:36:07'),
+(10, 5, 'MSC003', 'Ijin', '2019-06-22 13:36:07'),
+(11, 5, 'MSC001', 'Tanpa Keterangan', '2019-06-29 09:52:08'),
+(12, 5, 'MSC002', 'Hadir', '2019-06-29 09:52:08'),
+(13, 5, 'MSC003', 'Ijin', '2019-06-29 09:52:08');
 
 -- --------------------------------------------------------
 
@@ -139,6 +139,7 @@ CREATE TABLE `jadwal` (
   `kode_group` varchar(6) NOT NULL,
   `id_mapel_tentor` int(5) NOT NULL,
   `hari` varchar(8) NOT NULL,
+  `hari_ke` int(1) NOT NULL,
   `jam_mulai` time NOT NULL,
   `jam_slesai` time NOT NULL,
   `pengumuman` text NOT NULL
@@ -148,13 +149,13 @@ CREATE TABLE `jadwal` (
 -- Dumping data for table `jadwal`
 --
 
-INSERT INTO `jadwal` (`id_jadwal`, `minggu_ke`, `kode_group`, `id_mapel_tentor`, `hari`, `jam_mulai`, `jam_slesai`, `pengumuman`) VALUES
-(1, 3, '2', 8, 'Minggu', '13:00:00', '15:00:00', ''),
-(2, 4, '2', 15, 'Sabtu', '08:00:00', '17:00:00', 'Pengumuman'),
-(3, 1, '2', 14, 'Minggu', '16:00:00', '17:00:00', ''),
-(4, 1, '123EA', 15, 'Rabu', '15:00:00', '16:00:00', 'Hari Ini Kita Belajar Web'),
-(5, 4, '2', 16, 'Rabu', '10:00:00', '11:00:00', 'belajar'),
-(6, 4, '3', 19, 'Rabu', '10:00:00', '11:00:00', 'hari ini belajar coding');
+INSERT INTO `jadwal` (`id_jadwal`, `minggu_ke`, `kode_group`, `id_mapel_tentor`, `hari`, `hari_ke`, `jam_mulai`, `jam_slesai`, `pengumuman`) VALUES
+(1, 1, '2', 8, 'Minggu', 7, '15:00:00', '17:00:00', ''),
+(2, 4, '2', 15, 'Sabtu', 6, '08:00:00', '17:00:00', 'Pengumuman'),
+(3, 4, '2', 14, 'Minggu', 7, '16:00:00', '17:00:00', ''),
+(4, 1, '123EA', 15, 'Rabu', 3, '15:00:00', '16:00:00', 'Hari Ini Kita Belajar Web'),
+(5, 4, '2', 16, 'Rabu', 3, '10:00:00', '11:00:00', 'belajar'),
+(6, 4, '3', 19, 'Rabu', 3, '10:00:00', '11:00:00', 'hari ini belajar coding');
 
 -- --------------------------------------------------------
 
@@ -439,13 +440,6 @@ CREATE TABLE `pembayaran_spp` (
   `tanggal_bayar` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `pembayaran_spp`
---
-
-INSERT INTO `pembayaran_spp` (`id_pembayaran_spp`, `kode_siswa`, `nominal`, `tanggal_bayar`) VALUES
-(2, 'MSC001', 100000, '2019-06-25');
-
 -- --------------------------------------------------------
 
 --
@@ -467,7 +461,7 @@ CREATE TABLE `req_perubahan_jadwal` (
 --
 
 INSERT INTO `req_perubahan_jadwal` (`id_req`, `id_jadwal`, `kode_siswa`, `ke_hari`, `ke_minggu`, `ke_jam`, `status`) VALUES
-(1, 1, 'MSC005', 'Minggu', 1, '15:00:00', 'Menunggu');
+(1, 1, 'MSC005', 'Minggu', 1, '15:00:00', 'Diterima');
 
 -- --------------------------------------------------------
 
@@ -531,6 +525,34 @@ INSERT INTO `tentor` (`kode_tentor`, `nama_tentor`, `jk`, `alamat`, `no_hp`, `pe
 ('T00100', 'Fathan', 'Laki Laki', 'Bondowoso, Maesan', '081216938489', 'S2', 3000000, ''),
 ('T00213', 'Tejo', 'Perempuan', 'Jember', '873246873246', 'S2', 100000, ''),
 ('TR022', 'kiki', 'Perempuan', 'jember', '098723567', 's1', 1000000, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `id_user` int(2) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `nama_pengguna` varchar(50) NOT NULL,
+  `hak_akses` enum('Admin','Tentor','Siswa','Orang Tua','Owner') NOT NULL,
+  `id_child` varchar(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id_user`, `username`, `password`, `nama_pengguna`, `hak_akses`, `id_child`) VALUES
+(1, 'fathan', 'c31573e9fd10409dca20572ae7ad69f9', 'M Fathan', 'Tentor', 'T00100'),
+(2, 'fathan2', 'fathan2', 'fathan lagi', 'Siswa', '3'),
+(3, 'admin', 'admin', 'admin', 'Admin', '1'),
+(4, 'siswa', 'siswa', 'siswa', 'Siswa', '1'),
+(5, 'tentor', 'tentor', 'tentor', 'Tentor', 'T00100'),
+(6, 'ortu', 'ortu', 'ortu', 'Orang Tua', '1'),
+(7, 'owner', 'owner', 'owner', 'Owner', '1');
 
 --
 -- Indexes for dumped tables
@@ -660,6 +682,12 @@ ALTER TABLE `tentor`
   ADD PRIMARY KEY (`kode_tentor`);
 
 --
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id_user`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -770,6 +798,12 @@ ALTER TABLE `req_perubahan_jadwal`
 --
 ALTER TABLE `siswa`
   MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id_user` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

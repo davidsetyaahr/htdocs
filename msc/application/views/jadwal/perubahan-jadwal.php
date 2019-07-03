@@ -62,8 +62,12 @@
     						Opsi <span class="fas fa-caret-down"></span>
     					</button>
     					<div class="dropdown-menu" aria-labelledby="<?= $value["id_req"]?>">
-							<a class="dropdown-item req_jadwal" id="<?= $value["id_req"]?>" href="">Terima</a>
-							<a class="dropdown-item req_jadwal" id="<?= $value["id_req"]?>" href="">Tolak</a>
+							<a class="dropdown-item req_jadwal" name="Terima" id="<?= $value["id_req"]?>" href="<?php echo base_url()."permintaan_perubahan_jadwal/edit_jadwal/".$value['id_req'] ?>" >Terima</a>
+							<?php 
+								if($value['status']!="Ditolak"){
+							?>
+							<a class="dropdown-item req_jadwal" name="Tolak" id="<?= $value["id_req"]?>" href="<?php echo base_url()."permintaan_perubahan_jadwal/status/".$value['id_req']."/Ditolak"; ?>">Tolak</a>
+								<?php } ?>
 						</div>
 					</div>
 						</td>

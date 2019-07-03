@@ -64,57 +64,13 @@
       </div>
 
       <!-- Nav Item - Utilities Collapse Menu -->
+      <?php 
+        if($this->session->userdata("hak_akses") == "Admin"){
+          ?>
       <li class="nav-item">
         <a class="nav-link" href="<?php echo base_url()."daftar-siswa"; ?>">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Pendaftaran Siswa</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse0" aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-credit-card"></i>
-            <span>Penjadwalan</span>
-        </a>
-        <div id="collapse0" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="<?php echo base_url()."jadwal" ?>">Jadwal Les</a>
-                <a class="collapse-item" href="<?php echo base_url()."permintaan-perubahan-jadwal" ?>">Permintaan Perubahan<br> Jadwal</a>
-            </div>
-        </div>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url()."data-siswa"; ?>">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Data Siswa</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url()."tentor"; ?>">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Data Tentor</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url()."lkbm" ?>">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Lampiran KBM</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url()."nilai-siswa" ?>">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Nilai Siswa</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse2" aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-credit-card"></i>
-            <span>Keuangan</span>
-        </a>
-        <div id="collapse2" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="<?php echo base_url()."keuangan/cicilan"; ?>">Cicilan</a>
-                <a class="collapse-item" href="<?php echo base_url()."keuangan/spp"; ?>">SPP</a>
-                <a class="collapse-item" href="<?php echo base_url()."keuangan/gaji"; ?>">Gaji Karyawan</a>
-                <a class="collapse-item" href="<?php echo base_url()."keuangan/laporan"; ?>">Laporan Keuangan</a>
-            </div>
-        </div>
       </li>
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapseTwo">
@@ -130,6 +86,66 @@
             </div>
         </div>
       </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse0" aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-credit-card"></i>
+            <span>Penjadwalan</span>
+        </a>
+        <div id="collapse0" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="<?php echo base_url()."jadwal" ?>">Jadwal Les</a>
+                <a class="collapse-item" href="<?php echo base_url()."permintaan-perubahan-jadwal" ?>">Permintaan Perubahan<br> Jadwal</a>
+            </div>
+        </div>
+      </li>
+      
+      <?php }
+      else if($this->session->userdata("hak_akses") == "Admin" || $this->session->userdata("hak_akses") == "Owner" || $this->session->userdata("hak_akses") == "Tentor"){
+      ?>
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo base_url()."data-siswa"; ?>">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Data Siswa</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo base_url()."tentor"; ?>">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Data Tentor</span></a>
+      </li>
+      <?php }
+        else if($this->session->userdata("hak_akses") == "Tentor"){
+          ?>
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo base_url()."lkbm" ?>">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Lampiran KBM</span></a>
+      </li>
+      <?php }
+        else if($this->session->userdata("hak_akses") == "Tentor" || $this->session->userdata("hak_akses") == "Admin"){
+          ?>
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo base_url()."nilai-siswa" ?>">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Nilai Siswa</span></a>
+      </li>
+      <?php }
+        else if($this->session->userdata("hak_akses" == "Admin") || $this->session->userdata("hak_akses" == "Owner")){
+          ?>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse2" aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-credit-card"></i>
+            <span>Keuangan</span>
+        </a>
+        <div id="collapse2" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="<?php echo base_url()."keuangan/cicilan"; ?>">Cicilan</a>
+                <a class="collapse-item" href="<?php echo base_url()."keuangan/spp"; ?>">SPP</a>
+                <a class="collapse-item" href="<?php echo base_url()."keuangan/gaji"; ?>">Gaji Karyawan</a>
+                <a class="collapse-item" href="<?php echo base_url()."keuangan/laporan"; ?>">Laporan Keuangan</a>
+            </div>
+        </div>
+      </li>
+      <?php } ?>
       <hr class="sidebar-divider d-none d-md-block">
 
       <!-- Sidebar Toggler (Sidebar) -->
