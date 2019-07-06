@@ -5,8 +5,10 @@ class Api extends CI_Controller {
 	public function __construct()
 	{
         parent::__construct();
-        $this->kode_siswa = $this->uri->segment(3);
-        $this->siswa = $this->common->getData("nama_siswa,kelas,cicilan,kode_group,awal_spp","siswa","",["kode_siswa" => $this->kode_siswa],"");
+        if(!empty($this->uri->segment(3))){
+            $this->kode_siswa = $this->uri->segment(3);
+            $this->siswa = $this->common->getData("nama_siswa,kelas,cicilan,kode_group,awal_spp","siswa","",["kode_siswa" => $this->kode_siswa],"");
+        }
         $this->date = date("Y-m-d");
     }
     public function dashboard()
@@ -101,7 +103,7 @@ class Api extends CI_Controller {
        $json = [];
        $now = date("H:i:s");
        foreach ($jadwal as $key => $value) {
-           $diff = $value['hari_ke']-6;
+           $diff = $value['hari_ke']-$date;
            if($diff==0){
                $img = array(
                    "img" => "calendar32.png",
@@ -239,7 +241,43 @@ class Api extends CI_Controller {
     public function materi()
     {
         $materi = $this->common->getData("l.caption,t.nama_tentor,l.lampiran","lampiran_kbm l",["jadwal j","l.id_jadwal = j.id_jadwal","mapel_tentor mt","j.id_mapel_tentor = mt.id_mapel_tentor","tentor t","mt.kode_tentor = t.kode_tentor"],["j.kode_group" => $this->siswa[0]['kode_group']],["l.id_lampiran","desc"]);
-
+        foreach($materi as $key => $m){
+            $cekFile = strtolower(substr($m['lampiran'],strpos($m['lampiran'],".")+1));
+            if($cekFile=="pdf"){
+                $img = "pdf32.png";                
+            }
+            else if($cekFile=="doc" || $cekFile=="docx"){
+                $img = "word32.png";                
+            }
+            else if($cekFile=="ppt" || $cekFile=="pptx"){
+                $img = "ppt32.png";                
+            }
+            else if($cekFile=="xls" || $cekFile=="xlsx"){
+                $img = "xls32.png";
+            }
+            else if($cekFile=="jpg" || $cekFile=="png" || $cekFile=="gif" || $cekFile=="jpeg"){
+                $img = "img32.png";
+            }
+            else{
+                $img = "file32.png";
+            }
+            $materi[$key]['img'] = $cekFile=="pdf" ? "pdf32.png" : "word32.png";
+        }
         echo json_encode($materi);
+    }
+
+    public function login()
+    {
+        echo password_hash("david",PASSWORD_DEFAULT);
+        $cekUser = $this->common->getData("count(id_user) ttl,password,kode_siswa","user","",["username" => $_POST['username']],"");
+
+        $json['status'] = "error";
+
+        if($cekUser[0]['ttl']> 0 && password_verify($_POST['password'], $cekUser[0]['password'])){
+            $json['status'] = "success";
+            $json['kode_siswa'] = $cekUser[0]['kode_siswa'];
+        }
+
+        echo json_encode($json);
     }
 }
