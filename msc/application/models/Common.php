@@ -68,12 +68,12 @@ class Common extends CI_Model {
 
         return $this->db->get()->result_array();
     }
-    public function detail_data_siswa(){
+    public function detail_data_siswa($filter){
         $sql = $this->db->select("siswa.kode_siswa, siswa.nama_siswa, siswa.tgl_lahir, siswa.jk, siswa.alamat, siswa.no_hp, group_siswa.kode_group, ortu.nama_ortu, siswa.tgl_daftar, siswa.cicilan, siswa.kelas, ortu.no_hp");
         $sql = $this->db->from("siswa");
         $sql = $this->db->join("group_siswa", "siswa.kode_group = group_siswa.kode_group");
         $sql = $this->db->join("ortu", "ortu.id_ortu = siswa.id_ortu");
-        //$this->db->where('kode_siswa');
+        $sql = $this->db->where($filter);
 
         return $this->db->get()->result_array();
     }

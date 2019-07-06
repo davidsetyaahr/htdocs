@@ -6,19 +6,32 @@ class Tentor extends CI_Controller {
 	{
 		parent::__construct();
 		$this->title = $this->common_lib->getTitle();
+		if($this->session->userdata("status") != "login" )
+		{
+			redirect(base_url()."login");
+		}
+		else if($this->session->userdata("hak_akses") == "Siswa" || $this->session->userdata("hak_akses") == "Orang Tua")
+		{
+			show_404();
+		}
 		$this->sess = $this->session->userdata(); 
 	}
 	
 	public function index()
 	{
-		$menu["title"] = $this->title;
-		if($this->sess["hak_akses"] != "Tentor"){
-        $menu = array(
-			"btnHref" => base_url()."tentor/input_tentor",
-			"btnBg" => "success",
-			"btnFa" => "keyboard",
-			"btnText" => "Tambah Data"
-		);
+		if($this->sess["hak_akses"] == "Tentor"){
+			$menu = array(
+				"title" => $this->title,
+			);
+		}
+		else{
+			$menu = array(
+				"title" => $this->title,
+				"btnHref" => base_url()."tentor/input_tentor",
+				"btnBg" => "primary","btnFa" => "keyboard",
+				"btnText" => "Tambah Data"
+			);
+			
 		}
 
 		$card['title'] = "Tentor <span>> List Tentor</span>";
@@ -120,7 +133,7 @@ class Tentor extends CI_Controller {
 				"no_hp" => $this->input->post("no_hp"),
 				"jk" => $this->input->post("jk"),
 				"alamat" => $this->input->post("alamat"),
-				"gaji" => $this->input->post("gaji")
+			"gaji" => $this->input->post("gaji")
 			);
 			$this->common->update("tentor", $tentor, $filter);
 			for($i=0; $i<count($_POST['id_mapel']); $i++){

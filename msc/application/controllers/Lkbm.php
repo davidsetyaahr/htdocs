@@ -4,11 +4,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Lkbm extends CI_Controller {
 
     public function __construct()
-	{
-		parent::__construct();
-		$this->title = $this->common_lib->getTitle();
-        date_default_timezone_set("Asia/Jakarta");
-    }
+		{
+			parent::__construct();
+			$this->title = $this->common_lib->getTitle();
+			date_default_timezone_set("Asia/Jakarta");
+			if($this->session->userdata("status") != "login")
+			{
+				redirect(base_url()."login");
+			}
+			else if($this->session->userdata("hak_akses") != "Tentor"){
+				show_404();
+			}
+		}
     
     public function index()
     {

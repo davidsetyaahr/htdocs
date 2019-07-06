@@ -31,10 +31,10 @@
 					<tr>
 						<td><?= $s["kode_siswa"]?></td>
 						<td><?= $s["nama_siswa"]?></td>
-						<td>Rp. <?= $s["cicilan"]?></td>
+						<td>Rp. <?= number_format($s["cicilan"],2,',','.')?></td>
 						<td><?= $sisa_cicilan?></td>
-						<td>Rp. <?= $terbayar[0]["total"]?></td>
-						<td>Rp. <?= $kekurangan?></td>
+						<td>Rp. <?= number_format($terbayar[0]["total"],2,',','.')?></td>
+						<td>Rp. <?= number_format($kekurangan,2,',','.')?></td>
 					</tr>
 				<?php }?>
 				</tbody>

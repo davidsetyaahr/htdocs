@@ -188,34 +188,42 @@ $(document).ready(function () {
 		spp_bayar()
 	})
 
-	$(".req_jadwal").click(function(){
-		var id = $(this).attr("id")
-		Swal.fire('Hello world!')
-		// alert($(this).attr("id"))
-		// Swal.fire({
-		// 	title: 'Are you sure?',
-		// 	text: 'You will not be able to recover this imaginary file!',
-		// 	type: 'warning',
-		// 	showCancelButton: true,
-		// 	confirmButtonText: 'Yes, delete it!',
-  		// 	cancelButtonText: 'No, keep it'
-		// }).then((result) => {
-		// 	if (result.value) {
-		// 	  Swal.fire(
-		// 		'Deleted!',
-		// 		'Your imaginary file has been deleted.',
-		// 		'success'
-		// 	  )
-		// 	// For more information about handling dismissals please visit
-		// 	// https://sweetalert2.github.io/#handling-dismissals
-		// 	} else if (result.dismiss === Swal.DismissReason.cancel) {
-		// 	  Swal.fire(
-		// 		'Cancelled',
-		// 		'Your imaginary file is safe :)',
-		// 		'error'
-		// 	  )
-		// 	}
-		//   })
+	// var rupiah = document.getElementById('biaya_spp');
+	// rupiah.addEventListener('keyup', function(e){
+	// 	// tambahkan 'Rp.' pada saat form di ketik
+	// 	// gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
+	// 	rupiah.value = formatRupiah(this.value);
+	// });
+
+	// function formatRupiah(angka, prefix){
+	// 	var number_string = angka.replace(/[^,\d]/g, '').toString(),
+	// 	split   		= number_string.split(','),
+	// 	sisa     		= split[0].length % 3,
+	// 	rupiah     		= split[0].substr(0, sisa),
+	// 	ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+
+	// 	// tambahkan titik jika yang di input sudah menjadi angka ribuan
+	// 	if(ribuan){
+	// 		separator = sisa ? '.' : '';
+	// 		rupiah += separator + ribuan.join('.');
+	// 	}
+
+	// 	rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+	// 	return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+	// }
+
+	$("#group_spp").change(function(){
+		var kode_group = $("#group_spp").val();
+		// return alert(kode_group)
+		$.ajax({
+			url		: base_url+"keuangan/spp/ambil_siswa",
+			type	: "post",
+			data	: { "kode_group" : kode_group},
+			success	: function(response){
+				$("#siswa_spp option").remove();
+				$("#siswa_spp").append(response)
+			}
+		})
 	})
 
 });

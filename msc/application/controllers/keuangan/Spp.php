@@ -6,20 +6,30 @@ class Spp extends CI_Controller {
 	{
 		parent::__construct();
 		$this->title = $this->common_lib->getTitle();
+		if($this->session->userdata("status") != "login")
+		{
+			redirect(base_url()."login");
+		}
+		else if($this->session->userdata("hak_akses") == "Siswa" || $this->session->userdata("hak_akses") == "Tentor" || $this->session->userdata("hak_akses") == "Orang Tua")
+		{
+			show_404();
+		}
 	}
-
+	
 	public function index()
 	{
+		$data["bulan"] = array("","Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
 		$menu = array(
-            "title" => $this->title,
+			"title" => $this->title,
 			"btnHref" => base_url()."keuangan/spp/input_spp",
 			"btnBg" => "success",
 			"btnFa" => "keyboard",
 			"btnText" => "Tambah Data"
 		);
-
+		
 		$card['title'] = "Spp <span>> List Spp</span>";
 		$data["siswa"] = $this->common->getData("kode_siswa, nama_siswa", "siswa", "", "", "");
+		$data["group"] = $this->common->getData("kode_group, nama_group", "group_siswa", "", "", "");
 		$this->load->view('common/menu', $menu);
 		$this->load->view('common/card', $card);
 		$this->load->view('keuangan/spp/list-spp', $data);
@@ -98,6 +108,18 @@ class Spp extends CI_Controller {
 		redirect(base_url()."keuangan/spp");
 	}
 
+	public function ambil_siswa()
+	{
+		$cek = $this->common->getData("s.nama_siswa, s.kode_siswa", "siswa s", ["group_siswa g", "s.kode_group=g.kode_group"], ["s.kode_group" => $_POST["kode_group"]], "");
+		if(count($cek) > 0){
+			echo "<option value=''>---Option---</option>";
+			foreach ($cek as $s) 
+			{
+				echo '<option value="'.$s["kode_siswa"].'">'.$s["nama_siswa"].'</option>';
+			}
+		}
+	}
+
 	/*public function edit_spp($kode)
 	{
 		/*$where = array("id_spp" => $kode);
@@ -135,5 +157,27 @@ class Spp extends CI_Controller {
 			$spp = $cek[0]["spp"] * $banyak_bulan;
 		}
 		echo $spp;
+	}
+
+	public function detail_spp($kode_siswa)
+	{
+		$menu = array(
+			"title" => $this->title,
+			"btnHref" => base_url()."keuangan/spp",
+			"btnBg" => "primary",
+			"btnFa" => "keyboard",
+			"btnText" => "List Spp"
+		);
+
+		$data["bulan"] = array("","Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+    	$data["tahunPertamaBayar"] = $this->common->getData("tanggal_bayar", ["pembayaran_spp", 1], "", ["kode_siswa" => $kode_siswa], ["tanggal_bayar", "asc"]);
+		$data["terakhirBayarSpp"] = $this->common->getData("p.tanggal_bayar, s.nama_siswa, s.kode_siswa", ["pembayaran_spp p", 1], ["siswa s", "p.kode_siswa=s.kode_siswa"], ["p.kode_siswa" => $kode_siswa], ["tanggal_bayar", "desc"]);
+		// $data["siswa"] = $this->common->getData("nama_siswa, kode_siswa", "siswa","", ["kode_siswa" = $])
+		$card['title'] = "Spp <span>> Detail SPP </span>";
+		$this->load->view('common/menu', $menu);
+        $this->load->view('common/card', $card);
+		$this->load->view('keuangan/spp/detail-spp', $data);
+		$this->load->view('common/slash-card');
+		$this->load->view('common/footer');
 	}
 }

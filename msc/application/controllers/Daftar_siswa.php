@@ -6,6 +6,17 @@ class Daftar_siswa extends CI_Controller {
 	{
 		parent::__construct();
 		$this->title = $this->common_lib->getTitle();
+		if($this->session->userdata("status") != "login")
+		{
+			redirect(base_url()."login");
+		}
+		else if($this->session->userdata("hak_akses") == "Owner" || $this->session->userdata("hak_akses") == "Siswa" || $this->session->userdata("hak_akses") == "Tentor" || $this->session->userdataelse if($this->session->userdata("hak_akses") == "Owner" || $this->session->userdata("hak_akses") == "Siswa" || $this->session->userdata("hak_akses") == "Tentor" || $this->session->userdata("hak_akses") == "Orang Tua" )
+		{
+			show_404();
+		}("hak_akses") == "Orang Tua" )
+		{
+			show_404();
+		}
 	}
 	
 	public function index()

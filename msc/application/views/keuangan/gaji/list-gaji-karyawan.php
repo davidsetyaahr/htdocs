@@ -19,7 +19,7 @@
 					<td><?php echo $value['nama_tentor'] ?></td>
 					<td><?php echo $value['bulan'] ?></td>
 					<td><?php echo $value['tahun'] ?></td>
-					<td><?php echo $value['nominal'] ?></td>
+					<td>Rp. <?php echo number_format($value['nominal'],2,',','.') ?></td>
 					<td><?php echo $value['tanggal_bayar'] ?></td>
 
 				</tr>

@@ -24,8 +24,6 @@
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
-  <!-- Sweet Alert -->
-  <script src="<?= base_url()."assets/vendor/"?>sweetalert2-master/src/sweetalert2w.js"></script>
   
   <!-- Bootstrap core JavaScript-->
   <script src="<?php echo base_url()."assets/" ?>vendor/jquery/jquery.min.js"></script>
@@ -45,7 +43,7 @@
   <script src="<?php echo base_url()."assets/" ?>js/demo/chart-pie-demo.js"></script>
   <script src="<?php echo base_url()."assets/" ?>vendor/bootstrap-datepicker-master/dist/js/bootstrap-datepicker.min.js"></script>
   <script src="<?php echo base_url()."assets/" ?>custom/js/custom.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  
 </body>
 
 </html>

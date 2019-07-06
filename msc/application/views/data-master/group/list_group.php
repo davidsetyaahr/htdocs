@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-lg-12">
 		<div class="table-responsive">
-			<table class="table table-striped table-bordered table-hover">
+			<table class="table table-striped table-bordered table-hover" id="dataTable_wrapper">
 				<thead>
 					<tr>
 						<th>Kode group</th>

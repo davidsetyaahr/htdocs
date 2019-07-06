@@ -1,20 +1,21 @@
+<form action="" method="get">
 <div class="row">
 	<div class="col-lg-3">
-		<label>Kode Siswa</label>
-		<select class="form-control">
-			<option value="">---Option---</option>
-		</select>
-	</div>
-	<div class="col-lg-3">
 		<label>Group</label>
-		<select class="form-control">
+		<select name="kode_group" id="group_spp" class="form-control">
 			<option value="">---Pilih Group---</option>
 			<?php 
 				foreach ($group as $g) {
 					echo "<option value='".$g['kode_group']."'>$g[nama_group]</option>";
 				}
-			?>
+				?>
 		</select>
+	</div>
+	<div class="col-lg-3">
+		<label>Kode Siswa</label>
+			<select name="kode_siswa" id="siswa_spp" class="form-control">
+			</select>
+			<!-- <input type="text" class="form-control" id="siswa_spp"> -->
 	</div>
 	<div class="col-lg-3">
 		<label>Tahun</label>
@@ -31,20 +32,16 @@
 	</div>
 	<div class="col-lg-3">
 		<label>Bulan</label>
-		<select class="form-control">
+		<select name="bulan" class="form-control">
 			<option value="">---Option---</option>
-			<option>januari</option>
-			<option>februari</option>
-			<option>maret</option>
-			<option>april</option>
-			<option>mei</option>
-			<option>juni</option>
-			<option>juli</option>
-			<option>agustus</option>
-			<option>september</option>
-			<option>oktober</option>
-			<option>november</option>
-			<option>desember</option>
+			<?php
+				foreach ($bulan as $b => $val) 
+				{
+					if($b > 0){
+						echo '<option value="'.$b.'">'.$val.'</option>';
+					}
+				}
+				?>
 		</select>
 	</div>
 </div>
@@ -52,16 +49,22 @@
 			<br>
 			<?php $this->load->view("common/btn") ?>
 		</div>
+</form>
+<?php
+	if(empty($_GET["kode_siswa"]) && empty($_GET["kode_group"])){
+
+?>
 <br>
 <div class="row">
 	<div class="col-lg-12">
 		<div class="table-responsive">
+			<thead>
 			<table class="table table-striped table-bordered table-hover">
-                <thead>
 					<tr>
 						<th rowspan="2" class="align-middle text-center">Kode Siswa</th>
 						<th rowspan="2" class="align-middle text-center">Nama Siswa</th>
 						<th colspan="6" class="text-center"><?= date("Y")?></th>
+						<th rowspan="2" class="align-middle text-center">Aksi</th>
 					</tr>
 					<tr>
 						<?php
@@ -88,7 +91,16 @@
 									echo "<span class='$fa'></span></th>";
 								}
 							}
+							?>
+						<th>
+						<?php
+							$dropdown["id"] = "menu".$val["kode_siswa"];
+							$dropdown["href"] = array(
+								"Detail" => base_url()."keuangan/spp/detail_spp/".$val["kode_siswa"]
+							);
+							$this->load->view("common/dropdown", $dropdown);
 						?>
+						</th>
 					</tr>
 				<?php }?>
 				</tbody>
@@ -96,3 +108,4 @@
 		</div>
 	</div>
 </div>
+<?php } ?>

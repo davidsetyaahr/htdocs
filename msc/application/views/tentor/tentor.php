@@ -34,7 +34,7 @@
 						?></th>
 						<th><?php echo $t["no_hp"]?></th>
 						<th><?php echo $t["alamat"]?></th>
-						<th>Rp. <?php echo $t["gaji"]?></th>
+						<th>Rp. <?php echo number_format($t["gaji"],2,',','.')?></th>
 						<th><?php
 							$dropdown["id"] = "menu".$t["kode_tentor"];
 							$dropdown["href"] = array(
