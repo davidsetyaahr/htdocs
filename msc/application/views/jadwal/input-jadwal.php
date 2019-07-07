@@ -31,13 +31,13 @@
             <label for="">Hari</label>
             <select name="hari" class="form-control">
                 <option value="">---Pilih Hari---</option>
-                <option>Minggu</option>
-                <option>Senin</option>
-                <option>Selasa</option>
-                <option>Rabu</option>
-                <option>Kamis</option>
-                <option>Jumat</option>
-                <option>Sabtu</option>
+                <option value="Sun">Minggu</option>
+                <option value="Mon">Senin</option>
+                <option value="Tue">Selasa</option>
+                <option value="Wed">Rabu</option>
+                <option value="Thu">Kamis</option>
+                <option value="Fri">Jumat</option>
+                <option value="Sat">Sabtu</option>
             </select>
         </div>
         <div class="col-lg-6">
