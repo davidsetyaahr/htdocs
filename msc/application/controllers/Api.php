@@ -10,11 +10,11 @@ class Api extends CI_Controller {
             $this->siswa = $this->common->getData("nama_siswa,kelas,cicilan,kode_group,awal_spp","siswa","",["kode_siswa" => $this->kode_siswa],"");
         }
         $this->date = date("Y-m-d");
-        if($this->session->userdata("status") != "login")
+/*         if($this->session->userdata("status") != "login")
 		{
 			redirect(base_url()."login");
 		}
-    }
+ */    }
     public function dashboard()
     {
         $day = date("d");
@@ -272,14 +272,14 @@ class Api extends CI_Controller {
 
     public function login()
     {
-        echo password_hash("david",PASSWORD_DEFAULT);
-        $cekUser = $this->common->getData("count(id_user) ttl,password,kode_siswa","user","",["username" => $_POST['username']],"");
+        $cekUser = $this->common->getData("count(id_user) ttl,password,id_child","user","",["username" => $_POST['username']],"");
 
         $json['status'] = "error";
 
         if($cekUser[0]['ttl']> 0 && password_verify($_POST['password'], $cekUser[0]['password'])){
             $json['status'] = "success";
-            $json['kode_siswa'] = $cekUser[0]['kode_siswa'];
+            $getKode = $this->common->getData("kode_siswa","siswa","",["id_siswa" => $cekUser[0]['id_child']],"");
+            $json['kode_siswa'] = $getKode[0]['kode_siswa'];
         }
 
         echo json_encode($json);

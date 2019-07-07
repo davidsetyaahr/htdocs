@@ -37,18 +37,22 @@ class Lkbm extends CI_Controller {
 	
     public function kbm($id)
     {
+		$cek = $this->common->getData("count(id_kbm) ttl","kbm","",["tanggal" => date("Y-m-d"),"id_jadwal" => $id],"");
+		if($cek[0]['ttl']==0){
+			$this->common->insert("kbm",["id_jadwal" => $id,"tanggal" => date("Y-m-d")]);	
+		}
 		if(isset($_POST['pengumuman'])){
-			$this->common->update("jadwal",$_POST,["id_jadwal" => $id]);
+			$this->common->update("kbm",$_POST,["id_kbm" => $_POST['id_kbm']]);
 			$this->session->set_flashdata("success", "Berhasil Mengubah Pengumuman");
 			redirect(base_url()."lkbm/kbm/$id");
 		}
 		else if(isset($_POST['inputlampiran'])){
-			$config['upload_path']          = './assets/img/';
-			$config['allowed_types']        = 'pdf|docx|doc';
+			$this->load->helper("string");
+			$config['upload_path']          = './assets/lampiran/';
+			$config['allowed_types']        = 'pdf|docx|doc|png|jpg|jpeg|gif|xls|xlsx|ppt|pptx';
 			$config['max_size']             = 5000;
 
 			$this->load->library('upload', $config);
-			print_r($_FILES);
 			
 			$err = [];
 			for($i=0;$i < count($_POST['caption']);$i++){
@@ -61,7 +65,7 @@ class Lkbm extends CI_Controller {
 					$insert = array(
 						"lampiran" => $_FILES['lampiran'.$i]['name'],
 						"caption" => $_POST['caption'][$i],
-						"id_jadwal" => $id
+						"id_kbm" => $_POST['id_kbm']
 					);
 					$this->common->insert("lampiran_kbm",$insert);
 				}
@@ -74,13 +78,31 @@ class Lkbm extends CI_Controller {
 		}
 		
 		if(isset($_POST['absen'])){
-			foreach($_POST['absen'] as $key => $val){
-				$arr = array(
-					"id_jadwal" => $id,
-					"kode_siswa" => $key,
-					"keterangan" => $val,
-				);
-				$this->common->insert("absensi", $arr);
+			$cek = $this->common->getData("count(id_kbm) ttl","absensi","",["id_kbm" => $_POST['id_kbm']],"");
+			if($cek[0]['ttl']==0){
+				foreach($_POST['absen'] as $key => $val){
+					$arr = array(
+						"id_kbm" => $_POST['id_kbm'],
+						"kode_siswa" => $key,
+						"keterangan" => $val,
+					);
+					$this->common->insert("absensi", $arr);
+				}
+			}
+			else{
+				foreach($_POST['absen'] as $key => $val){
+					
+					$filter = array(
+						"id_kbm" => $_POST['id_kbm'],
+						"kode_siswa" => $key,
+					);
+
+					$arr = array(
+						"keterangan" => $val,
+					);
+					$this->common->update("absensi", $arr,$filter);
+				}
+
 			}
 
 			redirect(base_url()."lkbm/kbm/$id/absensi");
@@ -94,12 +116,10 @@ class Lkbm extends CI_Controller {
 			"btnText" => "Tambah KBM"
 		);
 		$card['title'] = "Lampiran KBM <span>> List L-KBM</span>";
-		$data['lampiran'] = $this->common->getData("*","lampiran_kbm","",["id_jadwal" => $id],["id_lampiran","desc"]);
 		$data["jadwal"] = $this->common->getData("j.*, g.kode_group, g.nama_group, t.kode_tentor, t.nama_tentor, m.mata_pelajaran, ", "jadwal j", ["group_siswa g", "j.kode_group=g.kode_group", "mapel_tentor mt", "mt.id_mapel_tentor=j.id_mapel_tentor", "mapel m", "mt.id_mapel=m.id_mapel", "tentor t", "mt.kode_tentor=t.kode_tentor"], $where, "");
-		if(!empty($this->uri->segment(4))){
-			$data['siswa'] = $this->common->getData("kode_siswa,nama_siswa","siswa","",["kode_group" => $data['jadwal'][0]['kode_group']],["kode_siswa","asc"]);
-			$data['cek'] = count($this->common->getData("kode_siswa","absensi","",["id_jadwal" => $id],""));
-		}
+		$data['datakbm'] = $this->common->getData("id_kbm,pengumuman",	"kbm","",["id_jadwal" => $id,"tanggal" => date("Y-m-d")],"");
+		$data['siswa'] = $this->common->getData("kode_siswa,nama_siswa","siswa","",["kode_group" => $data['jadwal'][0]['kode_group']],["kode_siswa","asc"]);
+		$data['cek'] = count($this->common->getData("kode_siswa","absensi","",["id_kbm" => $data['datakbm'][0]['id_kbm']],""));
 		$this->load->view('common/menu', $menu);
 		$this->load->view('common/card', $card);
 		$this->load->view('lampiran-kbm/kbm', $data);
