@@ -87,7 +87,7 @@ class Api extends CI_Controller {
         );
 
 
-        $materi = $this->db->query("select distinct mt.id_mapel, mt.kode_tentor,count(l.id_lampiran) ttl from lampiran_kbm l join jadwal j on l.id_jadwal = j.id_jadwal join mapel_tentor mt on j.id_mapel_tentor = mt.id_mapel_tentor where j.kode_group = '".$this->siswa[0]['kode_group']."'")->result_array();
+        $materi = $this->db->query("select distinct mt.id_mapel, mt.kode_tentor,count(l.id_lampiran) ttl from lampiran_kbm l join kbm k on l.id_kbm = k.id_kbm join jadwal j on k.id_jadwal = j.id_jadwal join mapel_tentor mt on j.id_mapel_tentor = mt.id_mapel_tentor where j.kode_group = '".$this->siswa[0]['kode_group']."'")->result_array();
         
         $json['materi'] = array(
             "caption" => $materi[0]['ttl']." Materi Pembelajaran",
@@ -244,7 +244,7 @@ class Api extends CI_Controller {
 
     public function materi()
     {
-        $materi = $this->common->getData("l.caption,t.nama_tentor,l.lampiran","lampiran_kbm l",["jadwal j","l.id_jadwal = j.id_jadwal","mapel_tentor mt","j.id_mapel_tentor = mt.id_mapel_tentor","tentor t","mt.kode_tentor = t.kode_tentor"],["j.kode_group" => $this->siswa[0]['kode_group']],["l.id_lampiran","desc"]);
+        $materi = $this->common->getData("l.caption,t.nama_tentor,l.lampiran","lampiran_kbm l",["kbm k","l.id_kbm = k.id_kbm","jadwal j","k.id_jadwal = j.id_jadwal","mapel_tentor mt","j.id_mapel_tentor = mt.id_mapel_tentor","tentor t","mt.kode_tentor = t.kode_tentor"],["j.kode_group" => $this->siswa[0]['kode_group']],["l.id_lampiran","desc"]);
         foreach($materi as $key => $m){
             $cekFile = strtolower(substr($m['lampiran'],strpos($m['lampiran'],".")+1));
             if($cekFile=="pdf"){

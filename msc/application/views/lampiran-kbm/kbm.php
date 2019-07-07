@@ -49,6 +49,13 @@
     </div>
 </div>
 <hr>
+<?php 
+    $day = date("D");
+    $now = date("H:i:s");
+    $mulaitamp = strtotime($jadwal[0]['jam_mulai']) - 60*60;
+	$mulai = date("H:i:s", $mulaitamp);
+	if($this->common_lib->indoDay($day)==$jadwal[0]['hari'] && ($now >= $mulai) && ($now <= $jadwal[0]["jam_slesai"])){
+?>
 <div class="card mb-4">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold">
@@ -258,6 +265,7 @@
         <br>
     </div>
 </div>
+<?php } ?>
 <div id="accordion">
     <?php 
 	$loopKbm = $this->common->getData("*","kbm","",["id_jadwal" => $jadwal[0]['id_jadwal'],"tanggal !=" => date("Y-m-d")],["tanggal","desc"]);
