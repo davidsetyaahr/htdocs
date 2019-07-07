@@ -5,14 +5,16 @@ class Api extends CI_Controller {
 	public function __construct()
 	{
         parent::__construct();
-        $this->kode_siswa = $this->uri->segment(3);
-        $this->siswa = $this->common->getData("nama_siswa,kelas,cicilan,kode_group,awal_spp","siswa","",["kode_siswa" => $this->kode_siswa],"");
+        if(!empty($this->uri->segment(3))){
+            $this->kode_siswa = $this->uri->segment(3);
+            $this->siswa = $this->common->getData("nama_siswa,kelas,cicilan,kode_group,awal_spp","siswa","",["kode_siswa" => $this->kode_siswa],"");
+        }
         $this->date = date("Y-m-d");
-        if($this->session->userdata("status") != "login")
+/*         if($this->session->userdata("status") != "login")
 		{
 			redirect(base_url()."login");
 		}
-    }
+ */    }
     public function dashboard()
     {
         $day = date("d");
@@ -85,7 +87,7 @@ class Api extends CI_Controller {
         );
 
 
-        $materi = $this->db->query("select distinct mt.id_mapel, mt.kode_tentor,count(l.id_lampiran) ttl from lampiran_kbm l join jadwal j on l.id_jadwal = j.id_jadwal join mapel_tentor mt on j.id_mapel_tentor = mt.id_mapel_tentor where j.kode_group = '".$this->siswa[0]['kode_group']."'")->result_array();
+        $materi = $this->db->query("select distinct mt.id_mapel, mt.kode_tentor,count(l.id_lampiran) ttl from lampiran_kbm l join kbm k on l.id_kbm = k.id_kbm join jadwal j on k.id_jadwal = j.id_jadwal join mapel_tentor mt on j.id_mapel_tentor = mt.id_mapel_tentor where j.kode_group = '".$this->siswa[0]['kode_group']."'")->result_array();
         
         $json['materi'] = array(
             "caption" => $materi[0]['ttl']." Materi Pembelajaran",
@@ -105,7 +107,7 @@ class Api extends CI_Controller {
        $json = [];
        $now = date("H:i:s");
        foreach ($jadwal as $key => $value) {
-           $diff = $value['hari_ke']-6;
+           $diff = $value['hari_ke']-$date;
            if($diff==0){
                $img = array(
                    "img" => "calendar32.png",
@@ -242,8 +244,80 @@ class Api extends CI_Controller {
 
     public function materi()
     {
-        $materi = $this->common->getData("l.caption,t.nama_tentor,l.lampiran","lampiran_kbm l",["jadwal j","l.id_jadwal = j.id_jadwal","mapel_tentor mt","j.id_mapel_tentor = mt.id_mapel_tentor","tentor t","mt.kode_tentor = t.kode_tentor"],["j.kode_group" => $this->siswa[0]['kode_group']],["l.id_lampiran","desc"]);
-
+        $materi = $this->common->getData("l.caption,t.nama_tentor,l.lampiran","lampiran_kbm l",["kbm k","l.id_kbm = k.id_kbm","jadwal j","k.id_jadwal = j.id_jadwal","mapel_tentor mt","j.id_mapel_tentor = mt.id_mapel_tentor","tentor t","mt.kode_tentor = t.kode_tentor"],["j.kode_group" => $this->siswa[0]['kode_group']],["l.id_lampiran","desc"]);
+        foreach($materi as $key => $m){
+            $cekFile = strtolower(substr($m['lampiran'],strpos($m['lampiran'],".")+1));
+            if($cekFile=="pdf"){
+                $img = "pdf32.png";                
+            }
+            else if($cekFile=="doc" || $cekFile=="docx"){
+                $img = "word32.png";                
+            }
+            else if($cekFile=="ppt" || $cekFile=="pptx"){
+                $img = "ppt32.png";                
+            }
+            else if($cekFile=="xls" || $cekFile=="xlsx"){
+                $img = "xls32.png";
+            }
+            else if($cekFile=="jpg" || $cekFile=="png" || $cekFile=="gif" || $cekFile=="jpeg"){
+                $img = "img32.png";
+            }
+            else{
+                $img = "file32.png";
+            }
+            $materi[$key]['img'] = $cekFile=="pdf" ? "pdf32.png" : "word32.png";
+        }
         echo json_encode($materi);
     }
+
+    public function login()
+    {
+        $cekUser = $this->common->getData("count(id_user) ttl,password,id_child","user","",["username" => $_POST['username']],"");
+
+        $json['status'] = "error";
+
+        if($cekUser[0]['ttl']> 0 && password_verify($_POST['password'], $cekUser[0]['password'])){
+            $json['status'] = "success";
+            $getKode = $this->common->getData("kode_siswa","siswa","",["id_siswa" => $cekUser[0]['id_child']],"");
+            $json['kode_siswa'] = $getKode[0]['kode_siswa'];
+        }
+
+        echo json_encode($json);
+    }
+
+    public function nilai()
+    {
+        $nilai = $this->common->getData("ns.id_nilai,ns.sikap,ns.bulan,ns.tahun,ns.tanggal_penilaian,t.nama_tentor","nilai_siswa ns",["tentor t","ns.kode_tentor = t.kode_tentor"],["kode_siswa" => $this->kode_siswa],["id_nilai","desc"]);
+
+        $arr = [];
+        foreach ($nilai as $key => $value) {
+            $nilaiMapel = $this->common->getData("np.nilai,np.catatan,m.mata_pelajaran","nilai_mapel np",["mapel m","np.id_mapel = m.id_mapel"],["np.id_nilai" => $value['id_nilai']],"");
+            $arr[$key][] = $value;
+            $arr[$key][] = $nilaiMapel;
+        }
+
+        echo json_encode($arr);
+
+    }
+
+    public function req_ubah_jadwal()
+    {
+        $this->common->insert("req_perubahan_jadwal",$_POST);
+        if($this->db->affected_rows() > 0){
+            $json['status'] = "success";
+        }
+        else{
+            $json['status'] = "error";
+        }
+
+        echo json_encode($json);
+    }
+
+    public function detailkbm()
+    {
+        # url/api/detailkbm/kodeSiswa/idDetail
+
+        $id = $this->uri->segment(4);
+    }
+
 }

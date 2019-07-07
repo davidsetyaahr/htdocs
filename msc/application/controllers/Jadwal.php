@@ -54,10 +54,13 @@ class Jadwal extends CI_Controller {
 	
 	public function insert_jadwal()
 	{
-		$this->common->insert("jadwal", $this->input->post());
+		$post = $_POST;
+		$post['hari_ke'] = $this->common_lib->hariKe($_POST['hari']);
+		$post['hari'] = $this->common_lib->indoDay($_POST['hari']);
+		$this->common->insert("jadwal", $post);
 		$this->session->set_flashdata("success", "Berhasil Menambahkan Data!!!");
 		redirect(base_url()."jadwal");
-	}
+ 	}
 	
 	public function edit_jadwal($kode)
 	{

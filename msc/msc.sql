@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 03, 2019 at 04:12 AM
+-- Generation Time: Jul 07, 2019 at 09:29 AM
 -- Server version: 10.3.15-MariaDB
 -- PHP Version: 7.3.6
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `absensi` (
   `id_absen` int(11) NOT NULL,
-  `id_jadwal` int(5) NOT NULL,
+  `id_kbm` int(5) NOT NULL,
   `kode_siswa` varchar(6) NOT NULL,
   `keterangan` enum('Hadir','Tanpa Keterangan','Ijin','Sakit') NOT NULL,
   `waktu_absen` datetime NOT NULL DEFAULT current_timestamp()
@@ -40,13 +40,15 @@ CREATE TABLE `absensi` (
 -- Dumping data for table `absensi`
 --
 
-INSERT INTO `absensi` (`id_absen`, `id_jadwal`, `kode_siswa`, `keterangan`, `waktu_absen`) VALUES
-(8, 5, 'MSC001', 'Tanpa Keterangan', '2019-06-22 13:36:06'),
-(9, 5, 'MSC002', 'Hadir', '2019-06-22 13:36:07'),
-(10, 5, 'MSC003', 'Ijin', '2019-06-22 13:36:07'),
-(11, 5, 'MSC001', 'Tanpa Keterangan', '2019-06-29 09:52:08'),
-(12, 5, 'MSC002', 'Hadir', '2019-06-29 09:52:08'),
-(13, 5, 'MSC003', 'Ijin', '2019-06-29 09:52:08');
+INSERT INTO `absensi` (`id_absen`, `id_kbm`, `kode_siswa`, `keterangan`, `waktu_absen`) VALUES
+(8, 2, 'MSC001', 'Tanpa Keterangan', '2019-06-22 13:36:06'),
+(9, 2, 'MSC002', 'Hadir', '2019-06-22 13:36:07'),
+(10, 2, 'MSC003', 'Ijin', '2019-06-22 13:36:07'),
+(14, 3, 'MSC001', 'Tanpa Keterangan', '2019-07-07 01:04:48'),
+(15, 3, 'MSC002', 'Ijin', '2019-07-07 01:04:48'),
+(16, 3, 'MSC003', 'Tanpa Keterangan', '2019-07-07 01:04:48'),
+(17, 3, 'MSC008', 'Sakit', '2019-07-07 01:04:48'),
+(22, 2, 'MSC008', 'Sakit', '2019-06-22 13:36:07');
 
 -- --------------------------------------------------------
 
@@ -141,21 +143,21 @@ CREATE TABLE `jadwal` (
   `hari` varchar(8) NOT NULL,
   `hari_ke` int(1) NOT NULL,
   `jam_mulai` time NOT NULL,
-  `jam_slesai` time NOT NULL,
-  `pengumuman` text NOT NULL
+  `jam_slesai` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `jadwal`
 --
 
-INSERT INTO `jadwal` (`id_jadwal`, `minggu_ke`, `kode_group`, `id_mapel_tentor`, `hari`, `hari_ke`, `jam_mulai`, `jam_slesai`, `pengumuman`) VALUES
-(1, 1, '2', 8, 'Minggu', 7, '15:00:00', '17:00:00', ''),
-(2, 4, '2', 15, 'Sabtu', 6, '08:00:00', '17:00:00', 'Pengumuman'),
-(3, 4, '2', 14, 'Minggu', 7, '16:00:00', '17:00:00', ''),
-(4, 1, '123EA', 15, 'Rabu', 3, '15:00:00', '16:00:00', 'Hari Ini Kita Belajar Web'),
-(5, 4, '2', 16, 'Rabu', 3, '10:00:00', '11:00:00', 'belajar'),
-(6, 4, '3', 19, 'Rabu', 3, '10:00:00', '11:00:00', 'hari ini belajar coding');
+INSERT INTO `jadwal` (`id_jadwal`, `minggu_ke`, `kode_group`, `id_mapel_tentor`, `hari`, `hari_ke`, `jam_mulai`, `jam_slesai`) VALUES
+(1, 1, '2', 15, 'Minggu', 7, '15:00:00', '17:00:00'),
+(2, 1, '2', 14, 'Sabtu', 6, '22:00:00', '23:00:00'),
+(3, 2, '2', 14, 'Minggu', 7, '16:00:00', '17:00:00'),
+(4, 1, '123EA', 15, 'Rabu', 3, '15:00:00', '16:00:00'),
+(5, 4, '2', 16, 'Rabu', 3, '10:00:00', '11:00:00'),
+(6, 4, '3', 19, 'Rabu', 3, '10:00:00', '11:00:00'),
+(7, 2, '2', 16, 'Senin', 1, '10:00:00', '11:00:00');
 
 -- --------------------------------------------------------
 
@@ -180,6 +182,30 @@ INSERT INTO `jenjang` (`id_jenjang`, `nama_jenjang`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `kbm`
+--
+
+CREATE TABLE `kbm` (
+  `id_kbm` int(11) NOT NULL,
+  `id_jadwal` int(11) NOT NULL,
+  `tanggal` date NOT NULL,
+  `pengumuman` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `kbm`
+--
+
+INSERT INTO `kbm` (`id_kbm`, `id_jadwal`, `tanggal`, `pengumuman`) VALUES
+(1, 2, '2019-06-01', 'Pengumuman'),
+(2, 2, '2019-07-06', 'PengumumanPengumuman'),
+(3, 2, '2019-07-07', 'Pengumuman Gaess'),
+(4, 1, '2019-07-07', ''),
+(5, 5, '2019-07-07', '');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `lampiran_kbm`
 --
 
@@ -187,20 +213,22 @@ CREATE TABLE `lampiran_kbm` (
   `id_lampiran` int(8) NOT NULL,
   `lampiran` varchar(255) NOT NULL,
   `caption` text NOT NULL,
-  `id_jadwal` int(5) NOT NULL
+  `id_kbm` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `lampiran_kbm`
 --
 
-INSERT INTO `lampiran_kbm` (`id_lampiran`, `lampiran`, `caption`, `id_jadwal`) VALUES
-(1, 'P2_Layout.pdf', 'LAYOUT', 2),
-(2, 'P3_Widget.pdf', 'WIDGET', 2),
-(3, 'P4_Selection Widget.pdf', 'Belajar Selection Widget', 4),
-(4, 'P5_Menu.pdf', 'Membuat Menu', 4),
-(5, 'P4_Selection Widget.pdf', 'materi widget', 6),
-(6, 'P7_Webkit.pdf', 'materi webkit', 6);
+INSERT INTO `lampiran_kbm` (`id_lampiran`, `lampiran`, `caption`, `id_kbm`) VALUES
+(1, 'P2_Layout.pdf', 'LAYOUT', 1),
+(2, 'P3_Widget.pdf', 'WIDGET', 1),
+(3, 'P4_Selection Widget.pdf', 'Belajar Selection Widget', 1),
+(4, 'P5_Menu.pdf', 'Membuat Menu', 1),
+(5, 'P4_Selection Widget.pdf', 'materi widget', 1),
+(6, 'P7_Webkit.pdf', 'materi webkit', 1),
+(7, '2D 1N SURABAYA - BROMO MIDNIGHT TOUR.docx', 'Materi 1', 1),
+(8, 'LOGO POLITEKNIK NEGERI  JEMBER.png', 'Logo Polije', 3);
 
 -- --------------------------------------------------------
 
@@ -493,7 +521,7 @@ CREATE TABLE `siswa` (
 INSERT INTO `siswa` (`id_siswa`, `kode_siswa`, `nama_siswa`, `kelas`, `tgl_lahir`, `jk`, `alamat`, `foto`, `no_hp`, `kode_group`, `id_ortu`, `tgl_daftar`, `cicilan`, `awal_spp`) VALUES
 (1, '', 'Dini', 0, '1997-12-31', 'Perempuan', 'Situbondo', 'default_siswa.png', '9329486342', '3', 4, '2017-01-01', 0, '0'),
 (2, 'MSC001', 'David Setya', 11, '2019-04-05', 'Laki Laki', 'Bondowoso', 'default_siswa.png', '0823138643', '2', 1, '2019-05-21', 0, '05-2018'),
-(3, 'MSC002', 'Fathan Ridlo', 12, '2019-05-15', 'Laki Laki', 'Maesan', 'default_siswa.png', '08231374', '2', 2, '2019-05-21', 6000000, '0'),
+(3, 'MSC002', 'David Setya', 12, '2019-05-15', 'Laki Laki', 'Maesan', 'default_siswa.png', '08231374', '2', 2, '2019-05-21', 6000000, '0'),
 (4, 'MSC003', 'Indri Nur', 0, '2019-05-22', 'Perempuan', 'Situbondo', 'default_siswa.png', '086432234', '2', 3, '2019-05-22', 0, '0'),
 (5, 'msc005', 'danu', 0, '1998-02-03', 'Laki Laki', 'jember', 'default_siswa.png', '089786427', '003', 5, '2019-05-29', 0, '0'),
 (6, 'MSC006', 'Muhammad', 11, '1999-03-10', 'Laki Laki', 'Maesan, Bondowoso', 'default_siswa.png', '081216938489', '3', 6, '1987-02-12', 0, '0'),
@@ -547,7 +575,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id_user`, `username`, `password`, `nama_pengguna`, `hak_akses`, `id_child`) VALUES
 (1, 'fathan', 'c31573e9fd10409dca20572ae7ad69f9', 'M Fathan', 'Tentor', 'T00100'),
-(2, 'fathan2', 'fathan2', 'fathan lagi', 'Siswa', '3'),
+(2, 'david', '$2y$10$r83G5LUQLX6nfrNV6UhmOuMenM7FQaXgurRrsY87PahaPxY49N3pW', 'David Setya', 'Siswa', '3'),
 (3, 'admin', 'admin', 'admin', 'Admin', '1'),
 (4, 'siswa', 'siswa', 'siswa', 'Siswa', '1'),
 (5, 'tentor', 'tentor', 'tentor', 'Tentor', 'T00100'),
@@ -593,6 +621,12 @@ ALTER TABLE `jadwal`
 --
 ALTER TABLE `jenjang`
   ADD PRIMARY KEY (`id_jenjang`);
+
+--
+-- Indexes for table `kbm`
+--
+ALTER TABLE `kbm`
+  ADD PRIMARY KEY (`id_kbm`);
 
 --
 -- Indexes for table `lampiran_kbm`
@@ -695,7 +729,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `absensi`
 --
 ALTER TABLE `absensi`
-  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `biaya_pendaftaran`
@@ -713,7 +747,7 @@ ALTER TABLE `detail_pembayaran_spp`
 -- AUTO_INCREMENT for table `jadwal`
 --
 ALTER TABLE `jadwal`
-  MODIFY `id_jadwal` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_jadwal` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `jenjang`
@@ -722,10 +756,16 @@ ALTER TABLE `jenjang`
   MODIFY `id_jenjang` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `kbm`
+--
+ALTER TABLE `kbm`
+  MODIFY `id_kbm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `lampiran_kbm`
 --
 ALTER TABLE `lampiran_kbm`
-  MODIFY `id_lampiran` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_lampiran` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `laporan_keuangan`
