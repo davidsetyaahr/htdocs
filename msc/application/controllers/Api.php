@@ -284,4 +284,40 @@ class Api extends CI_Controller {
 
         echo json_encode($json);
     }
+
+    public function nilai()
+    {
+        $nilai = $this->common->getData("ns.id_nilai,ns.sikap,ns.bulan,ns.tahun,ns.tanggal_penilaian,t.nama_tentor","nilai_siswa ns",["tentor t","ns.kode_tentor = t.kode_tentor"],["kode_siswa" => $this->kode_siswa],["id_nilai","desc"]);
+
+        $arr = [];
+        foreach ($nilai as $key => $value) {
+            $nilaiMapel = $this->common->getData("np.nilai,np.catatan,m.mata_pelajaran","nilai_mapel np",["mapel m","np.id_mapel = m.id_mapel"],["np.id_nilai" => $value['id_nilai']],"");
+            $arr[$key][] = $value;
+            $arr[$key][] = $nilaiMapel;
+        }
+
+        echo json_encode($arr);
+
+    }
+
+    public function req_ubah_jadwal()
+    {
+        $this->common->insert("req_perubahan_jadwal",$_POST);
+        if($this->db->affected_rows() > 0){
+            $json['status'] = "success";
+        }
+        else{
+            $json['status'] = "error";
+        }
+
+        echo json_encode($json);
+    }
+
+    public function detailkbm()
+    {
+        # url/api/detailkbm/kodeSiswa/idDetail
+
+        $id = $this->uri->segment(4);
+    }
+
 }
