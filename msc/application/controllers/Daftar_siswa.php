@@ -10,10 +10,11 @@ class Daftar_siswa extends CI_Controller {
 		{
 			redirect(base_url()."login");
 		}
-		else if($this->session->userdata("hak_akses") == "Owner" || $this->session->userdata("hak_akses") == "Siswa" || $this->session->userdata("hak_akses") == "Tentor" || $this->session->userdataelse if($this->session->userdata("hak_akses") == "Owner" || $this->session->userdata("hak_akses") == "Siswa" || $this->session->userdata("hak_akses") == "Tentor" || $this->session->userdata("hak_akses") == "Orang Tua" )
+		else if($this->session->userdata("hak_akses") == "Owner" || $this->session->userdata("hak_akses") == "Siswa" || $this->session->userdata("hak_akses") == "Tentor" || $this->session->userdata("hak_akses") == "Orang Tua" )
 		{
 			show_404();
-		}("hak_akses") == "Orang Tua" )
+		}
+		else if($this->session->userdata("hak_akses") == "Owner" || $this->session->userdata("hak_akses") == "Siswa" || $this->session->userdata("hak_akses") == "Tentor" || $this->session->userdata("hak_akses") == "Orang Tua" )
 		{
 			show_404();
 		}
@@ -69,7 +70,7 @@ class Daftar_siswa extends CI_Controller {
 		$this->load->view('common/slash-card');
         $this->load->view('common/footer');
     }
-    public function insert_daftar()
+    public function insert_daftar	()
     {
     	echo "<pre>";
     	print_r($_POST);

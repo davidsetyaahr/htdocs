@@ -119,33 +119,7 @@ class Spp extends CI_Controller {
 			}
 		}
 	}
-
-	/*public function edit_spp($kode)
-	{
-		/*$where = array("id_spp" => $kode);
-		$data["data"] = $this->common->getData("*", "jenjang", "", $where, "");*/
-		// $this
-		/*$menu = array(
-			"title" => $this->title,
-			"btnHref" => base_url()."keuangan/spp",
-			"btnBg" => "primary","btnFa" => "keyboard",
-			"btnText" => "Lihat Data"
-		);
-		$card['title'] = "Tentor <span>> Edit spp</span>";
-        $this->load->view('common/menu', $menu);
-        $this->load->view('common/card', $card);
-		$this->load->view('keuangan/spp/edit_spp', $data);
-		$this->load->view('common/slash-card');
-        $this->load->view('common/footer');
-	}
-
-	public function update_spp(){
-		$filter = array("id_spp" => $this->input->post("id_spp"));
-		$this->session->set_flashdata("success", "Berhasil Mengedit Data!!!");
-		$this->common->update("spp", $this->input->post(), $filter);
-		redirect(base_url()."keuangan/spp");
-	}*/
-
+	
 	public function spp_bayar()
 	{
 		$banyak_bulan = $_POST["jumlah_bulan"];
