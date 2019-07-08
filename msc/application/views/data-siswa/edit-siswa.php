@@ -1,36 +1,43 @@
 <form action="<?php echo base_url()."data_siswa/update_siswa" ?>" method="post">
 	<div class="row">
 		<div class="col-lg-6">
+		
+		<?php
+		foreach($edit as $s) {?>
 			<label>Kode Siswa</label>
-			<input type="text" class="form-control" name="kode_siswa" value="<?php echo $siswa[0]["kode_siswa"]?>" readonly>
+			<input type="text" class="form-control" name="kode_siswa" value="<?php echo $s{"kode_siswa"}?>" readonly>
 		</div> 
 		<div class="col-lg-6">
 			<label>Nama Siswa</label>
-			<input type="text" class="form-control" name="nama_siswa" value="<?php echo $siswa[0]["nama_siswa"]?>">
+			<input type="text" class="form-control" name="nama_siswa" value="<?php echo $s["nama_siswa"]?>">
 		</div>
 		<div class="col-lg-6">
 			<br>
 			<label>Tanggal Lahir</label>
-			<input type="date" class="form-control" name="tgl_lahir" value="<?php echo $siswa[0]["tgl_lahir"]?>">
+			<input type="date" class="form-control" name="tgl_lahir" value="<?php echo $s["tgl_lahir"]?>">
 		</div>
 		<div class="col-lg-6">
 			<br>
 			<label>Jenis Kelamin</label>
 			<select name="jk" class="form-control">
-			<option value="">---Pilih Jenis Kelamin---</option>
-				<option>Laki Laki</option>
-				<option>Perempuan</option>
+			<?php
+				$l = ($s["jk"] == "Laki Laki") ? "selected" : "";
+				$p = ($s["jk"] == "Perempuan") ? "selected" : "";
+				?>
+			<option value=""> ---Pilih Jenis Kelamin---</option>
+				<option <?php echo $l ?> >Laki Laki</option>
+				<option <?php echo $p ?> >Perempuan</option>
 			</select>
 		</div>
 		<div class="col-lg-6">
 			<br>
 			<label>Alamat</label>
-			<textarea type="number" class="form-control" name="alamat" value="<?php echo $siswa[0]["alamat"]?>" ></textarea>
+			<textarea type="number" class="form-control" name="alamat"><?php echo $s["alamat"]?></textarea>
 		</div>
 		<div class="col-lg-6">
 			<br>
 			<label>No Telepon Siswa</label>
-			<input type="number" class="form-control" name="no_hpsiswa" value="<?php echo $siswa[0]["no_hp"]?>">
+			<input type="number" class="form-control" name="no_hpsiswa" value="<?php echo $s["no_hp"]?>">
 		</div>
 		<div class="col-lg-6">
 			<br>
@@ -54,40 +61,34 @@
 		<div class="col-lg-6">
 			<br>
 			<label>Cicilan</label>
-			<input type="number" class="form-control" name="cicilan" value="">
+			<input type="number" class="form-control" name="cicilan" value="<?php echo $s["cicilan"]?>">
 		</div>
 		<div class="col-lg-6">
 			<br>
-			<label>Grup</label>
-			<select name="kode_group" class="form-control">
-			<option value="">---Pilih Group---</option>
-			<?php 
-				foreach ($group as $g) {
-					echo "<option value='".$g['kode_group']."'>$g[nama_group]</option>";
-				}
-			?>
-			</select>
+			<label> Nama Group</label>
+			<input type="text" class="form-control" name="nama_group" value="<?php echo $s["nama_group"]?>">
 		</div>
 		<div class="col-lg-6">
 			<br>
 			<label>Nama Orang Tua</label>
-			<input type="text" class="form-control" name="nama_ortu" value="">
+			<input type="text" class="form-control" name="nama_ortu" value="<?php echo $s["nama_ortu"]?>">
 		</div>
 		<div class="col-lg-6">
 			<br>
 			<label>No Telepon Wali</label>
-			<input type="number" class="form-control" name="no_hpwali" value="<?php echo $siswa[0]["no_hp"]?>">
+			<input type="number" class="form-control" name="no_hpwali" value="<?php echo $s["no_hp"]?>">
 		</div>
 		<div class="col-lg-6">
 			<br>
 			<label>Tanggal Pendafatran</label>
-			<input type="date" class="form-control" name="tgl_daftar" value="<?php echo $siswa[0]["tgl_daftar"]?>">
+			<input type="date" class="form-control" name="tgl_daftar" value="<?php echo $s["tgl_daftar"]?>">
 		</div>
 
 		<div class="col-lg-6">
 			<br>
 			<?php $this->load->view("common/btn") ?>
 		</div>
+			<?php }?>
 	</div>
 </form>
 
