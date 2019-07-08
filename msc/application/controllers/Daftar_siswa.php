@@ -82,6 +82,7 @@ class Daftar_siswa extends CI_Controller {
     	);
     	$this->common->insert("ortu",$ortu);
     	$getId = $this->common->getData("id_ortu",["ortu",1],"","",["id_ortu","desc"]);
+    	$getSpp = $this->common->getData("spp","biaya","","","");
     	$siswa = array(
     		"kode_siswa" => $_POST['kode_siswa'],
     		"nama_siswa" => $_POST['nama_siswa'],
@@ -94,9 +95,17 @@ class Daftar_siswa extends CI_Controller {
     		"kelas" => $_POST ['kelas'],
     		"kode_group" => $_POST['kode_group'],
     		"id_ortu" => $getId[0]['id_ortu'],
-    		"tgl_daftar" => $_POST['tgl_daftar'],
-    	);
+			"tgl_daftar" => $_POST['tgl_daftar'],
+			"awal_spp" => $getSpp[0]["spp"]
+		);
 		$this->common->insert("siswa",$siswa);
+		$pendaftaran = array(
+			"invoice" => date("dmYHi"),
+			"kode_siswa" => $_POST["kode_siswa"],
+			"nominal" => $_POST["nominal_pendaftaran"],
+			"tgl_bayar" => date("Y-m-d")
+		);
+		$this->common->insert("biaya_pendaftaran", $pendaftaran);
 		$getIdSiswa = $this->common->getData("id_siswa", ["siswa", 1], "", "", ["id_siswa", "desc"]);
 		$valLapKeuangan = array(
 			"id_parent" => $getIdSiswa[0]["id_siswa"],
@@ -105,6 +114,25 @@ class Daftar_siswa extends CI_Controller {
 			"tipe" => "Pendaftaran"
 		);
 		$this->common->insert("laporan_keuangan", $valLapKeuangan);
+		$passwordSiswa = str_replace(" ","", $_POST["nama_siswa"]);
+		$valUser = array(
+			"username" => strtolower($this->input->post("kode_siswa")),
+			"password" => password_hash(strtolower($passwordSiswa), PASSWORD_DEFAULT),
+			"nama_pengguna" => $_POST["nama_siswa"],
+			"hak_akses" => "Siswa",
+			"id_child" => $_POST["kode_siswa"]	
+		);
+		$this->common->insert("user", $valUser);
+		$passwordOrtu = str_replace(" ","", $_POST['nama_ortu']);
+		$usernameOrtu = str_replace(" ","_", $_POST['nama_ortu']);
+		$valUserOrtu = array(
+			"username" => strtolower($usernameOrtu),
+			"password" => password_hash(strtolower($passwordOrtu), PASSWORD_DEFAULT),
+			"nama_pengguna" => $_POST['nama_ortu'],
+			"hak_akses" => "Orang Tua",
+			"id_child" => $getId[0]['id_ortu']	
+		);
+		$this->common->insert("user", $valUserOrtu);
 		$this->session->set_flashdata("success", "Berhasil Menambahkan Data!!!");
 		redirect(base_url()."data_siswa");
 	}

@@ -44,7 +44,7 @@ class Cicilan extends CI_Controller {
 			"btnText" => "List Data"
 		   );
 		$card['title'] = "Cicilan <span>> Tambah Cicilan </span>";
-		$data["siswa"] = $this->common->getData("kode_siswa, nama_siswa", "siswa", "", "", "");
+		$data["siswa"] = $this->common->getData("kode_siswa, nama_siswa, cicilan", "siswa", "", "", "");
 		$data["cicilan"] = $this->common->getData("cicilan", "biaya", "", "", "");
 		$this->load->view('common/menu', $menu);
         $this->load->view('common/card', $card);
@@ -91,6 +91,14 @@ class Cicilan extends CI_Controller {
 			"tipe" => "Cicilan"
 		);
 		$this->common->insert("laporan_keuangan", $valLapKeuangan);
+		//insert to notif
+		$getKodeSiswa = $this->common->getData("kode_siswa", ["pembayaran_cicilan", 1], "", "", ["id_pembayaran_cicilan", "desc"]); 
+		$valNotif = array(
+			"kode_siswa" => $getKodeSiswa[0]["kode_siswa"],
+			"pesan" => "Pembayaran Cicilan Berhasil",
+			"tanggal" => $tgl
+		);
+		$this->common->insert("notif", $valNotif);
 		$this->session->set_flashdata("success", "Berhasil Menambahkan Data!!!");
 		redirect(base_url()."keuangan/cicilan");
 	}

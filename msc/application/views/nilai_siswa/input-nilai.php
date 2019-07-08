@@ -57,7 +57,6 @@
         <div class="col-lg-4">
             <br>
             <button name="simpan" type="submit" class="btn btn-info btn-sm">Simpan</button>
-            <button name="simpans" class="btn btn-info btn-sm coba">as</button>
             <a href="" type="reset"class="btn btn-danger btn-sm">Cancel</a>
         </div>
     </div>

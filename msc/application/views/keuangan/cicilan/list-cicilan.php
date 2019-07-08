@@ -27,7 +27,8 @@
 					$terbayar = $this->common->getData("sum(nominal) total", "pembayaran_cicilan", "", ["kode_siswa" => $s["kode_siswa"]], "");
 					//kekurangan
 					$kekurangan = $s["cicilan"] - $terbayar[0]["total"];
-					?>
+					if ($kekurangan > 0) {
+						?>
 					<tr>
 						<td><?= $s["kode_siswa"]?></td>
 						<td><?= $s["nama_siswa"]?></td>
@@ -36,7 +37,9 @@
 						<td>Rp. <?= number_format($terbayar[0]["total"],2,',','.')?></td>
 						<td>Rp. <?= number_format($kekurangan,2,',','.')?></td>
 					</tr>
-				<?php }?>
+				<?php 
+					}
+				}?>
 				</tbody>
 			</table>
 		</div>

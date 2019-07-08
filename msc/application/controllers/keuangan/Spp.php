@@ -59,7 +59,7 @@ class Spp extends CI_Controller {
 		//tanggal sekarang
 		$tgl = date("Y-m-d");
 		//get tahun dan bulan dari spp
-		$getSpp = $this->common->getData("d.tahun, d.bulan", ["pembayaran_spp p", 1], ["detail_pembayaran_spp d","p.id_pembayaran_spp = d.id_pembayaran_spp"], ["p.kode_siswa" => $_POST["kode_siswa"]], ["d.id_detail", "desc"]);
+		$getSpp = $this->common->getData("p.id_pembayaran_spp, d.tahun, d.bulan", ["pembayaran_spp p", 1], ["detail_pembayaran_spp d","p.id_pembayaran_spp = d.id_pembayaran_spp"], ["p.kode_siswa" => $_POST["kode_siswa"]], ["d.id_detail", "desc"]);
 		if(count($getSpp)==0){
 			$bulan_terakhir = 0;
 			$tahun_terakhir = date("Y");
@@ -104,6 +104,14 @@ class Spp extends CI_Controller {
 			"tipe" => "Spp"
 		);
 		$this->common->insert("laporan_keuangan", $valLapKeuangan);
+		//insert to notif
+		$getKodeSiswa = $this->common->getData("kode_siswa", ["pembayaran_spp", 1], "", "", ["id_pembayaran_spp", "desc"]); 
+		$valNotif = array(
+			"kode_siswa" => $getKodeSiswa[0]["kode_siswa"],
+			"pesan" => "Pembayaran SPP Berhasil",
+			"tanggal" => $tgl
+		);
+		$this->common->insert("notif", $valNotif);
 		$this->session->set_flashdata("success", "Berhasil Menambahkan Data!!!");
 		redirect(base_url()."keuangan/spp");
 	}

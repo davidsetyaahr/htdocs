@@ -1,20 +1,10 @@
 <?php
     $tahunpertama = DateTime::createFromFormat("Y-m-d",$tahunPertamaBayar[0]["tanggal_bayar"]);
     $tahunterakhir = DateTime::createFromFormat("Y-m-d",$terakhirBayarSpp[0]["tanggal_bayar"]);
-    // echo $tahunpertama->format("Y"); 
-    // echo "<br>"; 
-    // echo $tahunterakhir->format("Y");
-    // selisih tahun pertama sampai sekaran
 ?>
     <div class="row">
         <div class="col-lg-12">
             <p class="bg-primary text-center h5 text-white" style="padding-top: 5px; padding-bottom: 5px; padding-left: 7px;"><?= $terakhirBayarSpp[0]["nama_siswa"]?></p>
-        <!-- <div class="col-lg-4">
-            <label for="" class="text-primary">Nama Siswa</label>
-        </div>
-            <select name="" id="" class="form-control">
-            </select>
-        </div> -->
         <div class="col-lg-12">
             <table class="table table-striped table-bordered table-hover">
                 <thead>

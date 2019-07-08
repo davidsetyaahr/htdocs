@@ -32,7 +32,7 @@
                 <option value="">---Pilih Hari---</option>
                 <?php
                     $hari = array(
-                        "Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"
+                        "Sun","Mon","Tue","Wed","Thu","Fri","Sat"
                     );
                     foreach($hari as $h){
                         $kode = ($jadwal[0]["hari"] == $h) ? "selected" : "";

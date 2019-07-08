@@ -101,6 +101,15 @@ class Tentor extends CI_Controller {
 				);
 				$this->common->insert("mapel_tentor", $mapelTentor);
 			}
+			$password = str_replace(" ","", $_POST["nama_tentor"]);
+			$valUser = array(
+				"username" => $this->input->post("kode_tentor"),
+				"password" => strtolower($password),
+				"nama_pengguna" => $_POST["nama_tentor"],
+				"hak_akses" => "Tentor",
+				"id_child" => $_POST["kode_tentor"]	
+			);
+			$this->common->insert("user", $valUser);
 			$this->session->set_flashdata("success", "Berhasil Menambahkan Data!!!");
 			redirect(base_url()."tentor");
 		}
