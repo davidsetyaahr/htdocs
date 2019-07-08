@@ -54,11 +54,11 @@
         </div>
         <div class="col-lg-6">
             <label for="">Waktu Mulai</label>
-            <input type="time" class="form-control" name="jam_mulai" value="<?php echo $jadwal[0]["jam_mulai"]?>">
+            <input type="text" class="form-control time-24" name="jam_mulai" value="<?php echo $jadwal[0]["jam_mulai"]?>">
         </div>
         <div class="col-lg-6">
             <label for="">Waktu Selesai</label>
-            <input type="time" class="form-control" name="jam_slesai" value="<?php echo $jadwal[0]["jam_slesai"]?>">
+            <input type="text" class="form-control time-24" name="jam_slesai" value="<?php echo $jadwal[0]["jam_slesai"]?>">
         </div>
         <div class="col-lg-6">
 			<br>

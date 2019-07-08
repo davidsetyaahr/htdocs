@@ -35,6 +35,24 @@ class Group extends CI_Controller {
 	
 	public function input_group()
 	{
+		$cek = $this->common->getData("kode_group", "group_siswa", "", "", "");
+		if(count($cek)==0){
+			$kode = "GP001";
+		}
+		else{
+				$getKode = $this->common->getData("kode_group", ["group_siswa",1], "", "", ["kode_group","desc"]);
+				$getInt = (int)substr($getKode[0]['kode_group'],2,3) + 1;
+				if(strlen($getInt)==1){
+					$nol = "00";
+			}
+			else if(strlen($getInt)==2){
+				$nol = "0";
+			}
+			else if(strlen($getInt)==3){
+				$nol = "";
+			}
+			$kode = "GP".$nol.$getInt;
+		}
 		$menu = array(
 			"title" => $this->title,
 			"btnHref" => base_url()."data-master/group",
@@ -43,6 +61,7 @@ class Group extends CI_Controller {
 		);
 		$card['title'] = "Group <span>> Input Group</span>";
 		$data["data"] = $this->common->getData("kode_tentor, nama_tentor", "tentor", "", "", "");
+		$data["kode"] = $kode;
 		$this->load->view('common/menu', $menu);
 		$this->load->view('common/card', $card);
 		$this->load->view('data-master/group/input_group', $data);

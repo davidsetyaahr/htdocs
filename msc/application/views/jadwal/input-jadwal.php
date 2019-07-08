@@ -1,18 +1,14 @@
 <form action="<?php echo base_url()."jadwal/insert_jadwal"?>" method="post">
     <div class="row">
-        <div class="col-lg-6">
-            <label for="">ID Jadwal</label>
-            <input type="text" class="form-control" name="id_jadwal">
+         <div class="col-lg-6">
+            <label for="">Nama Group</label>
+            <select name="kode_group" class="form-control">
+                <option value="">---Pilih Group---</option>
+                <?php foreach($group as $g){?>
+                <option value="<?php echo $g["kode_group"]?>"><?php echo $g["nama_group"]?></option>
+                <?php }?>
+            </select>
         </div>
-                <div class="col-lg-6">
-                    <label for="">Nama Group</label>
-                    <select name="kode_group" class="form-control">
-                        <option value="">---Pilih Group---</option>
-                        <?php foreach($group as $g){?>
-                        <option value="<?php echo $g["kode_group"]?>"><?php echo $g["nama_group"]?></option>
-                        <?php }?>
-                    </select>
-                </div>
         <div class="col-lg-6">
             <label for="">Minggu Ke-</label>
             <select name="minggu_ke" class="form-control">
@@ -51,11 +47,11 @@
         </div>
         <div class="col-lg-6">
             <label for="">Waktu Mulai</label>
-            <input type="time" class="form-control" name="jam_mulai" >
+            <input type="input" class="form-control time-24" name="jam_mulai" >
         </div>
         <div class="col-lg-6">
             <label for="">Waktu Selesai</label>
-            <input type="time" class="form-control" name="jam_slesai" >
+            <input type="input" class="form-control time-24" name="jam_slesai" >
         </div>
         <div class="col-lg-6">
 			<br>

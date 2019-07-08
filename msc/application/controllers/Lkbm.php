@@ -14,18 +14,14 @@ class Lkbm extends CI_Controller {
 			}
 			else if($this->session->userdata("hak_akses") != "Tentor"){
 				show_404();
-			}
+			} 
 		}
     
     public function index()
     {
-		$menu = array(
-			"title" => $this->title,
-			"btnHref" => base_url()."lkbm/input_lkbm",
-			"btnBg" => "success",
-			"btnFa" => "keyboard",
-			"btnText" => "Tambah KBM"
-		);
+				$menu = array(
+					"title" => $this->title,
+				);
 		$card['title'] = "Lampiran KBM <span>> List L-KBM</span>";
 		$data["jadwal"] = $this->common->getData("j.*, g.kode_group, g.nama_group, t.kode_tentor, t.nama_tentor, m.mata_pelajaran, ", "jadwal j", ["group_siswa g", "j.kode_group=g.kode_group", "mapel_tentor mt", "mt.id_mapel_tentor=j.id_mapel_tentor", "mapel m", "mt.id_mapel=m.id_mapel", "tentor t", "mt.kode_tentor=t.kode_tentor"], "", "");
 		$this->load->view('common/menu', $menu);
@@ -110,10 +106,6 @@ class Lkbm extends CI_Controller {
 		$where = array("id_jadwal" => $id);
 		$menu = array(
 			"title" => $this->title,
-			"btnHref" => base_url()."lkbm/input_lkbm",
-			"btnBg" => "success",
-			"btnFa" => "keyboard",
-			"btnText" => "Tambah KBM"
 		);
 		$card['title'] = "Lampiran KBM <span>> List L-KBM</span>";
 		$data["jadwal"] = $this->common->getData("j.*, g.kode_group, g.nama_group, t.kode_tentor, t.nama_tentor, m.mata_pelajaran, ", "jadwal j", ["group_siswa g", "j.kode_group=g.kode_group", "mapel_tentor mt", "mt.id_mapel_tentor=j.id_mapel_tentor", "mapel m", "mt.id_mapel=m.id_mapel", "tentor t", "mt.kode_tentor=t.kode_tentor"], $where, "");

@@ -18,6 +18,7 @@
   <link href="<?php echo base_url()."assets/" ?>css/sb-admin-2.min.css" rel="stylesheet">
   <link href="<?php echo base_url()."assets/" ?>vendor/bootstrap-datepicker-master/dist/css/bootstrap-datepicker3.standalone.min.css" rel="stylesheet">
   <link href="<?php echo base_url()."assets/" ?>custom/css/custom-style.css" rel="stylesheet">
+  <link href="<?php echo base_url()."assets/" ?>vendor/MDTimePicker-master/mdtimepicker.css" rel="stylesheet">
   
 </head>
 
