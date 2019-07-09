@@ -22,11 +22,11 @@ class Api extends CI_Controller {
 
         $jadwal = $this->common->getData("mata_pelajaran,jam_mulai","jadwal j",["mapel_tentor mt","j.id_mapel_tentor = mt.id_mapel_tentor","mapel m","mt.id_mapel = m.id_mapel"],["minggu_ke" => $minggu_ke,"hari" => $this->common_lib->indoDay(date("D")),"kode_group" => $this->siswa[0]['kode_group']],["jam_mulai","asc"]);
         
-        $json['banner'] = array(
+/*         $json['banner'] = array(
             "title" => "Halo, ".ucwords($this->siswa[0]['nama_siswa']),
             "msg" => count($jadwal)==0 ? "Selamat Datang Di Aplikasi MSC Bondowoso" : "Jangan lupa ada Les ".$jadwal[0]['mata_pelajaran']." Jam ".$jadwal[0]['jam_mulai']
         );
-
+ */
         if($this->siswa[0]['kelas']==6 || $this->siswa[0]['kelas']==9 || $this->siswa[0]['kelas']==12){
             $json['tagihan']['caption'] = "Cicilan Siswa";
             $cicilan = $this->common->getData("sum(nominal) ttl","pembayaran_cicilan","",["kode_siswa" => $this->kode_siswa],"");
@@ -94,7 +94,6 @@ class Api extends CI_Controller {
             "mapel" => is_array($materi[0]['id_mapel']) ? count($materi[0]['id_mapel']) : 1,
             "tentor" => is_array($materi[0]['kode_tentor']) ? count($materi[0]['kode_tentor']) : 1,
         );
-        
         echo json_encode($json);
    }
 
@@ -138,9 +137,9 @@ class Api extends CI_Controller {
         if($this->siswa[0]['kelas']==6 || $this->siswa[0]['kelas']==9 || $this->siswa[0]['kelas']==12){
             $tahun = $this->common->getData("tahun",["pembayaran_cicilan",1],"",["kode_siswa" => $this->kode_siswa],["tahun","desc"]);
             $cicilan = $this->common->getData("sum(nominal) ttl","pembayaran_cicilan","",["kode_siswa" => $this->kode_siswa,"tahun" => $tahun[0]['tahun']],"");
-            $json['tagihan'][0]['caption'] = "Cicilan Tahun ".$tahun[0]['tahun'];
-            $json['tagihan'][0]['biaya'] = $this->siswa[0]['cicilan'];
-            $json['tagihan'][0]['kekurangan'] = $this->siswa[0]['cicilan'] - $cicilan[0]['ttl'];
+            $json[0]['caption'] = "Cicilan Tahun ".$tahun[0]['tahun'];
+            $json[0]['biaya'] = $this->siswa[0]['cicilan'];
+            $json[0]['kekurangan'] = $this->siswa[0]['cicilan'] - $cicilan[0]['ttl'];
         }
         else{
             $spp = $this->common->getData("tanggal_bayar",["pembayaran_spp",1],"",["kode_siswa" => $this->kode_siswa],["id_pembayaran_spp","desc"]);
@@ -160,14 +159,14 @@ class Api extends CI_Controller {
 
             $month = (int)$monthStart;
             $year = $yearStart;
-            $json['tagihan'] = [];
+            $json = [];
             for ($i=(int)$monthStart; $i <= ($monthStart+$diff) ; $i++) { 
                 $arr = array(
                     "caption" => "Spp Bulan ".$this->common_lib->indoMonth($month)." ".$year,
                     "biaya" => $biaya[0]['spp'],
                     "kekurangan" => ""
                 );
-                $json['tagihan'][] = $arr;
+                $json[] = $arr;
                 if($month==12){
                     $month = 1;
                     $year++;
@@ -221,7 +220,7 @@ class Api extends CI_Controller {
             $arr = array($valHadir,$valSakit,$valIjin,$valAlpa);
         }
 
-        $json['kehadiran'] = array(
+        $json = array(
             "hadir" => array(
                 "caption" => "Hadir",
                 "value" => $arr[0]
@@ -295,8 +294,9 @@ class Api extends CI_Controller {
             $arr[$key][] = $value;
             $arr[$key][] = $nilaiMapel;
         }
-
-        echo json_encode($arr);
+        echo "<pre>";
+        print_r($arr);
+//        echo json_encode($arr);
 
     }
 
@@ -318,6 +318,34 @@ class Api extends CI_Controller {
         # url/api/detailkbm/kodeSiswa/idDetail
 
         $id = $this->uri->segment(4);
-    }
 
+        $kbm = $this->common->getData("k.id_kbm,k.pengumuman,m.mata_pelajaran,t.nama_tentor,g.nama_group,j.jam_mulai,j.jam_slesai","kbm k",["jadwal j","k.id_jadwal = j.id_jadwal","mapel_tentor mt","j.id_mapel_tentor = mt.id_mapel_tentor","mapel m","mt.id_mapel = m.id_mapel","tentor t","mt.kode_tentor = t.kode_tentor","group_siswa g","j.kode_group = g.kode_group"],["k.id_jadwal" => $id,"k.tanggal" => date("Y-m-d")],"");
+
+        $materi = $this->common->getData("l.caption,l.lampiran","lampiran_kbm l",["kbm k","l.id_kbm = k.id_kbm"],["l.id_kbm" => $kbm[0]['id_kbm']],["l.id_lampiran","desc"]);
+        foreach($materi as $key => $m){
+            $cekFile = strtolower(substr($m['lampiran'],strpos($m['lampiran'],".")+1));
+            if($cekFile=="pdf"){
+                $img = "pdf32.png";                
+            }
+            else if($cekFile=="doc" || $cekFile=="docx"){
+                $img = "word32.png";                
+            }
+            else if($cekFile=="ppt" || $cekFile=="pptx"){
+                $img = "ppt32.png";                
+            }
+            else if($cekFile=="xls" || $cekFile=="xlsx"){
+                $img = "xls32.png";
+            }
+            else if($cekFile=="jpg" || $cekFile=="png" || $cekFile=="gif" || $cekFile=="jpeg"){
+                $img = "img32.png";
+            }
+            else{
+                $img = "file32.png";
+            }
+            $materi[$key]['img'] = $cekFile=="pdf" ? "pdf32.png" : "word32.png";
+        }
+        $json['kbm'] = $kbm[0];
+        $json['materi'] = $materi;
+        echo json_encode($json);
+    }
 }
