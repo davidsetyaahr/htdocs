@@ -6,7 +6,9 @@
 				<option value="">---Option---</option>
 				<?php
 				foreach($siswa as $s => $val) {
-					echo '<option value="'.$val["kode_siswa"].'">'.$val["nama_siswa"].'</option>';
+					if($val["cicilan"] > 0){
+						echo '<option value="'.$val["kode_siswa"].'">'.$val["nama_siswa"].'</option>';
+					}
 				}
 				?>
 			</select>

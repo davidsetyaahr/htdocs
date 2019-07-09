@@ -84,7 +84,7 @@ class Nilai_siswa extends CI_Controller {
 				"tahun" => $this->input->post("tahun"),
 				"sikap" => $_POST["sikap"][$i],
 				"kode_siswa" => $_POST["kode_siswa"][$i],
-				"kode_tentor" => "T00100", // sesuai login nanti
+				"kode_tentor" => $this->session->userdata("kode"), // sesuai login nanti
 				"tanggal_penilaian" => date("Y-m-d")
 			);	
 			$this->common->insert("nilai_siswa", $valNilaiSiswa);

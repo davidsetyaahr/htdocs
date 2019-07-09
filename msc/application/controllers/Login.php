@@ -7,10 +7,15 @@ class Login extends CI_Controller {
         parent::__construct();
         
     }
-
+    
     public function index()
     {
-        $this->load->view("auth/login");
+        if($this->session->userdata("status") == "login"){
+            redirect(base_url()."welcome");
+        }
+        else {
+            $this->load->view("auth/login");
+        }
     }
     public function aksi_login()
     {

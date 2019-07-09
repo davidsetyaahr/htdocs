@@ -42,6 +42,7 @@
   <script src="<?php echo base_url()."assets/" ?>js/demo/chart-area-demo.js"></script>
   <script src="<?php echo base_url()."assets/" ?>js/demo/chart-pie-demo.js"></script>
   <script src="<?php echo base_url()."assets/" ?>vendor/bootstrap-datepicker-master/dist/js/bootstrap-datepicker.min.js"></script>
+  <script src="<?php echo base_url()."assets/" ?>vendor/MDTimePicker-master/mdtimepicker.js"></script>
   <script src="<?php echo base_url()."assets/" ?>custom/js/custom.js"></script>
   
 </body>

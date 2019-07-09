@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-lg-6">
 			<label>Kode Group</label>
-			<input type="text" name="kode_group" class="form-control" value="">
+			<input type="text" name="kode_group" class="form-control" readonly value="<?= $kode?>">
 		</div>
 		<div class="col-lg-6">
 			<label>Nama Group</label>

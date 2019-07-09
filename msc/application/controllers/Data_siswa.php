@@ -39,7 +39,8 @@ class Data_siswa extends CI_Controller
 			"title" => $this->title,
 		);
 		$card['title'] = "Data Siswa <span>> Edit Data Siswa</span>";
-		$data['siswa'] = $this->common->getData("*","siswa","",["kode_siswa" => $kode_siswa],""); 
+		$filter = array("kode_siswa" => $kode_siswa);
+		$data['edit'] = $this->common->edit_siswa($filter); 
 		$this->load->view('common/menu', $menu);
         $this->load->view('common/card', $card);
 		$this->load->view('data-siswa/edit-siswa', $data);
@@ -53,7 +54,7 @@ class Data_siswa extends CI_Controller
 			"title" => $this->title,
 		);	
 		$card['title'] = "Detail <span>> Detail Daftar Siswa </span>";
-		$filter = array("kode_siswa" => $kode_siswa);
+		$filter = array("siswa.kode_siswa" => $kode_siswa);
 		$data['detail'] = $this->common->detail_data_siswa($filter);
 		$this->load->view('common/menu', $menu);
         $this->load->view('common/card', $card);

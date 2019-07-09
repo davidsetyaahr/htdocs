@@ -18,5 +18,3 @@
 		</div>
 	</div>
 </form>
-
-<button class="btn btn-danger" id="try">Try It!</button>

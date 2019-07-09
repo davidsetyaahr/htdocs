@@ -1,10 +1,6 @@
 <form action="<?php echo base_url()."kbm/insert_kbm"?>" method="post" id="myform">
     <div class="row">
         <div class="col-lg-6">
-            <label for="">ID L-KBM</label>
-            <input type="text" class="form-control" name="id_lampiran">
-        </div>
-        <div class="col-lg-6">
             <label for="">Tentor</label>
             <div class="row">
                 <div class="col-lg-9">

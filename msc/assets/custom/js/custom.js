@@ -1,8 +1,7 @@
 $(document).ready(function () {
+	$('.time-24').mdtimepicker({format: 'hh:mm'}) //Initializes the time picker	
+	
 	var base_url = "http://localhost/projek-kelompok/msc/"
-	//datatable
-//	window.$('#lkbm').DataTable();
-	  
 	
 	$(".datepicker").datepicker({
 		format : "yyyy-mm-dd",
@@ -225,5 +224,6 @@ $(document).ready(function () {
 			}
 		})
 	})
+	
 
 });
